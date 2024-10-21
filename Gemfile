@@ -6,6 +6,7 @@ source "https://rubygems.org"
 gemspec
 
 group :development, :test do
+  gem "puma"
   gem 'dotenv'
   gem 'renuocop', require: false
   gem 'rspec'

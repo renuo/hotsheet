@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails_db_manager (0.1.0)
-      rails (>= 6.1)
+      rails (>= 7.2.1)
 
 GEM
   remote: https://rubygems.org/
@@ -130,6 +130,8 @@ GEM
       racc
     psych (5.1.2)
       stringio
+    puma (6.4.3)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.8)
     rack-session (2.0.0)
@@ -253,6 +255,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  puma
   rails_db_manager!
   rake
   renuocop
