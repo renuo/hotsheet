@@ -1,0 +1,10 @@
+default:
+  image: ruby:3.1.2
+
+  before_script:
+    - gem install bundler -v 2.4.14
+    - bundle install
+
+example_job:
+  script:
+    - bundle exec rake
