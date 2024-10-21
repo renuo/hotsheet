@@ -1,3 +1,6 @@
+inherit_gem:
+  renuocop: config/base.yml
+
 AllCops:
   TargetRubyVersion: 2.6
 
