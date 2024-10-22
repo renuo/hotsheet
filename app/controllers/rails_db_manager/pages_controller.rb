@@ -8,9 +8,9 @@ module RailsDbManager
 
     def show
       model_class = params[:model].constantize
-      editable_columns = model_class.editable_columns
+      editable_attributes = model_class.editable_attributes
 
-      @model_attributes = model_class.all.map { |model| model.attributes.slice(*editable_columns) }
+      @model_attributes = model_class.all.map { |model| model.attributes.slice(*editable_attributes) }
     end
   end
 end

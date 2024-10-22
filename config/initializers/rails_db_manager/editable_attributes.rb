@@ -6,13 +6,13 @@ Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLeng
 
     model.class_eval do
       class << self
-        def editable_columns
-          @editable_columns ||= fetch_editable_columns
+        def editable_attributes
+          @editable_attributes ||= fetch_editable_attributes
         end
 
         private
 
-        def fetch_editable_columns
+        def fetch_editable_attributes
           config = RailsDbManager.configuration.models[name.to_sym]
 
           if config.key?(:included_attributes)
@@ -34,6 +34,6 @@ Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLeng
       end
     end
 
-    model.editable_columns
+    model.editable_attributes
   end
 end
