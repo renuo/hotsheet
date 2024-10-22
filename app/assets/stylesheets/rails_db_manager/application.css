@@ -76,6 +76,11 @@ main {
     padding: .5rem;
   }
 
+  .readonly-attribute {
+    min-width: 1rem;
+    min-height: 1rem;
+  }
+
   .editable-input {
     border: none;
     background-color: transparent;

@@ -1,6 +1,7 @@
 <%= turbo_frame_tag("#{dom_id(object)}-#{attribute}") do %>
   <div data-controller="editable-attribute">
-    <div data-editable-attribute-target="readonlyAttribute"
+    <div class="readonly-attribute"
+         data-editable-attribute-target="readonlyAttribute"
          data-action="click->editable-attribute#displayInputField">
       <%= object.public_send(attribute) %>
     </div>

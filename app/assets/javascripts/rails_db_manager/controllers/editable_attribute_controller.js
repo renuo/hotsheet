@@ -19,10 +19,11 @@ export default class extends Controller {
         // Prevent standard submission triggered by Enter press
         event.preventDefault();
 
-        if (this.readonlyAttributeTarget.innerText.trim() === this.attributeFormInputTarget.value) {
+        const previousValue = this.readonlyAttributeTarget.innerText.trim();
+        const newValue = this.attributeFormInputTarget.value;
+        if (previousValue && previousValue === newValue) {
             this.readonlyAttributeTarget.style.display = 'block';
             this.attributeFormTarget.style.display = 'none';
-
             return;
         }
 
