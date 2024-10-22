@@ -3,7 +3,7 @@
     <ul class="nav-list">
       <%= link_to t('home'), root_path, class: "nav-item" %>
       <% RailsDbManager.models.each do |model| %>
-        <%= link_to model.model_name.human, polymorphic_path(model.to_s.downcase.pluralize), class: "nav-item" %>
+        <%= link_to model.model_name.human, polymorphic_path(model.table_name), class: "nav-item" %>
       <% end %>
     </ul>
   </nav>

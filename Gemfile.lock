@@ -86,7 +86,6 @@ GEM
     crass (1.0.6)
     date (3.3.4)
     diff-lcs (1.5.1)
-    dotenv (3.1.4)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
@@ -252,9 +251,9 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-23
 
 DEPENDENCIES
-  dotenv
   puma
   rails_db_manager!
   rake

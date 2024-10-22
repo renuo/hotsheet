@@ -7,8 +7,7 @@ gemspec
 
 group :development, :test do
   gem "puma"
-  gem 'dotenv'
-  gem 'renuocop', require: false
-  gem 'rspec'
+  gem "renuocop", require: false
+  gem "rspec"
   gem "rake"
 end
