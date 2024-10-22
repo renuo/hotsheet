@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gem "puma"
+gem "rails", github: "rails/rails", branch: "main"
+gem "rails_db_manager", path: "../.."
+gem "sqlite3"
+
+group :development, :test do
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "debug"
+  gem "renuocop", require: false
+  gem "rspec-rails", require: false
+end
