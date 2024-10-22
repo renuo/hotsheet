@@ -4,6 +4,6 @@ module RailsDbManager
   class Configuration
     include ActiveSupport::Configurable
 
-    config_accessor(:excluded_models) { nil }
+    config_accessor(:models) { {} }
   end
 end
