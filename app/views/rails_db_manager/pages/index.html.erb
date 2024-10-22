@@ -1,5 +1,5 @@
 <h1 style="padding: 1rem">--- Rails DB Manager ---</h1>
 
 <% @models.each do |model| %>
-  <%= link_to model.name, "/test/#{model.table_name}" %>
+  <%= link_to model.name, polymorphic_path(model.table_name) %>
 <% end %>
