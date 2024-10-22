@@ -1,2 +1,23 @@
-<h1>Rails DB Manager</h1>
-<p>Welcome to the Rails DB Manager. Select a model from the sidebar to view the spreadsheet.</p>
+<% if @model %>
+  <h1>--- <%= @model %> ---</h1>
+  <table class="model-table">
+    <tr>
+      <% @model.editable_attributes.each do |attribute| %>
+        <th><%= attribute %></th>
+      <% end %>
+    </tr>
+
+    <% @model.find_each do |record| %>
+      <tr>
+        <% @model.editable_attributes.each do |attribute| %>
+          <td>
+            <%= render 'shared/inline_editable_value', object: record, attribute: attribute %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h1>--- Rails DB Manager#index ---</h1>
+  <p>Welcome to the Rails DB Manager. Select a model from the sidebar to view the spreadsheet.</p>
+<% end %>

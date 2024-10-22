@@ -1,0 +1,17 @@
+<%= turbo_frame_tag("#{dom_id(object)}-#{attribute}") do %>
+  <div data-controller="editable-attribute">
+    <div data-editable-attribute-target="readonlyAttribute"
+         data-action="click->editable-attribute#displayInputField">
+      <%= object.public_send(attribute) %>
+    </div>
+
+    <div data-editable-attribute-target="attributeForm" style="display: none;">
+      <%= form_for object do |f| %>
+        <%= f.text_field attribute, class: "editable-input", data: {
+          editable_attribute_target: "attributeFormInput",
+          action: "keydown.enter->editable-attribute#submitForm blur->editable-attribute#submitForm"
+        } %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

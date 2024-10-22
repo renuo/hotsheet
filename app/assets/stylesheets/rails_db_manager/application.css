@@ -16,6 +16,8 @@
 
 :root {
   --sidebar-width: 300px;
+  --table-border-color: #E0E1DD;
+  --table-header-bg-color: #778DA9;
 }
 
 body {
@@ -43,7 +45,7 @@ main {
     gap: 0.5rem;
     list-style: none;
     padding: 1rem 0.5rem;
-    
+
     .nav-item {
       padding: 0.5rem 2rem;
       border-radius: 5px;
@@ -59,4 +61,23 @@ main {
   }
 }
 
- 
+
+.model-table {
+  border-collapse: collapse;
+
+  th {
+    background-color: var(--table-border-color);
+    border-color: black;
+    text-align: left;
+  }
+
+  th, td {
+    border: 1px solid var(--table-border-color);
+    padding: .5rem;
+  }
+
+  .editable-input {
+    border: none;
+    background-color: transparent;
+  }
+}
