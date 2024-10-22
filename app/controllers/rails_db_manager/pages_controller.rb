@@ -10,10 +10,12 @@ module RailsDbManager
       model = model_class.find(params[:id])
 
       if model.update(model_params)
-        redirect_to polymorphic_path(model_class), notice: "#{model_class} updated successfully"
+        notice = "#{model_class} updated successfully"
       else
-        render :index, notice: "#{model_class} update failed"
+        notice = "#{model_class} update failed"
       end
+
+      redirect_to polymorphic_path(model_class), notice: notice
     end
 
     private

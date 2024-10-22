@@ -11,7 +11,7 @@
       <tr>
         <% @model.editable_attributes.each do |attribute| %>
           <td>
-            <%= render 'shared/inline_editable_value', object: record, attribute: attribute %>
+            <%= render 'rails_db_manager/shared/inline_editable_value', object: record, attribute: attribute %>
           </td>
         <% end %>
       </tr>
