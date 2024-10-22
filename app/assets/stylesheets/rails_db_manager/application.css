@@ -18,6 +18,10 @@
   --sidebar-width: 300px;
 }
 
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
 main {
   margin-left: var(--sidebar-width);
   padding: 1rem 2rem;
