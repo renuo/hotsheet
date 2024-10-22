@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "sprockets/railtie"
 require "rails_db_manager/configuration"
 require "rails_db_manager/engine"
 require "rails_db_manager/version"

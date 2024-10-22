@@ -13,6 +13,5 @@
 /test/dummy/storage/
 /test/dummy/tmp/
 
-
-# rspec failure tracking
+/Gemfile.lock
 .rspec_status
