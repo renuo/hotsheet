@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rails DB manager</title>
+  <title>Rails DB Manager</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
   <%= yield :head %>
-
-  <%= stylesheet_link_tag    "rails_db_manager/application", media: "all" %>
+  <%= stylesheet_link_tag "rails_db_manager/application", media: :all %>
 </head>
-
 <body>
-    <%= render "layouts/rails_db_manager/sidebar" %>
-    <main>
-      <%= yield %>
-    </main>
-  </body>
+  <%= render "layouts/rails_db_manager/sidebar" %>
+  <main>
+    <%= yield %>
+  </main>
+</body>
 </html>

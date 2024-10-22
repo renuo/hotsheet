@@ -2,10 +2,6 @@
 
 module RailsDbManager
   class PagesController < ApplicationController
-    def index
-      @models = RailsDbManager.models
-    end
-
     def show
       model_class = params[:model].constantize
       editable_attributes = model_class.editable_attributes
