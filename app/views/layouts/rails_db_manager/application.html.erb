@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Rails DB Manager</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= yield :head %>
-  <%= stylesheet_link_tag "rails_db_manager/application", media: :all %>
-</head>
-<body>
-  <%= render "layouts/rails_db_manager/sidebar" %>
-  <main>
-    <%= yield %>
-  </main>
-</body>
+  <head>
+    <title>Rails DB Manager</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <%= stylesheet_link_tag "rails_db_manager/application", media: :all %>
+    <%= javascript_include_tag "rails_db_manager/application", "data-turbolinks-track": "reload", type: "module" %>
+  </head>
+  <body data-controller="hello">
+    <%= render "layouts/rails_db_manager/sidebar" %>
+    <main>
+      <%= yield %>
+    </main>
+  </body>
 </html>
