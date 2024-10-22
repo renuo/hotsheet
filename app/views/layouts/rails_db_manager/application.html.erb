@@ -9,9 +9,11 @@
 
   <%= stylesheet_link_tag    "rails_db_manager/application", media: "all" %>
 </head>
+
 <body>
-
-<%= yield %>
-
-</body>
+    <%= render "layouts/rails_db_manager/sidebar" %>
+    <main>
+      <%= yield %>
+    </main>
+  </body>
 </html>

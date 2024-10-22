@@ -14,6 +14,45 @@
  *= require_self
  */
 
- h1 {
-  color: green;
- }
+:root {
+  --sidebar-width: 300px;
+}
+
+main {
+  margin-left: var(--sidebar-width);
+  padding: 1rem 2rem;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: lightgray;
+  border-right: 1px solid gray;
+
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 1rem 0.5rem;
+    
+    .nav-item {
+      padding: 0.5rem 2rem;
+      border-radius: 5px;
+      text-decoration: none;
+      color: green;
+      font-weight: bold;
+      font-size: 1.5rem;
+
+      &:hover {
+        background-color: darkgray;
+      }
+    }
+  }
+}
+
+ 
