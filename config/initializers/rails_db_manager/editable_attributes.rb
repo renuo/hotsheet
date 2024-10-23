@@ -2,9 +2,7 @@
 
 Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLength
   RailsDbManager.configuration.models.each_key do |model| # rubocop:disable Metrics/BlockLength
-    model = model.to_s.constantize
-
-    model.class_eval do
+    model.constantize.class_eval do
       class << self
         def editable_attributes
           @editable_attributes ||= fetch_editable_attributes
@@ -13,14 +11,15 @@ Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLeng
         private
 
         def fetch_editable_attributes
-          config = RailsDbManager.configuration.models[name.to_sym]
+          config = RailsDbManager.configuration.models[name]
+          excluded_attributes = config.excluded_attributes
 
-          if config.key?(:included_attributes)
-            raise "Can only specify either included or excluded attributes" if config.key?(:excluded_attributes)
+          if config.included_attributes.present?
+            raise "Can only specify either included or excluded attributes" if excluded_attributes.present?
 
-            attrs_to_s(config[:included_attributes])
-          elsif config.key?(:excluded_attributes)
-            column_names - attrs_to_s(config[:excluded_attributes])
+            attrs_to_s(config.included_attributes)
+          elsif excluded_attributes.present?
+            column_names - attrs_to_s(excluded_attributes)
           else
             column_names
           end
@@ -34,6 +33,6 @@ Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLeng
       end
     end
 
-    model.editable_attributes
+    model.constantize.editable_attributes
   end
 end

@@ -18,7 +18,7 @@ module RailsDbManager
     end
 
     def models
-      configuration.models.each_key.map { |model| model.to_s.constantize }
+      @models ||= configuration.models.each_key.map(&:constantize)
     end
   end
 end

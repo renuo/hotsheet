@@ -24,7 +24,7 @@ module RailsDbManager
     end
 
     def model_class
-      params[:model].constantize
+      params[:model]&.constantize
     end
   end
 end
