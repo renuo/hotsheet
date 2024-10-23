@@ -6,6 +6,6 @@ Hotsheet.configure do |config|
   end
 
   config.model :Post do |model|
-    model.excluded_attributes = %i[created_at updated_at]
+    model.excluded_attributes = %i[id author_id created_at updated_at]
   end
 end
