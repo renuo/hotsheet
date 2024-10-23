@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "importmap-rails"
 gem "puma"
 gem "rails", github: "rails/rails", branch: "main"
 gem "hotsheet", path: "../.."
@@ -11,6 +12,7 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "debug"
+  gem "faker", require: false
   gem "renuocop", require: false
   gem "rspec-rails", require: false
 end
