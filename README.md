@@ -1,40 +1,58 @@
 # Hotsheet
 
-TODO: Delete this and the text below, and describe your gem
+### Manage your database with a simple and familiar web interface
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hotsheet`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem allows you to mount a view to manage your database using a table view where you can edit DB records inline.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add and install the gem by adding this to the application's Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
+```ruby
+gem "hotsheet"
+```
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+And executing:
 
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+```bash
+bundle
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+You can mount the view in your routes file like this:
 
-## Development
+```ruby
+mount Hotsheet::Engine, at: "hotsheet"
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+By default, the gem will fetch all models in you application and allow you to manage them.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+You can also configure which models and columns whithin them you want to manage by creating an initializer file in your application:
 
-## Contributing
+```ruby
+# config/initializers/hotsheet.rb
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hotsheet.
+Hotsheet.configure do |config|
+  config.model :Author do |model|
+    model.included_attributes = %i[name birthdate gender]
+    # model.excluded_attributes = %i[created_at updated_at]
+  end
+end
+
+```
+
+Finally, you will need to create a configuration file to specify which models you want to manage with Hotsheet.
 
 
-## TODO:
-1. Use importmap-rails for js dependencies
-1. 
 
-## Future improvements:
-1. Type-specific input fields
-1. 
+## TODO
+
+- Support live updates (show when someone has the intention to edit a resource) via ActionCable
+- Conflict resolution strategy (locking / merging / latest change etc.)
+- Fine grained access / permissions (cancancan)
+- Type specific input fields
+- Undo feature (or confirm / discard changes icons)
+- Configure visibility of non-editable (excluded) fields
+- Generator for configuration file/s
+- Use importmap-rails for js dependencies

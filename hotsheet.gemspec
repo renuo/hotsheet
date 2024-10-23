@@ -5,11 +5,14 @@ require_relative "lib/hotsheet/version"
 Gem::Specification.new do |spec|
   spec.name = "hotsheet"
   spec.version = Hotsheet::VERSION
-  spec.authors = ["Ignacio Sfeir"]
-  spec.email = ["ignacio.sfeir@renuo.ch"]
+  spec.authors = ["Renuo AG"]
+  spec.email = [
+    "ignacio.sfeir@renuo.ch", "simon.isler@renuo.ch", "eduard.munteanu@renuo.ch", "chris.hunziker@renuo.ch"
+  ]
 
   spec.summary = "Manage your database with a simple and familiar web interface"
-  # spec.description = "TODO: Write a longer description or delete this line."
+  spec.description = "This gem allows you to mount a view to manage your database using a" \
+    "table view where you can edit DB records inline."
   spec.homepage = "https://github.com/renuo/hotsheet"
 
   spec.metadata["homepage_uri"] = spec.homepage
