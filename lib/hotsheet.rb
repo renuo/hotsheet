@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require "sprockets/railtie"
-require "rails_db_manager/configuration"
-require "rails_db_manager/engine"
-require "rails_db_manager/version"
+require "hotsheet/configuration"
+require "hotsheet/engine"
+require "hotsheet/version"
 
-module RailsDbManager
+module Hotsheet
   class Error < StandardError; end
 
   class << self

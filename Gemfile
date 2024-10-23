@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in rails_db_manager.gemspec
+# Specify your gem's dependencies in hotsheet.gemspec
 gemspec
 
 group :development, :test do

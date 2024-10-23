@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "puma"
 gem "rails", github: "rails/rails", branch: "main"
-gem "rails_db_manager", path: "../.."
+gem "hotsheet", path: "../.."
 gem "sqlite3"
 
 group :development, :test do

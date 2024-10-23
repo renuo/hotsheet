@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module RailsDbManager
+module Hotsheet
   module ApplicationHelper
   end
 end

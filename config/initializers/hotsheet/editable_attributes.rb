@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLength
-  RailsDbManager.configuration.models.each_key do |model| # rubocop:disable Metrics/BlockLength
+  Hotsheet.configuration.models.each_key do |model| # rubocop:disable Metrics/BlockLength
     model = model.to_s.constantize
 
     model.class_eval do
@@ -13,7 +13,7 @@ Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLeng
         private
 
         def fetch_editable_attributes
-          config = RailsDbManager.configuration.models[name.to_sym]
+          config = Hotsheet.configuration.models[name.to_sym]
 
           if config.key?(:included_attributes)
             raise "Can only specify either included or excluded attributes" if config.key?(:excluded_attributes)

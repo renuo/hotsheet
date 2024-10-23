@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_db_manager"
+require "hotsheet"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

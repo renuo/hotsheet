@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/rails_db_manager/version"
+require_relative "lib/hotsheet/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "rails_db_manager"
-  spec.version = RailsDbManager::VERSION
+  spec.name = "hotsheet"
+  spec.version = Hotsheet::VERSION
   spec.authors = ["Ignacio Sfeir"]
   spec.email = ["ignacio.sfeir@renuo.ch"]
 
   spec.summary = "Manage your database with a simple and familiar web interface"
   # spec.description = "TODO: Write a longer description or delete this line."
-  spec.homepage = "https://github.com/renuo/rails_db_manager"
+  spec.homepage = "https://github.com/renuo/hotsheet"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage

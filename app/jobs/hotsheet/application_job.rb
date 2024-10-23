@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module RailsDbManager
+module Hotsheet
   class ApplicationJob < ActiveJob::Base
   end
 end

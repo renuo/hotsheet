@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module RailsDbManager
+module Hotsheet
   class PagesController < ApplicationController
     def index
       @model = model_class
