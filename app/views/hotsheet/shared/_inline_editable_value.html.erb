@@ -1,5 +1,8 @@
 <%= turbo_frame_tag("#{dom_id(object)}-#{attribute}") do %>
-  <div data-controller="editable-attribute">
+  <div data-controller="editable-attribute"
+       data-editable-attribute-broadcast-url-value="<%= broadcast_edit_intent_path %>"
+       data-editable-attribute-resource-name-value="<%= object.class.name.downcase %>"
+       data-editable-attribute-resource-id-value="<%= object.id %>">
     <div class="readonly-attribute"
          data-editable-attribute-target="readonlyAttribute"
          data-action="click->editable-attribute#displayInputField">

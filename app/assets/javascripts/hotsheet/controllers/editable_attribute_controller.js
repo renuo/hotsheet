@@ -3,6 +3,12 @@ import {
 } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js";
 
 export default class extends Controller {
+    static values = {
+        broadcastUrl: String,
+        resourceName: String,
+        resourceId: Number
+    };
+
     static targets = [
       'readonlyAttribute',
       'attributeForm',
@@ -10,9 +16,25 @@ export default class extends Controller {
     ];
 
     displayInputField() {
+        this.broadcastEditIntent();
         this.readonlyAttributeTarget.style.display = 'none';
         this.attributeFormTarget.style.display = 'block';
         this.attributeFormInputTarget.focus();
+    }
+
+    broadcastEditIntent() {
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        headers.append("X-CSRF-Token", document.querySelector("meta[name=csrf-token]").content);
+
+        const data = JSON.stringify({
+            broadcast: {
+                resource_name: this.resourceNameValue,
+                resource_id: this.resourceIdValue
+            }
+        });
+
+        fetch(this.broadcastUrlValue, { method: "POST",  headers: headers,  body: data }).then();
     }
 
     submitForm(event) {
