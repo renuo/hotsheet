@@ -100,7 +100,7 @@ GIT
 PATH
   remote: ../..
   specs:
-    rails_db_manager (0.1.0)
+    hotsheet (0.1.0)
       rails (>= 7.2.1)
       sprockets-rails
       stimulus-rails
@@ -307,10 +307,10 @@ DEPENDENCIES
   binding_of_caller
   debug
   faker
+  hotsheet!
   importmap-rails
   puma
   rails!
-  rails_db_manager!
   renuocop
   rspec-rails
   sqlite3
