@@ -2,7 +2,5 @@ inherit_gem:
   renuocop: config/base.yml
 
 AllCops:
+  SuggestExtensions: false
   TargetRubyVersion: 3.1.4
-
-Layout/LineLength:
-  Max: 120

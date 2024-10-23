@@ -314,6 +314,7 @@ DEPENDENCIES
   renuocop
   rspec-rails
   sqlite3
+  turbo-rails
 
 BUNDLED WITH
    2.5.22

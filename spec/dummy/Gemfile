@@ -2,11 +2,12 @@
 
 source "https://rubygems.org"
 
+gem "hotsheet", path: "../.."
 gem "importmap-rails"
 gem "puma"
 gem "rails", github: "rails/rails", branch: "main"
-gem "hotsheet", path: "../.."
 gem "sqlite3"
+gem "turbo-rails"
 
 group :development, :test do
   gem "better_errors"

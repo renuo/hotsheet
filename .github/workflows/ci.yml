@@ -14,8 +14,11 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Setup Hotsheet
+        run: bin/setup
+
       - name: Run linters
-        run: bundle exec rubocop -c .rubocop.yml
+        run: bin/fastcheck
 
       - name: Run tests
-        run: RAILS_ENV=test bundle exec rspec
+        run: bin/check
