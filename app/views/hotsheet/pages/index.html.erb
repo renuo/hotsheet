@@ -1,5 +1,5 @@
 <% if @model %>
-  <h1>--- <%= @model %> ---</h1>
+  <h1><%= @model %></h1>
   <table class="model-table">
     <tr>
       <% @model.editable_attributes.each do |attribute| %>
@@ -18,6 +18,6 @@
     <% end %>
   </table>
 <% else %>
-  <h1>--- Hotsheet ---</h1>
+  <h1>Hotsheet</h1>
   <p>Welcome to the Hottest sheet around. Select a model from the sidebar to view the spreadsheet.</p>
 <% end %>
