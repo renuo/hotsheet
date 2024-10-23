@@ -1,0 +1,21 @@
+name: ci
+
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        uses: ruby/setup-ruby@v1.197.0
+        with:
+          bundler-cache: true
+
+      - name: Run linters
+        run: bundle exec rubocop -c .rubocop.yml
+
+      - name: Run tests
+        run: RAILS_ENV=test bundle exec rspec
