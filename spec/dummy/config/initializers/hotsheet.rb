@@ -2,7 +2,7 @@
 
 Hotsheet.configure do |config|
   config.model :Author do |model|
-    model.included_attributes = %i[name birthdate gender updated_at]
+    model.included_attributes = %i[name birthdate gender created_at]
   end
 
   config.model :Post do |model|
