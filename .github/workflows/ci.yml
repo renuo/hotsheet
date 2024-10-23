@@ -15,7 +15,7 @@ jobs:
           bundler-cache: true
 
       - name: Setup Hotsheet
-        run: bin/setup
+        run: bundle && cd spec/dummy && bundle
 
       - name: Run linters
         run: bin/fastcheck
