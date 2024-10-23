@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -eu
+
+cd spec/dummy
+bundle exec rspec --fail-fast=3 -f documentation

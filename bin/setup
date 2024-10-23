@@ -1,8 +1,10 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-set -vx
+#!/usr/bin/env sh
+set -eu
 
-bundle install
+echo ---- Installing dependencies ----
+bundle
+cd spec/dummy
+bundle
 
-# Do any other automated setup that you need to do here
+echo ---- Setting up database ----
+bundle exec rails db:drop db:setup
