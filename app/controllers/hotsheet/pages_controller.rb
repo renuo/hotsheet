@@ -3,7 +3,7 @@
 module Hotsheet
   class PagesController < ApplicationController
     def index
-      @model = model_class
+      @pagy, @records = pagy model.all if model
     end
 
     def broadcast_edit_intent
@@ -14,14 +14,10 @@ module Hotsheet
     end
 
     def update
-      model = model_class.find(params[:id])
-      notice = if model.update(model_params)
-                 "#{model_class} updated successfully"
-               else
-                 "#{model_class} update failed"
-               end
+      record = model.find(params[:id])
+      notice = "#{record} #{record.update(model_params) ? "updated successfully" : "update failed"}"
 
-      redirect_to polymorphic_path(model_class), notice: notice
+      redirect_to polymorphic_path(record), notice: notice
     end
 
     private
@@ -31,11 +27,11 @@ module Hotsheet
     end
 
     def model_params
-      params.require(model_class.name.underscore.to_sym).permit(*model_class.editable_attributes)
+      params.require(model.name.underscore.to_sym).permit(*model.editable_attributes)
     end
 
-    def model_class
-      params[:model]&.constantize
+    def model
+      @model ||= params[:model]&.constantize
     end
   end
 end

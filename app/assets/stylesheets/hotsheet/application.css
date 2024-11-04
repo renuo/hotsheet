@@ -62,7 +62,7 @@ main {
 }
 
 
-.model-table {
+table {
   border-collapse: collapse;
 
   th {

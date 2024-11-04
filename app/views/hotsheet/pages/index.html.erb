@@ -1,23 +1,27 @@
-<% if @model %>
+<% if @model.nil? %>
+  <h1>Hotsheet</h1>
+  <p>Welcome to the hottest sheet around. Select a model from the sidebar to view the spreadsheet.</p>
+<% else %>
   <h1><%= @model %></h1>
-  <table class="model-table">
-    <tr>
-      <% @model.editable_attributes.each do |attribute| %>
-        <th><%= attribute %></th>
-      <% end %>
-    </tr>
-
-    <% @model.find_each do |record| %>
+  <table>
+    <thead>
       <tr>
         <% @model.editable_attributes.each do |attribute| %>
-          <td>
-            <%= render 'hotsheet/shared/inline_editable_value', object: record, attribute: attribute %>
-          </td>
+          <th><%= attribute %></th>
         <% end %>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @records.each do |record| %>
+        <tr>
+          <% @model.editable_attributes.each do |attribute| %>
+            <td>
+              <%= render "hotsheet/shared/inline_editable_value", object: record, attribute: attribute %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
-<% else %>
-  <h1>Hotsheet</h1>
-  <p>Welcome to the Hottest sheet around. Select a model from the sidebar to view the spreadsheet.</p>
+  <%== pagy_nav @pagy %>
 <% end %>
