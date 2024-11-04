@@ -6,7 +6,8 @@
     <%= csp_meta_tag %>
     <%= yield :head %>
     <%= stylesheet_link_tag "hotsheet/application", media: :all %>
-    <%= javascript_include_tag "hotsheet/application", "data-turbolinks-track": "reload", type: "module" %>
+    <%= javascript_include_tag "hotsheet/application", "data-turbolinks-track": :reload,
+          type: :module, nonce: content_security_policy_nonce, defer: true %>
   </head>
   <body>
     <%= render "layouts/hotsheet/sidebar" %>
