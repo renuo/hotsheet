@@ -2,6 +2,6 @@
 
 class ApplicationController < ActionController::Base
   def index
-    redirect_to "/admin"
+    redirect_to "/hotsheet"
   end
 end
