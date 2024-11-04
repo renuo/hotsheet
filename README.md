@@ -8,29 +8,24 @@ This gem allows you to mount a view to manage your database using a table view w
 
 Add and install the gem by adding this to the application's Gemfile:
 
-```ruby
+```rb
 gem "hotsheet"
 ```
 
 And executing:
 
-```bash
+```sh
 bundle
+bin/rails g hotsheet:install
 ```
 
 ## Usage
-
-You can mount the view in your routes file like this:
-
-```ruby
-mount Hotsheet::Engine, at: "hotsheet"
-```
 
 By default, the gem will fetch all models in you application and allow you to manage them.
 
 You can also configure which models and columns whithin them you want to manage by creating an initializer file in your application:
 
-```ruby
+```rb
 # config/initializers/hotsheet.rb
 
 Hotsheet.configure do |config|
@@ -60,5 +55,4 @@ After cloning the repo, run `bin/setup` to install dependencies.
 - Type specific input fields
 - Undo feature (or confirm / discard changes icons)
 - Configure visibility of non-editable (excluded) fields
-- Generator for configuration file/s
 - Use importmap-rails for js dependencies
