@@ -4,7 +4,7 @@
   <nav>
     <ul>
       <% Hotsheet.models.each do |model| %>
-        <%= link_to model.model_name.human, polymorphic_path(model.table_name) %>
+        <%= link_to model.model_name.human, "#{root_path}#{model.table_name}" %>
       <% end %>
     </ul>
   </nav>

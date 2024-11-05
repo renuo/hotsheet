@@ -33,7 +33,7 @@ module Hotsheet
     end
 
     def model_params
-      params.require(model.name.underscore.to_sym).permit(*model.editable_attributes)
+      params.require(model.name.underscore).permit(*model.editable_attributes)
     end
 
     def model
