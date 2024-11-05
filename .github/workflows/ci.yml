@@ -3,22 +3,40 @@ name: ci
 on: push
 
 jobs:
-  check:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [3.0, 3.3]
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        uses: ruby/setup-ruby@v1.197.0
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: ${{ matrix.ruby }}
 
-      - name: Setup Hotsheet
-        run: bundle && cd spec/dummy && bundle
+      - name: Install dependencies
+        run: bundle && cd spec/dummy && bundle && cd ../.. && bundle exec appraisal install
+
+      - name: Run tests
+        run: bundle exec appraisal bin/check
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+
+      - name: Install dependencies
+        run: bundle
 
       - name: Run linters
         run: bin/fastcheck
-
-      - name: Run tests
-        run: bin/check

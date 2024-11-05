@@ -2,12 +2,10 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in hotsheet.gemspec
 gemspec
 
-group :development, :test do
-  gem "puma"
+group :test do
+  gem "appraisal"
   gem "renuocop", require: false
   gem "rspec"
-  gem "rake"
 end

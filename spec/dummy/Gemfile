@@ -3,17 +3,12 @@
 source "https://rubygems.org"
 
 gem "hotsheet", path: "../.."
-gem "importmap-rails"
 gem "puma"
-gem "rails", github: "rails/rails", branch: "main"
 gem "sqlite3"
-gem "turbo-rails"
 
-group :development, :test do
+group :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "debug"
   gem "faker", require: false
-  gem "renuocop", require: false
-  gem "rspec-rails", require: false
 end
