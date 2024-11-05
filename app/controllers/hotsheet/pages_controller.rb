@@ -13,11 +13,17 @@ module Hotsheet
                                    })
     end
 
-    def update
-      record = model.find(params[:id])
-      notice = "#{record} #{record.update(model_params) ? "updated successfully" : "update failed"}"
+    def update # rubocop:disable Metrics/AbcSize
+      record = model.find params[:id]
 
-      redirect_to polymorphic_path(record), notice: notice
+      if record.update model_params
+        flash[:notice] = t("hotsheet.success", record: record)
+      else
+        flash[:alert] = t("hotsheet.error", record: record,
+                                            errors: record.errors.full_messages.join(", "))
+      end
+
+      redirect_to "#{root_path}#{model.table_name}"
     end
 
     private
