@@ -23,7 +23,7 @@ bin/rails g hotsheet:install
 
 
 
-You can also configure which models the gem should manage, and even specify columns whithin them you want by configuring the initializer file created by the install command:
+You can also configure which models the gem should manage, and even specify columns within them, by configuring the initializer file created by the install command:
 
 ```rb
 # config/initializers/hotsheet.rb
