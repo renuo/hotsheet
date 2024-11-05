@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLength
+  # Only run this initializer when running the Rails server
+  next unless defined? Rails::Server
+
   Hotsheet.configuration.models.each_key do |model| # rubocop:disable Metrics/BlockLength
     model.constantize.class_eval do
       class << self
@@ -27,7 +30,9 @@ Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLeng
 
         def attrs_to_s(attrs)
           attrs.map do |attr|
-            column_names.include?(attr.to_s) ? attr.to_s : raise("Attribute '#{attr}' doesn't exist on model '#{name}'")
+            raise "Attribute '#{attr}' doesn't exist on model '#{name}'" if column_names.exclude? attr.to_s
+
+            attr.to_s
           end
         end
       end

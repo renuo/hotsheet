@@ -16,7 +16,7 @@
         <tr>
           <% @model.editable_attributes.each do |attribute| %>
             <td>
-              <%= render "hotsheet/shared/inline_editable_value", object: record, attribute: attribute %>
+              <%= render "editable_attribute", model: @model, record: record, attribute: attribute %>
             </td>
           <% end %>
         </tr>

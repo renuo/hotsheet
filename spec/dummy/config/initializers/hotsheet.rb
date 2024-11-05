@@ -8,4 +8,12 @@ Hotsheet.configure do |config|
   config.model :Post do |model|
     model.excluded_attributes = %i[id author_id created_at updated_at]
   end
+
+  config.model :TableNameTest do |model|
+    model.included_attributes = []
+  end
+
+  config.model :VeryLongModelNameForOverflowTest do
+    nil
+  end
 end
