@@ -44,8 +44,6 @@ end
 
 Finally, you will need to create a configuration file to specify which models you want to manage with Hotsheet.
 
-
-
 ## TODO
 
 - Support live updates (show when someone has the intention to edit a resource) via ActionCable
