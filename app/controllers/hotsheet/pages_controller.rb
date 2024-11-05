@@ -3,7 +3,7 @@
 module Hotsheet
   class PagesController < ApplicationController
     def index
-      @model = model_class
+      @pagy, @records = pagy model.all if model
     end
 
     def broadcast_edit_intent
@@ -13,15 +13,17 @@ module Hotsheet
                                    })
     end
 
-    def update
-      model = model_class.find(params[:id])
-      notice = if model.update(model_params)
-                 "#{model_class} updated successfully"
-               else
-                 "#{model_class} update failed"
-               end
+    def update # rubocop:disable Metrics/AbcSize
+      record = model.find params[:id]
 
-      redirect_to polymorphic_path(model_class), notice: notice
+      if record.update model_params
+        flash[:notice] = t("hotsheet.success", record: record)
+      else
+        flash[:alert] = t("hotsheet.error", record: record,
+                                            errors: record.errors.full_messages.join(", "))
+      end
+
+      redirect_to "#{root_path}#{model.table_name}"
     end
 
     private
@@ -31,11 +33,11 @@ module Hotsheet
     end
 
     def model_params
-      params.require(model_class.name.underscore.to_sym).permit(*model_class.editable_attributes)
+      params.require(model.name.underscore.to_sym).permit(*model.editable_attributes)
     end
 
-    def model_class
-      params[:model]&.constantize
+    def model
+      @model ||= params[:model]&.constantize
     end
   end
 end

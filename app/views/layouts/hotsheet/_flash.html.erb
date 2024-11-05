@@ -1,0 +1,7 @@
+<%# locals: () %>
+
+<% flash.each do |type, msg| %>
+  <div class='flash <%= type %>'>
+    <span><%= msg %></span>
+  </div>
+<% end %>

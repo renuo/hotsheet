@@ -2,15 +2,16 @@
 <html>
   <head>
     <title>Hotsheet</title>
+    <meta name="robots" content="noindex,nofollow">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= yield :head %>
-    <%= stylesheet_link_tag "hotsheet/application", media: :all %>
+    <%= stylesheet_link_tag "hotsheet/application" %>
     <%= javascript_include_tag "hotsheet/application", "data-turbolinks-track": :reload,
           type: :module, nonce: content_security_policy_nonce, defer: true %>
   </head>
   <body>
     <%= render "layouts/hotsheet/sidebar" %>
+    <%= render "layouts/hotsheet/flash" %>
     <main>
       <%= yield %>
     </main>

@@ -1,0 +1,37 @@
+/* https://ddnexus.github.io/pagy/docs/api/stylesheets */
+
+.pagy {
+  color: #6b7280;
+  display: flex;
+  font-size: .875rem;
+  font-weight: 600;
+  margin-top: 1rem;
+
+  a ~ a {
+    margin-left: .25rem;
+  }
+
+  a:not(.gap) {
+    background-color: #e5e7eb;
+    border-radius: .5rem;
+    color: inherit;
+    display: block;
+    padding: .25rem .75rem;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #d1d5db;
+    }
+  
+    &:not([href]) {
+      background-color: #f3f4f6;
+      color: #d1d5db;
+      cursor: default;
+    }
+  
+    &.current {
+      background-color: #9ca3af;
+      color: white;
+    }
+  }
+}
