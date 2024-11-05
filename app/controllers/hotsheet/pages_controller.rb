@@ -7,10 +7,10 @@ module Hotsheet
     end
 
     def broadcast_edit_intent
-      ActionCable.server.broadcast(InlineEditChannel::STREAM_NAME, {
-                                     resource_name: broadcast_params[:resource_name],
-                                     resource_id: broadcast_params[:resource_id]
-                                   })
+      ActionCable.server.broadcast InlineEditChannel::STREAM_NAME, {
+        resource_name: broadcast_params[:resource_name],
+        resource_id: broadcast_params[:resource_id]
+      }
     end
 
     def update # rubocop:disable Metrics/AbcSize
@@ -29,7 +29,7 @@ module Hotsheet
     private
 
     def broadcast_params
-      params.require(:broadcast).permit(:resource_name, :resource_id)
+      params.require(:broadcast).permit :resource_name, :resource_id
     end
 
     def model_params
