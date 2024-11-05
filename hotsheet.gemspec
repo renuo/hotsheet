@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   }
   spec.files = Dir["{app,config,lib,vendor}/**/*.*", "CHANGELOG.md", "LICENSE", "README.md"]
 
-  spec.required_ruby_version = ">= 2.7.0"
+  spec.required_ruby_version = ">= 3.0.0"
   spec.add_dependency "rails", ">= 6.1.0"
   spec.add_dependency "pagy"
   spec.add_dependency "sprockets-rails"

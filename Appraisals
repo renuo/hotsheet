@@ -8,6 +8,14 @@ appraise "rails_7" do
   gem "rails", "7.0.0"
 end
 
+appraise "rails_7_1" do
+  gem "rails", "7.1.0"
+end
+
+appraise "rails_7_2" do
+  gem "rails", "7.2.0"
+end
+
 appraise "rails_8" do
   gem "rails", "8.0.0.rc2"
 end
