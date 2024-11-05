@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -eu
+
+[ "$(basename "$PWD")" = dummy ] || cd spec/dummy
+bundle exec rails s
