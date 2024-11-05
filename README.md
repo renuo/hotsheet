@@ -44,6 +44,14 @@ end
 
 Finally, you will need to create a configuration file to specify which models you want to manage with Hotsheet.
 
+## Development: Local Setup
+
+After cloning the repo, run `bin/setup` to install dependencies.
+
+- Run tests: `bin/check`
+- Run linters: `bin/fastcheck`
+- Start dummy app: `spec/dummy/bin/run`
+
 ## TODO
 
 - Support live updates (show when someone has the intention to edit a resource) via ActionCable
