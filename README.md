@@ -49,7 +49,7 @@ After cloning the repo, run `bin/setup` to install dependencies.
 
 ## TODO
 
-- By default, the gem will fetch all models in you application and allow you to manage them.
+- Fetch all models in the application by default
 - Support live updates (show when someone has the intention to edit a resource) via ActionCable
 - Conflict resolution strategy (locking / merging / latest change etc.)
 - Fine grained access / permissions (cancancan)
