@@ -8,44 +8,45 @@
  */
 
 :root {
-  --sidebar-width: 300px;
-  --table-border-color: #E0E1DD;
-  --table-header-bg-color: #778DA9;
+  --bg-color: lightgray;
+  --sidebar-width: 12rem;
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font: 400 16px system-ui, Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
 }
 
 main {
   margin-left: var(--sidebar-width);
-  padding: 1rem 2rem;
+  padding: 1rem;
 }
 
-.sidebar {
-  width: var(--sidebar-width);
+aside {
+  background-color: var(--bg-color);
+  border-right: 1px solid gray;
+  height: 100%;
+  left: 0;
+  overflow-y: auto;
   position: fixed;
   top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  background-color: lightgray;
-  border-right: 1px solid gray;
+  width: var(--sidebar-width);
 
-  .nav-list {
+  ul {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 1rem 0.5rem;
+    margin: 0;
+    padding: 0.25rem;
 
-    .nav-item {
-      padding: 0.5rem 2rem;
-      border-radius: 5px;
-      text-decoration: none;
+    a {
+      border-radius: 0.5rem;
       color: green;
-      font-weight: bold;
-      font-size: 1.5rem;
+      font-weight: 700;
+      overflow: hidden;
+      padding: 0.5rem;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       &:hover {
         background-color: darkgray;
@@ -54,29 +55,32 @@ main {
   }
 }
 
+h1 {
+  margin: 0 0 1rem 0;
+}
 
 table {
   border-collapse: collapse;
 
-  th {
-    background-color: var(--table-border-color);
-    border-color: black;
+  th,
+  td {
+    border: 1px solid var(--bg-color);
+    padding: 0.5rem;
     text-align: left;
   }
 
-  th, td {
-    border: 1px solid var(--table-border-color);
-    padding: .5rem;
+  th {
+    background-color: var(--bg-color);
   }
 
   .readonly-attribute {
-    min-width: 1rem;
     min-height: 1rem;
+    min-width: 1rem;
   }
 
   .editable-input {
-    border: none;
     background-color: transparent;
+    border: none;
     width: 100%;
   }
 }

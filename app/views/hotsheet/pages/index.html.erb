@@ -2,7 +2,7 @@
   <h1>Hotsheet</h1>
   <p>Welcome to the hottest sheet around. Select a model from the sidebar to view the spreadsheet.</p>
 <% else %>
-  <h1><%= @model %></h1>
+  <h1><%= @model.model_name.human %></h1>
   <table>
     <thead>
       <tr>
