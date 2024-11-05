@@ -5,20 +5,40 @@ on: push
 jobs:
   check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [3.0, 3.3]
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        uses: ruby/setup-ruby@v1.197.0
+      - name: Restore cache
+        uses: actions/cache/restore@v4
         with:
-          bundler-cache: true
+          key: gems
+          path: vendor/bundle
 
-      - name: Setup Hotsheet
-        run: bundle && cd spec/dummy && bundle
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
 
-      - name: Run linters
-        run: bin/fastcheck
+      - name: Install dependencies
+        run:
+          bundle config set path --local vendor/bundle && bundle > /dev/null 2>&1 &&
+          cd spec/dummy && bundle config set path --local ../../vendor/bundle &&
+          bundle > /dev/null 2>&1 && bundle exec appraisal install
+
+      - if: ${{ matrix.ruby == '3.3' }}
+        name: Cache RubyGems
+        uses: actions/cache/save@v4
+        with:
+          key: gems
+          path: vendor/bundle
 
       - name: Run tests
-        run: bin/check
+        run: bundle exec appraisal bin/check
+
+      - if: ${{ matrix.ruby == '3.3' }}
+        name: Run linters
+        run: bin/fastcheck

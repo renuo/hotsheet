@@ -9,6 +9,6 @@ Bundler.require(*Rails.groups)
 
 module Lw2024DemoProject
   class Application < Rails::Application
-    config.load_defaults 8.1
+    config.load_defaults Rails::VERSION::STRING.to_f
   end
 end

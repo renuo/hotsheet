@@ -6,9 +6,9 @@ module Hotsheet
 
     config_accessor(:models) { {} }
 
-    def model(name, &)
+    def model(name, &block)
       model_config = ModelConfig.new
-      yield model_config
+      yield model_config if block
       models[name.to_s] = model_config
     end
 

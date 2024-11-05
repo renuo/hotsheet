@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "sprockets/railtie"
+require "turbo-rails"
+
 require "hotsheet/configuration"
 require "hotsheet/engine"
 require "hotsheet/version"
