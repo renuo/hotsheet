@@ -27,8 +27,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - name: Install dependencies
-        run: bundle && bundle exec appraisal install
+      - name: Set up Hotsheet
+        run: bundle && bundle exec appraisal install && bundle exec rails db:create db:schema:load
 
       - name: Run tests
         run: bundle exec appraisal bin/check

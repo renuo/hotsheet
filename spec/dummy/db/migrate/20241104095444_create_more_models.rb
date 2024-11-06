@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateMoreModels < ActiveRecord::Migration[8.1]
+class CreateMoreModels < ActiveRecord::Migration[6.1]
   def change
     overflow_test
     different_db_name

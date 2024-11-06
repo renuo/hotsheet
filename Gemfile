@@ -6,6 +6,12 @@ gemspec
 
 group :test do
   gem "appraisal"
+  gem "capybara"
+  gem "database_cleaner-active_record", require: false
+  gem "faker", require: false
+  gem "puma"
   gem "renuocop", require: false
-  gem "rspec"
+  gem "rspec-rails"
+  gem "selenium-webdriver", require: false
+  gem "sqlite3"
 end
