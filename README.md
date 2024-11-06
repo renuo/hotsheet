@@ -21,17 +21,17 @@ bin/rails g hotsheet:install
 
 ## Usage
 
-By default, the gem will fetch all models in you application and allow you to manage them.
 
-You can also configure which models and columns whithin them you want to manage by creating an initializer file in your application:
+
+You can also configure which models the gem should manage, and even specify columns within them, by configuring the initializer file created by the install command:
 
 ```rb
 # config/initializers/hotsheet.rb
 
 Hotsheet.configure do |config|
   config.model :Author do |model|
-    model.included_attributes = %i[name birthdate gender]
-    # model.excluded_attributes = %i[created_at updated_at]
+    model.included_attributes = %i[name birthdate gender] # mutually exclusive with "excluded_attributes"
+    # model.excluded_attributes = %i[created_at updated_at] # mutually exclusive with "included_attributes"
   end
 end
 
@@ -49,6 +49,7 @@ After cloning the repo, run `bin/setup` to install dependencies.
 
 ## TODO
 
+- Fetch all models in the application by default
 - Support live updates (show when someone has the intention to edit a resource) via ActionCable
 - Conflict resolution strategy (locking / merging / latest change etc.)
 - Fine grained access / permissions (cancancan)
