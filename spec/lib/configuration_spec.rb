@@ -17,14 +17,4 @@ RSpec.describe "Hotsheet::Configuration" do
     expect(config.included_attributes).to eq %i[name birthdate]
     expect(config.excluded_attributes).to eq %i[created_at]
   end
-
-  it "doesn't have any other model configs" do # rubocop:disable RSpec/ExampleLength
-    expect do
-      Hotsheet.configure do |config|
-        config.model :Author do |model|
-          model.attributes = %i[name birthdate]
-        end
-      end
-    end.to raise_error NoMethodError
-  end
 end

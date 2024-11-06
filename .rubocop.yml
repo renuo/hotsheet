@@ -7,3 +7,9 @@ AllCops:
   Exclude:
     - gemfiles/**/*
     - spec/dummy/db/schema.rb
+
+RSpec/ExampleLength:
+  CountAsOne:
+    - array
+    - hash
+    - method_call
