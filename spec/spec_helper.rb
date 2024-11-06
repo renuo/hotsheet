@@ -2,7 +2,7 @@
 
 ENV["RAILS_ENV"] = "test"
 
-require_relative "../config/environment"
+require_relative "dummy/config/environment"
 require "database_cleaner-active_record"
 require "rspec/rails"
 require "selenium-webdriver"
