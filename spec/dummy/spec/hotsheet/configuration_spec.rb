@@ -5,7 +5,7 @@ require "spec_helper"
 RSpec.describe "Hotsheet::Configuration" do
   let(:config) do
     Hotsheet.configure do |config|
-      config.model :User do |model|
+      config.model :Author do |model|
         model.included_attributes = %i[name birthdate]
         model.excluded_attributes = %i[created_at]
       end
@@ -21,7 +21,7 @@ RSpec.describe "Hotsheet::Configuration" do
   it "doesn't have any other model configs" do # rubocop:disable RSpec/ExampleLength
     expect do
       Hotsheet.configure do |config|
-        config.model :User do |model|
+        config.model :Author do |model|
           model.attributes = %i[name birthdate]
         end
       end
