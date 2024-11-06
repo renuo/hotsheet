@@ -9,6 +9,7 @@
 - Dummy app for development and test ([@hunchr])
 - Configuration for initializer, CI, lint, tests ([@hunchr])
 - Generator `bin/rails g hotsheet:install` for copying initializer and mounting engine in routes ([@hunchr])
+- Pagination for data tables ([@hunchr])
 
 [@ignaciosy]: https://github.com/ignaciosy
 [@hunchr]: https://github.com/hunchr
