@@ -2,13 +2,6 @@
 
 ## Local Setup
 
-### Prerequisites
-
-- Bash ([^5.0](https://www.gnu.org/software/bash/))
-- Ruby ([`.ruby-version`](.ruby-version))
-
-### Setup
-
 Clone this repository and run the setup script:
 
 ```sh
@@ -29,5 +22,5 @@ bin/setup
 ### Test
 
 - `bin/check`: Run specs for **all** supported Rails versions
-- `bin/check rails_8_0`: Run specs for a **specific** Rails versions
+- `bin/check rails_8_0`: Run specs for a **specific** Rails version
   defined in [Appraisals](Appraisals)
