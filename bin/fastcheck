@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
-set -eu
+set -e
 
-bundle exec rubocop -c .rubocop.yml
+bundle exec rubocop -c .rubocop.yml "$@"

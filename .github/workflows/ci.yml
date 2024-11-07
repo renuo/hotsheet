@@ -28,10 +28,10 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
 
       - name: Set up Hotsheet
-        run: bundle && bundle exec appraisal install && bundle exec rails db:create db:schema:load
+        run: bin/setup
 
       - name: Run tests
-        run: bundle exec appraisal bin/check
+        run: bin/check
 
   lint:
     runs-on: ubuntu-latest
