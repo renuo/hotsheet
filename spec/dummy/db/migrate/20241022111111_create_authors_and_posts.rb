@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateAuthorsAndPosts < ActiveRecord::Migration[8.1]
+class CreateAuthorsAndPosts < ActiveRecord::Migration[6.1]
   def change
     authors
     posts

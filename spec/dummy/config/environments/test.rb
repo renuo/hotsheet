@@ -3,7 +3,6 @@
 Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
   config.action_controller.perform_caching = false
-  config.action_controller.raise_on_missing_callback_actions = true
   config.action_dispatch.show_exceptions = :all
   config.action_view.logger = nil
   config.active_record.migration_error = :raise

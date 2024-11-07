@@ -17,9 +17,9 @@ module Hotsheet
       record = model.find params[:id]
 
       if record.update model_params
-        flash[:notice] = t("hotsheet.success", record: record)
+        flash[:notice] = t("hotsheet.success", record: model.model_name.human)
       else
-        flash[:alert] = t("hotsheet.error", record: record,
+        flash[:alert] = t("hotsheet.error", record: model.model_name.human,
                                             errors: record.errors.full_messages.join(", "))
       end
 

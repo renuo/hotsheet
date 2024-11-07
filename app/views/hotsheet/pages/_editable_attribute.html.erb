@@ -7,7 +7,8 @@
       data-editable-attribute-resource-id-value="<%= record.id %>">
     <div class="readonly-attribute"
         data-editable-attribute-target="readonlyAttribute"
-        data-action="click->editable-attribute#displayInputField">
+        data-action="click->editable-attribute#displayInputField"
+        role="button">
       <%= record.public_send attribute %>
     </div>
 

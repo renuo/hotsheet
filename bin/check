@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-set -eu
+set -e
 
-cd spec/dummy
-bundle exec rspec --fail-fast=3 -f documentation
+bundle exec appraisal "$@" rspec --fail-fast=3 -f documentation

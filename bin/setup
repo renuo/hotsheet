@@ -1,10 +1,13 @@
 #!/usr/bin/env sh
-set -eu
+set -e
 
 echo ---- Installing dependencies ----
 bundle
-cd spec/dummy
-bundle
+bundle exec appraisal install
 
 echo ---- Setting up database ----
-bundle exec rails db:drop db:setup
+if [ -n "$CI" ]; then
+  bundle exec rails db:create db:schema:load
+else
+  bundle exec rails db:drop db:setup
+fi

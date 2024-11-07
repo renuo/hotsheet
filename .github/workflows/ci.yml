@@ -27,11 +27,11 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - name: Install dependencies
-        run: bundle && bundle exec appraisal install
+      - name: Set up Hotsheet
+        run: bin/setup
 
       - name: Run tests
-        run: bundle exec appraisal bin/check
+        run: bin/check
 
   lint:
     runs-on: ubuntu-latest
