@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
 
   spec.summary = "Manage your database with a simple and familiar web interface"
-  spec.description = "This gem allows you to mount a view to manage your database using a" \
+  spec.description = "This gem allows you to mount a view to manage your database using a " \
                      "table view where you can edit DB records inline."
   spec.homepage = "https://github.com/renuo/hotsheet"
   spec.metadata = {

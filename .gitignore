@@ -5,3 +5,4 @@
 
 /Gemfile.lock
 /spec/dummy/Gemfile.lock
+*.gem
