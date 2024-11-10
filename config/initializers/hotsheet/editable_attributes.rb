@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.application.config.after_initialize do # rubocop:disable Metrics/BlockLength
+Rails.application.config.to_prepare do # rubocop:disable Metrics/BlockLength
   # Only run this initializer when running the Rails server
   next unless Rails.env.test? || defined? Rails::Server
 
