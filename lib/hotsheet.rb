@@ -3,9 +3,9 @@
 require "sprockets/railtie"
 require "turbo-rails"
 
-require "hotsheet/configuration"
 require "hotsheet/engine"
 require "hotsheet/version"
+require "hotsheet/configuration"
 
 module Hotsheet
   class Error < StandardError; end
@@ -16,6 +16,7 @@ module Hotsheet
     end
 
     def configure
+      @configuration = Configuration.new
       yield configuration
     end
 

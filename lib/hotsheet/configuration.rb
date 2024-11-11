@@ -6,6 +6,10 @@ module Hotsheet
 
     config_accessor(:models) { {} }
 
+    def initialize
+      self.models = {}
+    end
+
     def model(name, &block)
       model_config = ModelConfig.new
       yield model_config if block
