@@ -38,6 +38,34 @@ RSpec.describe "Hotsheet" do
       end
     end
 
+    context "when included attributes are empty" do
+      before do
+        Hotsheet.configure do |config|
+          config.model :Author do |model|
+            model.included_attributes = %i[]
+          end
+        end
+      end
+
+      it "returns an empty list" do
+        expect(editable_attributes).to eq %w[]
+      end
+    end
+
+    context "when excluded attributes are empty" do
+      before do
+        Hotsheet.configure do |config|
+          config.model :Author do |model|
+            model.excluded_attributes = %i[]
+          end
+        end
+      end
+
+      it "returns all attributes" do
+        expect(editable_attributes).to eq Author.column_names
+      end
+    end
+
     context "when no included or excluded attributes are specified" do
       before do
         Hotsheet.configure do |config|

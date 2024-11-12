@@ -10,7 +10,7 @@ Hotsheet.configure do |config|
   end
 
   config.model :TableNameTest do |model|
-    model.included_attributes = []
+    model.included_attributes = %i[]
   end
 
   config.model :VeryLongModelNameForOverflowTest do
