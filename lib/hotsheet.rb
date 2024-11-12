@@ -15,9 +15,8 @@ module Hotsheet
       @configuration ||= Configuration.new
     end
 
-    def configure
-      @configuration = Configuration.new
-      yield configuration
+    def configure(&block)
+      @configuration = Configuration.new.tap(&block)
     end
 
     def models
