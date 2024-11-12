@@ -44,6 +44,10 @@ RSpec.describe "Hotsheet::Configuration" do
           "Author"
         end
 
+        def self.table_name
+          "authors"
+        end
+
         def self.column_names
           %w[id name birthdate created_at updated_at]
         end

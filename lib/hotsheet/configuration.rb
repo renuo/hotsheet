@@ -28,6 +28,8 @@ module Hotsheet
       end
 
       def validate!
+        return unless ActiveRecord::Base.connection.table_exists?(model_class.table_name)
+
         ensure_only_one_attribute_set
         validate_attribute_existence
       end
@@ -41,7 +43,6 @@ module Hotsheet
       end
 
       def validate_attribute_existence
-        model_class = model_name.to_s.constantize
         all_attributes = model_class.column_names
 
         (included_attributes + excluded_attributes).each do |attr|
@@ -49,6 +50,10 @@ module Hotsheet
             raise "Attribute '#{attr}' doesn't exist on model '#{model_name}'"
           end
         end
+      end
+
+      def model_class
+        model_name.to_s.constantize
       end
     end
   end
