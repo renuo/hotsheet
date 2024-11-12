@@ -7,6 +7,8 @@ require "database_cleaner-active_record"
 require "rspec/rails"
 require "selenium-webdriver"
 
+require "support/capybara_utils"
+
 %i[firefox firefox_headless].each do |driver|
   Capybara.register_driver driver do |app|
     args = ["--headless"] if driver == :firefox_headless
@@ -23,7 +25,8 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   Kernel.srand config.seed
 
-  config.include Capybara::DSL
+  config.include Capybara::DSL, type: :system
+  config.include CapybaraUtils, type: :system
 
   config.disable_monkey_patching!
   config.filter_rails_from_backtrace!

@@ -9,6 +9,8 @@ RSpec.describe "editable attributes", :js do
     before do
       visit "/hotsheet"
       click_link "Author"
+
+      wait_for_turbo
       find(".readonly-attribute", text: "Stephen").click
       fill_in "author_name", with: "King"
     end
