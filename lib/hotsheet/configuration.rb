@@ -12,7 +12,7 @@ module Hotsheet
 
     def model(name)
       model_config = ModelConfig.new(name).tap do |config|
-        yield(config)
+        yield(config) if block_given?
         Rails.application.config.to_prepare { config.validate! }
       end
       models[name.to_s] = model_config

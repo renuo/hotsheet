@@ -6,6 +6,7 @@ require "turbo-rails"
 require "hotsheet/engine"
 require "hotsheet/version"
 require "hotsheet/configuration"
+require "hotsheet/editable_attributes"
 
 module Hotsheet
   class Error < StandardError; end
