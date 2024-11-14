@@ -7,7 +7,7 @@ require "rails/all"
 
 Bundler.require(*Rails.groups)
 
-module Lw2024DemoProject
+module HotsheetDummy
   class Application < Rails::Application
     config.load_defaults Rails::VERSION::STRING.to_f
   end
