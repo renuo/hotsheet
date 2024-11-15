@@ -11,6 +11,7 @@ RSpec.describe "editable attributes", :js do
       click_link "Author"
 
       wait_for_turbo
+      expect(page).to have_content("Stephen") # rubocop:disable RSpec/ExpectInHook
       find(".readonly-attribute", text: "Stephen").click
       fill_in "author_name", with: "King"
     end
