@@ -6,7 +6,7 @@
   <table>
     <thead>
       <tr>
-        <% @model.editable_attributes.each do |attribute| %>
+        <% Hotsheet.editable_attributes_for(model: @model).each do |attribute| %>
           <th><%= attribute %></th>
         <% end %>
       </tr>
@@ -14,7 +14,7 @@
     <tbody>
       <% @records.each do |record| %>
         <tr>
-          <% @model.editable_attributes.each do |attribute| %>
+          <% Hotsheet.editable_attributes_for(model: @model).each do |attribute| %>
             <td>
               <%= render "editable_attribute", model: @model, record: record, attribute: attribute %>
             </td>

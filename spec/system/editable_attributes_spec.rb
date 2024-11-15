@@ -7,8 +7,16 @@ RSpec.describe "editable attributes", :js do
 
   describe "update strings" do
     before do
+      Hotsheet.configure do |config|
+        config.model :Author do |model|
+          model.included_attributes = %i[name birthdate]
+        end
+      end
+      Hotsheet.instance_variable_set(:@editable_attributes_for, nil) # reset the memoized editable attributes
+
       visit "/hotsheet"
       click_link "Author"
+
       find(".readonly-attribute", text: "Stephen").click
       fill_in "author_name", with: "King"
     end
