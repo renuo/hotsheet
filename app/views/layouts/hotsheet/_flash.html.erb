@@ -1,7 +1,20 @@
 <%# locals: () %>
 
-<% flash.each do |type, msg| %>
-  <div class='flash <%= type %>'>
-    <span><%= msg %></span>
-  </div>
-<% end %>
+<div id="flash-messages">
+  <% flash.each do |type, msg| %>
+    <div class = "flash"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 10%;
+        background-color: <%= type == 'error' ? 'red' : 'green' %>;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+      "
+    >
+      <%= msg %>
+    </div>
+  <% end %>
+</div>
