@@ -1,24 +1,15 @@
 <%# locals: (attribute:, model:, record:) %>
 
 <%= turbo_frame_tag "#{dom_id record}-#{attribute}" do %>
-  <div data-controller="editable-attribute"
-      data-editable-attribute-broadcast-url-value="<%= broadcast_edit_intent_path %>"
-      data-editable-attribute-resource-name-value="<%= model.table_name %>"
-      data-editable-attribute-resource-id-value="<%= record.id %>">
-    <div class="readonly-attribute"
-        data-editable-attribute-target="readonlyAttribute"
-        data-action="click->editable-attribute#displayInputField"
-        role="button">
-      <%= record.public_send attribute %>
-    </div>
-
-    <div data-editable-attribute-target="attributeForm" style="display:none">
-      <%= form_for record, url: "#{root_path}#{model.table_name}/#{record.id}" do |f| %>
-        <%= f.text_field attribute, class: "editable-input", data: {
-          editable_attribute_target: "attributeFormInput",
-          action: "keydown.enter->editable-attribute#submitForm blur->editable-attribute#submitForm"
-        } %>
-      <% end %>
-    </div>
-  </div>
+  <%= form_for record, url: "#{root_path}#{model.table_name}/#{record.id}",
+      html: { 'data-controller': "editable-attribute",
+              'data-editable-attribute-broadcast-url-value': broadcast_edit_intent_path,
+              'data-editable-attribute-resource-name-value': model.table_name,
+              'data-editable-attribute-resource-id-value': record.id,
+              'data-editable-attribute-resource-initial-value-value': record.public_send(attribute) } do |f| %>
+    <%= f.text_field attribute, class: "editable-input", data: {
+      editable_attribute_target: "attributeFormInput",
+      action: "keydown.enter->editable-attribute#submitForm blur->editable-attribute#submitForm"
+    } %>
+  <% end %>
 <% end %>

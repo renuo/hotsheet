@@ -12,15 +12,18 @@
   --main-padding-x: 2rem;
   --main-padding-y: 2rem;
   
+  --body-font: 400 16px system-ui, Roboto, Helvetica, Arial, sans-serif;
   --bg-color: lightgray;
   --success-color: green;
   --alert-color: yellow;
   --notice-color: blue;
   --error-color: red;
+  
+  --td-padding: 0.5rem;
 }
 
 body {
-  font: 400 16px system-ui, Roboto, Helvetica, Arial, sans-serif;
+  font: var(--body-font);
   margin: 0;
 }
 
@@ -72,12 +75,12 @@ table {
   th,
   td {
     border: 1px solid var(--bg-color);
-    padding: 0.5rem;
     text-align: left;
   }
 
   th {
     background-color: var(--bg-color);
+    padding: var(--td-padding);
   }
 
   .readonly-attribute {
@@ -88,7 +91,9 @@ table {
   .editable-input {
     background-color: transparent;
     border: none;
-    width: 100%;
+    font: var(--body-font);
+    padding: var(--td-padding);
+    width: calc(100% - var(--td-padding) * 2);
   }
 }
 
