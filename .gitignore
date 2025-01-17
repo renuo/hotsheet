@@ -1,4 +1,5 @@
-/gemfiles
+/gemfiles/*.gemfile.lock
+/gemfiles/.bundle
 /spec/dummy/log
 /spec/dummy/storage
 /spec/dummy/tmp
