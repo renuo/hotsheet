@@ -11,7 +11,6 @@ end
 
 appraise "rails_7_1" do
   gem "rails", "~> 7.1.0"
-  gem "nokogiri", "~> 1.18.1"
 
   group :test do
     gem "sqlite3", "~> 1.4"
