@@ -9,7 +9,7 @@ jobs:
       BUNDLE_PATH: vendor/bundle
     strategy:
       matrix:
-        ruby: [3.0, 3.3]
+        ruby: ["3.0", 3.3]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
