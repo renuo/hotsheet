@@ -37,7 +37,7 @@ jobs:
         run: bin/setup
 
       - name: Run tests
-        run: bin/check ${{ appraisal }}
+        run: bin/check ${{ matrix.appraisal }}
 
   lint:
     runs-on: ubuntu-latest
