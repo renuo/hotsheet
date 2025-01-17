@@ -3,7 +3,6 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 7.1.0"
-gem "nokogiri", "~> 1.18.1"
 
 group :test do
   gem "appraisal"
