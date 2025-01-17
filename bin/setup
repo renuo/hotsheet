@@ -3,7 +3,7 @@ set -e
 
 echo ---- Installing dependencies ----
 bundle
-bundle exec appraisal install
+bundle exec appraisal "$@" install
 
 echo ---- Setting up database ----
 if [ -n "$CI" ]; then

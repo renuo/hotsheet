@@ -34,7 +34,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
 
       - name: Set up Hotsheet
-        run: bin/setup
+        run: bin/setup ${{ matrix.appraisal }}
 
       - name: Run tests
         run: bin/check ${{ matrix.appraisal }}
