@@ -13,3 +13,6 @@ RSpec/ExampleLength:
     - array
     - hash
     - method_call
+
+Rails/StrongParametersExpect:
+  Enabled: false
