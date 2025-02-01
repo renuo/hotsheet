@@ -9,7 +9,13 @@ jobs:
       BUNDLE_PATH: vendor/bundle
     strategy:
       matrix:
-        ruby: [3.0, 3.3]
+        ruby: ["3.0", "3.3"]
+        appraisal: [rails_7_0, rails_7_1, rails_7_2, rails_8_0]
+        exclude:
+          - ruby: "3.0"
+            appraisal: rails_7_2
+          - ruby: "3.0"
+            appraisal: rails_8_0
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,12 +32,14 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+          bundler: latest
+          bundler-cache: false
 
       - name: Set up Hotsheet
-        run: bin/setup
+        run: bin/setup ${{ matrix.appraisal }}
 
       - name: Run tests
-        run: bin/check
+        run: bin/check ${{ matrix.appraisal }}
 
   lint:
     runs-on: ubuntu-latest

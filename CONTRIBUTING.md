@@ -24,3 +24,6 @@ bin/setup
 - `bin/check`: Run specs for **all** supported Rails versions
 - `bin/check rails_8_0`: Run specs for a **specific** Rails version
   defined in [Appraisals](Appraisals)
+
+### Appraisal
+- `bundle exec appraisal install`: Re-generate the respective gemfiles after one has been changed.
