@@ -9,7 +9,7 @@ jobs:
       BUNDLE_PATH: vendor/bundle
     strategy:
       matrix:
-        ruby: ["3.0", 3.3]
+        ruby: ["3.0", "3.3"]
         appraisal: [rails_7_0, rails_7_1, rails_7_2, rails_8_0]
         exclude:
           - ruby: "3.0"
