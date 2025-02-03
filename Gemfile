@@ -4,6 +4,10 @@ source "https://rubygems.org"
 
 gemspec
 
+group :development, :test do
+  gem "sprockets-rails"
+end
+
 group :test do
   gem "appraisal"
   gem "better_errors"
