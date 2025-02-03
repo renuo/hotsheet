@@ -17,21 +17,20 @@ RSpec.describe "editable attributes", :js do
       visit "/hotsheet"
       click_link "Author"
 
-      find(".readonly-attribute", text: "Stephen").click
       fill_in "author_name", with: "King"
     end
 
     it "updates attribute when pressing enter" do
       find_by_id("author_name").native.send_keys :return
 
-      expect(page).to have_content("King")
+      expect(page).to have_field("author_name", with: "King")
       expect(author.reload.name).to eq("King")
     end
 
     it "updates attribute when clicking outside the input" do
       find("th", text: "name").click
 
-      expect(page).to have_content("King")
+      expect(page).to have_field("author_name", with: "King")
       expect(author.reload.name).to eq("King")
     end
   end

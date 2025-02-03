@@ -5,18 +5,12 @@ export default class extends Controller {
     broadcastUrl: String,
     resourceName: String,
     resourceId: Number,
+    resourceInitialValue: String
   }
 
-  static targets = ["readonlyAttribute", "attributeForm", "attributeFormInput"]
+  static targets = ["attributeFormInput"]
 
-  displayInputField() {
-    // this.broadcastEditIntent()
-    this.readonlyAttributeTarget.style.display = "none"
-    this.attributeFormTarget.style.display = "block"
-    this.attributeFormInputTarget.focus()
-  }
-
-  broadcastEditIntent() {
+  broadcastEditIntent() { // TODO: trigger on input focus
     const headers = {
       "Content-Type": "application/json",
       "X-CSRF-Token": document.querySelector("meta[name=csrf-token]").content,
@@ -35,14 +29,8 @@ export default class extends Controller {
     // Prevent standard submission triggered by Enter press
     event.preventDefault()
 
-    const previousValue = this.readonlyAttributeTarget.innerText.trim()
     const newValue = this.attributeFormInputTarget.value
-
-    if (previousValue && previousValue === newValue) {
-      this.readonlyAttributeTarget.style.display = "block"
-      this.attributeFormTarget.style.display = "none"
-      return
-    }
+    if (this.resourceInitialValueValue === newValue) return;
 
     // It's important to use requestSubmit() instead of simply submit() as the latter will circumvent the
     // Turbo mechanism, causing the PATCH request to be submitted as HTML instead of TURBO_STREAM
