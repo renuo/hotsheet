@@ -9,7 +9,6 @@ Rails.application.configure do
   config.active_storage.service = :test
   config.active_support.deprecation = :stderr
   config.active_support.report_deprecations = true
-  config.assets.quiet = true
   config.cache_store = :null_store
   config.consider_all_requests_local = true
   config.eager_load = false

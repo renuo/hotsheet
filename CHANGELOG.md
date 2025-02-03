@@ -1,5 +1,10 @@
 <!-- ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.1.0..HEAD) -->
 
+## [0.1.2](https://github.com/renuo/hotsheet/releases/tag/v0.1.2) (2025-02-03)
+
+- Remove sprockets as a dependency
+- Improve compatibility with multiple configurations of pagy
+
 ## [0.1.1](https://github.com/renuo/hotsheet/releases/tag/v0.1.1) (2025-02-03)
 
 - Improve configuration file usage and logic ([@simon-isler])

@@ -1,10 +1,9 @@
 PATH
   remote: ..
   specs:
-    hotsheet (0.1.0)
+    hotsheet (0.1.2)
       pagy
       rails (>= 6.1.0)
-      sprockets-rails
       stimulus-rails
       turbo-rails
 
@@ -318,6 +317,7 @@ DEPENDENCIES
   renuocop
   rspec-rails
   selenium-webdriver
+  sprockets-rails
   sqlite3 (~> 1.4)
 
 BUNDLED WITH
