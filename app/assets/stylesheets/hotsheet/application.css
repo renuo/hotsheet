@@ -10,7 +10,7 @@
 :root {
   --sidebar-width: 12rem;
   --main-padding-x: 2rem;
-  --main-padding-y: 3rem;
+  --main-padding-y: 2rem;
   
   --bg-color: lightgray;
   --success-color: green;
@@ -92,15 +92,14 @@ table {
   }
 }
 
-#flash-container {
+.flash-container {
   position: fixed;
   display: flex;
   flex-direction: column;
-  top: 1rem;
+  bottom: 1rem;
+  right: 1rem;
   gap: 1rem;
-  justify-content: center;
-  width: calc(100% - var(--sidebar-width) - var(--main-padding-x) * 2);
-
+  max-width: calc(100% - var(--sidebar-width) - var(--main-padding-x));
 
   .flash {
     border-radius: 0.4rem;
@@ -108,6 +107,7 @@ table {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 
     &.success {
       background-color: rgb(from var(--success-color) r g b / 80%);
@@ -125,7 +125,7 @@ table {
       background-color: rgb(from var(--error-color) r g b / 80%);
     }
 
-    button.close {
+    .btn-close {
       background-color: transparent;
       border: none;
       cursor: pointer;
