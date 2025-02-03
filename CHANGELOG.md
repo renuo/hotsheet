@@ -1,6 +1,7 @@
 ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.1.0..HEAD)
 
 - Configure compatible Ruby/Rails versions for testing
+- Improve flash messages layout
 
 ## [0.1.0](https://github.com/renuo/hotsheet/releases/tag/v0.1.0) (2024-11-05)
 
