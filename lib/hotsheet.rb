@@ -1,27 +1,23 @@
 # frozen_string_literal: true
 
-require "sprockets/railtie"
-require "turbo-rails"
-
+require "hotsheet/config"
 require "hotsheet/engine"
+require "hotsheet/sheet"
 require "hotsheet/version"
-require "hotsheet/configuration"
-require "hotsheet/editable_attributes"
 
 module Hotsheet
   class Error < StandardError; end
 
   class << self
-    def configuration
-      @configuration ||= Configuration.new
-    end
+    attr_accessor :sheets
 
-    def configure(&block)
-      @configuration = Configuration.new.tap(&block)
-    end
+    def configure(&config)
+      Hotsheet.sheets = {}
+      return unless config && defined? Rails::Server
 
-    def models
-      @models ||= configuration.models.each_key.map(&:constantize)
+      Rails.application.config.to_prepare do
+        Hotsheet.sheets = Config.new.tap { |c| c.instance_eval(&config) }.sheets
+      end
     end
   end
 end
