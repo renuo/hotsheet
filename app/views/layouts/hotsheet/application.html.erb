@@ -13,8 +13,9 @@
     <%= javascript_include_tag "hotsheet", nonce: true, defer: true %>
   </head>
   <body>
+    <%= render "hotsheet/shared/nav" %>
     <main>
-      <%= render "layouts/hotsheet/flash" %>
+      <%= render "hotsheet/shared/flash" %>
       <%= yield %>
     </main>
   </body>

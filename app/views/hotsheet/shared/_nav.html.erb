@@ -1,0 +1,14 @@
+<nav class="nav">
+  <ul>
+    <li><%= link_to "Hotsheet", root_path, class: "title" %></li>
+  </ul>
+  <ul class="sheets">
+    <% Hotsheet.sheets.each_with_index do |sheet, index| %>
+      <% sheet_name, model = sheet %>
+      <li>
+        <%= link_to model.human_name, sheet_path_for(sheet_name),
+                    class: ("active" if params[:sheet_name] == sheet_name), data: { x: index } %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

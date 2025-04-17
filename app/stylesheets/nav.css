@@ -1,0 +1,47 @@
+.nav {
+  background-color: var(--color-background);
+  border-bottom: var(--border);
+  flex-direction: column;
+  gap: var(--margin);
+  padding: var(--padding);
+  position: fixed;
+  top: 0;
+  user-select: none;
+  width: 100%;
+
+  ul {
+    gap: var(--margin);
+    width: 100%;
+  }
+
+  a {
+    align-items: center;
+    border-radius: var(--border-radius);
+    border: var(--border);
+    cursor: pointer;
+    height: var(--height);
+    justify-content: center;
+    padding: 0 0.5rem;
+    width: 100%;
+
+    &:focus-visible {
+      border: var(--outline);
+      z-index: 1;
+    }
+
+    &:hover,
+    &.active {
+      background-color: var(--border-color);
+    }
+
+    &.title {
+      border-color: transparent;
+      font-size: 1.25rem;
+    }
+  }
+
+  .sheets {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+}

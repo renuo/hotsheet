@@ -1,0 +1,13 @@
+.flash {
+  position: absolute;
+  right: var(--padding);
+  top: var(--padding);
+  z-index: 2;
+
+  .alert {
+    background-color: var(--color-red);
+    border-radius: var(--border-radius);
+    color: var(--color-black);
+    padding: var(--padding);
+  }
+}
