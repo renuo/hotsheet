@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+set -e
+
+bundle exec rubocop -c .rubocop.yml
+bundle exec erb_lint --config .erb_lint.yml .
+bundle exec brakeman -Aq --no-pager --no-summary
+bundle exec rails zeitwerk:check
+
+bun -b x prettier -c --config .prettierrc --log-level warn .
