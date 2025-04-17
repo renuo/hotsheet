@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
     <meta name="turbo-prefetch" content="false">
+    <meta name="turbo-refresh-method" content="morph">
+    <meta name="turbo-refresh-scroll" content="preserve">
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "hotsheet/application" %>
-    <%= javascript_include_tag "hotsheet/application", "data-turbolinks-track": :reload,
-          type: :module, nonce: content_security_policy_nonce, defer: true %>
+    <%= stylesheet_link_tag "hotsheet", nonce: true %>
+    <%= javascript_include_tag "hotsheet", nonce: true, defer: true %>
   </head>
   <body>
-    <%= render "layouts/hotsheet/sidebar" %>
     <main>
       <%= render "layouts/hotsheet/flash" %>
       <%= yield %>

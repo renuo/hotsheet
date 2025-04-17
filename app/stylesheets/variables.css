@@ -1,0 +1,19 @@
+:root {
+  --color-foreground: #fff;
+  --color-background: #000;
+  --color-white: #fff;
+  --color-gray: #c0c0c0;
+  --color-black: #000;
+  --color-primary: #60ffff;
+  --color-red: #ff6060;
+
+  --border: var(--border-width) solid var(--border-color);
+  --border-color: #404040;
+  --border-width: 0.0625rem;
+  --border-radius: 0.25rem;
+  --outline: var(--border-width) solid var(--color-primary);
+
+  --margin: 0.25rem;
+  --padding: 0.5rem;
+  --height: 1.75rem;
+}

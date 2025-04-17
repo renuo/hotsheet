@@ -1,0 +1,15 @@
+<div class="table" spellcheck="false">
+  <% @cells.each_with_index do |columns, x_index| %>
+    <% column = @columns[x_index] %>
+    <% readonly_class = column[:editable] ? "" : " readonly" %>
+
+    <div class="column">
+      <span class="cell header"><%= column[:label] %></span>
+
+      <% columns.each_with_index do |value, y_index| %>
+        <span class="cell<%= readonly_class %>" tabindex="0"
+              data-xy="<%= "#{x_index},#{y_index}" %>"><%= value %></span>
+      <% end %>
+    </div>
+  <% end %>
+<div>

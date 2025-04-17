@@ -1,0 +1,45 @@
+.table {
+  border: calc(var(--border-width) / 2) solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow-x: auto;
+}
+
+.column {
+  flex-direction: column;
+  max-width: 20rem;
+}
+
+.cell {
+  align-items: center;
+  border: calc(var(--border-width) / 2) solid var(--border-color);
+  height: var(--height);
+  overflow: hidden;
+  padding: 0 0.5rem;
+  user-select: none;
+  white-space: nowrap;
+
+  &:focus {
+    border-radius: 0.25rem;
+    outline: var(--outline);
+    user-select: text;
+    z-index: 1;
+  }
+
+  &:has(input) {
+    overflow: visible;
+  }
+
+  &.header {
+    background-color: var(--border-color);
+  }
+
+  &.readonly {
+    color: var(--color-gray);
+  }
+
+  input {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+  }
+}
