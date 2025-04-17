@@ -1,4 +1,4 @@
-<div class="table" spellcheck="false">
+<div class="table" spellcheck="false" data-controller="sheets">
   <% @cells.each_with_index do |columns, x_index| %>
     <% column = @columns[x_index] %>
     <% readonly_class = column[:editable] ? "" : " readonly" %>
