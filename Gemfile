@@ -2,19 +2,22 @@
 
 source "https://rubygems.org"
 
-gemspec
+gem "propshaft", require: false
+gem "puma", require: false
+gem "sqlite3", require: false
 
-group :test do
-  gem "appraisal"
+group :development do
+  gem "appraisal", require: false
   gem "better_errors"
   gem "binding_of_caller"
-  gem "capybara"
-  gem "database_cleaner-active_record", require: false
-  gem "debug"
+  gem "brakeman", require: false
+  gem "capybara", require: false
+  gem "erb_lint", require: false
   gem "faker", require: false
-  gem "puma"
   gem "renuocop", require: false
-  gem "rspec-rails"
+  gem "rspec-rails", require: false
   gem "selenium-webdriver", require: false
-  gem "sqlite3"
+  gem "simplecov", require: false
 end
+
+gemspec

@@ -3,6 +3,5 @@
 /spec/dummy/storage
 /spec/dummy/tmp
 
-/Gemfile.lock
 /spec/dummy/Gemfile.lock
 *.gem
