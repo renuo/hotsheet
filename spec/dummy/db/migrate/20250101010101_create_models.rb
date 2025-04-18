@@ -12,8 +12,9 @@ class CreateModels < ActiveRecord::Migration[8.0]
 
   def create_users
     create_table :users do |t|
-      t.string :display_name, null: false
+      t.string :name, null: false
       t.string :handle, null: false, index: { unique: true }
+      t.string :email, null: false, index: { unique: true }
       t.date :birthdate
       t.boolean :admin, null: false, default: false
       t.integer :status, null: false

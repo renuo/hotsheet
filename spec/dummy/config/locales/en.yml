@@ -17,7 +17,7 @@ en:
     body: Body
     color: Color
     created_at: Created at
-    display_name: Display name
+    email: Email
     handle: Handle
     id: ID
     name: Name

@@ -14,8 +14,9 @@ Hotsheet.configure do
 
   sheet :User do
     row :id, editable: false
-    row :display_name
+    row :name
     row :handle
+    row :email
     row :birthdate
     row :admin
     row :status

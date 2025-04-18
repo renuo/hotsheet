@@ -35,14 +35,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_01_010101) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "display_name", null: false
+    t.string "name", null: false
     t.string "handle", null: false
+    t.string "email", null: false
     t.date "birthdate"
     t.boolean "admin", default: false, null: false
     t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["handle"], name: "index_users_on_handle", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "post_tags", "posts"
