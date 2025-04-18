@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   enum :status, { invisible: 0, do_not_disturb: 1, idle: 2, online: 3 }, default: :invisible
 
-  validates :name, presence: true, length: { in: 1..40 }
+  validates :name, presence: true, length: { in: 2..40 }
   validates :handle, presence: true, length: { in: 1..20 }, uniqueness: true
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates :admin, inclusion: { in: [true, false] }

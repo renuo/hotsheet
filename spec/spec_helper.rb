@@ -31,6 +31,7 @@ driver = ENV.fetch("SELENIUM_DRIVER", "firefox_headless").to_sym
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = driver
 
+ActionController::Base.allow_forgery_protection = false
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|

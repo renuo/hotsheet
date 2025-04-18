@@ -4,7 +4,7 @@
     <% readonly_class = row[:editable] ? "" : " readonly" %>
 
     <div class="row">
-      <span class="cell header"><%= row[:label] %></span>
+      <span class="cell header" data-name="<%= row[:name] %>"><%= row[:label] %></span>
 
       <% rows.each_with_index do |value, y_index| %>
         <span class="cell<%= readonly_class %>" tabindex="0"

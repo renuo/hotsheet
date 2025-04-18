@@ -1,14 +1,57 @@
 import { Controller } from "@hotwired/stimulus"
 
+type UpdateResponse = {
+  error?: string
+  value: string
+  x: number
+  y: number
+}
+
 export class SheetsController extends Controller {
   static readonly arrowKeys = ["ArrowDown", "ArrowLeft", "ArrowRight", "ArrowUp"]
 
+  private readonly csrf = document.querySelector<HTMLMetaElement>("meta[name=csrf-token]")?.content
+
   private x = 0
   private y = 0
+  private attrs: string[] = []
   private input = document.createElement("input")
   private cell = this.input as HTMLElement
   private cells: HTMLElement[][] = []
   private editMode = false
+  private value = ""
+
+  /** Sends the new value to the server. */
+  private readonly update = () => {
+    const sheet = window.location.pathname
+    const id = this.cells[this.y][0].innerHTML
+    const params = new URLSearchParams({
+      attr: this.attrs[this.x],
+      value: this.input.value,
+      prev: this.value,
+    })
+
+    fetch(`${sheet}/${id}?${params}&x=${this.x}&y=${this.y}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": this.csrf,
+      },
+    })
+      .then((res) => res.json())
+      .then((res: UpdateResponse) => {
+        if (res.error) {
+          const flash = document.createElement("span")
+
+          flash.classList.add("alert")
+          flash.innerHTML = res.error
+          this.cells[res.y][res.x].innerHTML = res.value
+
+          document.querySelector(".flash")!.replaceChildren(flash)
+          setTimeout(() => flash.remove(), 5000)
+        }
+      })
+  }
 
   /** Returns the cell at the given position. */
   private readonly getCell = (offsetX: number, offsetY: number): HTMLElement | undefined =>
@@ -17,6 +60,7 @@ export class SheetsController extends Controller {
   /** Sets the cell and focuses it. */
   private readonly setCell = (cell: HTMLElement): void => {
     if (this.editMode) {
+      this.update()
       this.editMode = false
       this.cell.innerHTML = this.input.value
       this.cell.scrollLeft = 0
@@ -31,6 +75,7 @@ export class SheetsController extends Controller {
   private readonly enableEditMode = (): void => {
     if (!this.cell.classList.contains("readonly")) {
       this.editMode = true
+      this.value = this.input.value = this.cell.innerHTML
       this.cell.replaceChildren(this.input)
       this.input.select()
     }
@@ -79,12 +124,16 @@ export class SheetsController extends Controller {
   }
 
   readonly connect = (): void => {
-    this.element.querySelectorAll<HTMLElement>("[data-xy]").forEach((cell) => {
+    this.element.querySelectorAll<HTMLElement>(".cell[data-xy]").forEach((cell) => {
       const [x, y] = cell.dataset.xy!.split(",").map(Number)
 
       ;(this.cells[y] ??= [])[x] = cell
       cell.addEventListener("click", this.focus)
       cell.addEventListener("keydown", this.moveFocus)
     })
+
+    this.attrs = [...this.element.querySelectorAll<HTMLElement>(".header")].map(
+      (header) => header.dataset.name!,
+    )
   }
 }

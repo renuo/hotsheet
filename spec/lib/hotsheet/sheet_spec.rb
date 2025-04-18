@@ -69,20 +69,20 @@ RSpec.describe Hotsheet::Sheet do
 
   describe "#update!" do
     let(:user) { users(:admin) }
-    let(:row) { sheet.row :name }
+    let(:row) { sheet.row :admin }
 
     before { row }
 
     it "updates the model" do
-      expect { sheet.update!(id: user.id, attr: :name, value: "Admin") }
-        .to change { user.reload.name }.from("Admin User").to("Admin")
+      expect { sheet.update!(id: user.id, attr: :admin, value: false) }
+        .to change { user.reload.admin? }.from(true).to(false)
     end
 
     context "when row is readonly" do
-      let(:row) { sheet.row :name, editable: false }
+      let(:row) { sheet.row :admin, editable: false }
 
       it "raises an error" do
-        expect { sheet.update!(id: user.id, attr: :name, value: "Admin") }.to raise_error "Forbidden"
+        expect { sheet.update!(id: user.id, attr: :admin, value: false) }.to raise_error "Forbidden"
       end
     end
   end
