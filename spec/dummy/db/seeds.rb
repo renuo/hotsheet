@@ -3,18 +3,27 @@
 require "faker"
 
 10.times do
-  Author.create! name: Faker::Name.name,
-                 birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
-                 gender: Author.genders.values.sample
+  User.create!(
+    display_name: Faker::Name.name,
+    handle: Faker::Internet.unique.username(specifier: 1..20),
+    birthdate: Faker::Date.birthday,
+    admin: Faker::Boolean.boolean(true_ratio: 0.25),
+    status: User.statuses.keys.sample
+  )
 end
 
-10.times do
-  Post.create! title: Faker::Lorem.word,
-               body: Faker::Lorem.paragraph,
-               author_id: Author.pluck(:id).sample
+30.times do
+  Post.create!(
+    title: Faker::Lorem.sentence,
+    body: Faker::Lorem.paragraph,
+    user_id: User.pluck(:id).sample
+  )
 end
 
-100.times do
-  VeryLongModelNameForOverflowTest
-    .create! even_longer_column_name_for_overflow_test: Faker::Lorem.paragraph
+5.times do
+  Tag.create!(
+    name: Faker::Music.genre.delete(" "),
+    color: Faker::Color.hex_color.slice(1, 6),
+    post_ids: Post.pluck(:id).sample(3)
+  )
 end
