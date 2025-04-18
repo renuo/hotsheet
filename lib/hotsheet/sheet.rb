@@ -9,7 +9,7 @@ class Hotsheet::Sheet
     error "Unknown model '#{model_name}'" unless Object.const_defined? model_name
 
     @model = model_name.to_s.constantize
-    @columns = []
+    @rows = []
   end
 
   def row(name, **config)
@@ -18,16 +18,15 @@ class Hotsheet::Sheet
     validate_column_name! name
     validate_config!
 
-    @columns << @config.merge(name: name.to_sym)
+    @rows << @config.merge(name: name.to_sym)
   end
 
-  def columns_for(current_user)
-    @current_user = current_user
-    @columns.filter_map do |column|
-      next unless allowed? column[:visible]
+  def rows
+    @rows.filter_map do |row|
+      next unless allowed? row[:visible]
 
-      column.merge label: @model.human_attribute_name(column[:name]),
-                   editable: allowed?(column[:editable])
+      row.merge label: @model.human_attribute_name(row[:name]),
+                editable: allowed?(row[:editable])
     end
   end
 
@@ -38,7 +37,7 @@ class Hotsheet::Sheet
   private
 
   def allowed?(config)
-    config.is_a?(Proc) ? config.call(@current_user) : config
+    config.is_a?(Proc) ? config.call : config
   end
 
   def validate_column_name!(name)

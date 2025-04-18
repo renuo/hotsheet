@@ -7,6 +7,6 @@ Hotsheet.configure do
   # sheet :User do
   #   row :id, editable: false
   #   row :name
-  #   row :birthdate, visible: ->(current_user) { current_user.admin? }
+  #   row :birthdate, visible: false
   # end
 end

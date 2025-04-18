@@ -4,7 +4,7 @@
   overflow-x: auto;
 }
 
-.column {
+.row {
   flex-direction: column;
   max-width: 20rem;
 }
