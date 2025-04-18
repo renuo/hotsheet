@@ -3,11 +3,13 @@
 require "spec_helper"
 
 RSpec.describe Hotsheet::Sheet do
-  let(:sheet) { described_class.new :Post }
+  fixtures :users
+
+  let(:sheet) { described_class.new :User }
 
   describe "#initialize" do
     it "constantizes the model name" do
-      expect(sheet.model).to eq Post
+      expect(sheet.model).to eq User
     end
 
     context "with nonexistent model" do
@@ -21,47 +23,67 @@ RSpec.describe Hotsheet::Sheet do
 
   describe "#row" do
     it "is editable and visible by default" do
-      expect(sheet.row(:title)).to contain_exactly(name: :title, editable: true, visible: true)
+      expect(sheet.row(:name)).to contain_exactly(name: :name, editable: true, visible: true)
     end
 
     context "with invalid config" do
       it "raises an error" do
-        expect { sheet.row(:title, editable: true) }
-          .to raise_error "Invalid config 'editable' for row 'title'"
+        expect { sheet.row(:name, editable: true) }
+          .to raise_error "Invalid config 'editable' for row 'name'"
       end
     end
 
     context "with nonexistent config" do
       it "raises an error" do
-        expect { sheet.row(:title, readonly: true) }
-          .to raise_error "Unknown config 'readonly' for row 'title'"
+        expect { sheet.row(:name, readonly: true) }
+          .to raise_error "Unknown config 'readonly' for row 'name'"
       end
     end
 
     context "with nonexistent database column" do
       it "raises an error" do
-        expect { sheet.row(:content) }.to raise_error "Unknown database column 'content' for 'posts'"
+        expect { sheet.row(:age) }.to raise_error "Unknown database column 'age' for 'users'"
       end
     end
   end
 
   describe "#rows" do
     let(:sheet) do
-      sheet = described_class.new :Post
-      sheet.row :title
+      sheet = described_class.new :User
+      sheet.row :name
       sheet
     end
 
     it "has a label, name, and is editable and visible by default" do
       expect(sheet.rows).to contain_exactly(
-        label: "Title", name: :title, editable: true, visible: true
+        label: "Name", name: :name, editable: true, visible: true
       )
     end
   end
 
   describe "#human_name" do
     it "reads the human name from the locales" do
-      expect(sheet.human_name).to eq I18n.t "activerecord.models.post.other"
+      expect(sheet.human_name).to eq I18n.t "activerecord.models.user.other"
+    end
+  end
+
+  describe "#update!" do
+    let(:user) { users(:admin) }
+    let(:row) { sheet.row :name }
+
+    before { row }
+
+    it "updates the model" do
+      expect { sheet.update!(id: user.id, attr: :name, value: "Admin") }
+        .to change { user.reload.name }.from("Admin User").to("Admin")
+    end
+
+    context "when row is readonly" do
+      let(:row) { sheet.row :name, editable: false }
+
+      it "raises an error" do
+        expect { sheet.update!(id: user.id, attr: :name, value: "Admin") }.to raise_error "Forbidden"
+      end
     end
   end
 end

@@ -33,6 +33,15 @@ class Hotsheet::Sheet
     @model.model_name.human count: 2
   end
 
+  def update!(id:, attr:, value:)
+    row = @rows.find { |r| r[:name] == attr }
+    error "Forbidden" unless row && row[:visible] && row[:editable]
+
+    @model.find(id).update! attr => value
+  rescue StandardError => e
+    error e.message
+  end
+
   private
 
   def validate_column_name!(name)
