@@ -31,7 +31,7 @@ Hotsheet.configure do
   sheet :User do
     row :id, editable: false
     row :name
-    row :birthdate, visible: ->(current_user) { current_user.read_birthdate? }
+    row :birthdate, visible: false
   end
 end
 ```
