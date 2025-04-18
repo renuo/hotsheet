@@ -13,4 +13,9 @@ echo '---- Building assets ----'
 bun run build
 
 echo '---- Setting up database ----'
-bundle exec rails "$([ -n "$CI" ] && echo db:schema:load || echo db:reset)"
+if [ -n "$CI" ]; then
+  bundle exec rails db:schema:load 
+else
+  bundle exec rails db:reset db:schema:load 
+  RAILS_ENV=development bundle exec rails db:seed
+fi

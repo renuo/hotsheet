@@ -18,9 +18,9 @@ en:
     color: Color
     created_at: Created at
     display_name: Display name
-    gender: Gender
     handle: Handle
     id: ID
     name: Name
+    status: Status
     title: Title
     updated_at: Updated at

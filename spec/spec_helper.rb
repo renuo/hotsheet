@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ENV["RAILS_ENV"] = "test"
+
 begin
   require "simplecov"
 
@@ -41,9 +43,9 @@ RSpec.configure do |config|
   config.mock_with(:rspec) { |mocks| mocks.verify_partial_doubles = true }
   config.order = :random
   config.run_all_when_everything_filtered = true
+  config.use_transactional_fixtures = true
 
   config.before :all, type: :system do
-    FileUtils.rm_rf Rails.root.join "tmp/capybara"
     driven_by driver, screen_size: [1280, 800]
   end
 end
