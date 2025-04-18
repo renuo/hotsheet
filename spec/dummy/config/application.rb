@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
+require "logger"
 require "action_controller/railtie"
 require "active_record/railtie"
 require "propshaft"

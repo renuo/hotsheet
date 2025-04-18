@@ -7,7 +7,10 @@ rm -rf app/assets coverage spec/dummy/log spec/dummy/storage spec/dummy/tmp
 echo '---- Installing dependencies ----'
 bun i
 bundle
-bundle exec appraisal bundle
+bundle exec appraisal install
+
+echo '---- Building assets ----'
+bun run build
 
 echo '---- Setting up database ----'
 bundle exec rails "$([ -n "$CI" ] && echo db:schema:load || echo db:reset)"

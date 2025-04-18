@@ -1,21 +1,16 @@
 name: ci
 
-on: push
+on:
+  pull_request:
+  push:
+    branches:
+
+env:
+  BUNDLE_PATH: vendor/bundle
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
-    env:
-      BUNDLE_PATH: vendor/bundle
-    strategy:
-      matrix:
-        ruby: ["3.0", "3.3"]
-        appraisal: [rails_7_0, rails_7_1, rails_7_2, rails_8_0]
-        exclude:
-          - ruby: "3.0"
-            appraisal: rails_7_2
-          - ruby: "3.0"
-            appraisal: rails_8_0
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,37 +18,58 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v4
         with:
-          key: gems
+          key: cache-${{ hashFiles("bun.lock", "Gemfile") }}
+          restore-keys: cache
           path: |
-            gemfiles
+            node_modules
             vendor/bundle
+            ~/.bun/install/cache
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+          bundler-cache: false
+
+      - name: Install dependencies
+        run: bun i && bundle
+
+      - name: Run linters
+        run: bin/lint
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [3.1, 3.4]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          key: cache-${{ hashFiles("bun.lock", "Gemfile") }}
+          restore-keys: cache
+          path: |
+            node_modules
+            vendor/bundle
+            ~/.bun/install/cache
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler: latest
           bundler-cache: false
 
-      - name: Set up Hotsheet
-        run: bin/setup ${{ matrix.appraisal }}
+      - name: Install dependencies
+        run: bin/setup
 
       - name: Run tests
-        run: bin/check ${{ matrix.appraisal }}
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.3
-
-      - name: Install dependencies
-        run: bundle
-
-      - name: Run linters
-        run: bin/fastcheck
+        run: bin/check

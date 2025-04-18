@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-unless ENV.key? "NO_COV"
+begin
   require "simplecov"
 
   SimpleCov.start "rails" do
@@ -8,6 +8,8 @@ unless ENV.key? "NO_COV"
     enable_coverage :branch
     minimum_coverage line: 50, branch: 100
   end
+rescue LoadError
+  nil
 end
 
 require_relative "dummy/config/environment"

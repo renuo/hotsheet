@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 set -e
 
-bundle exec appraisal "$@" rspec -f d --fail-fast 3
+bundle exec appraisal "$@" rspec -f d --fail-fast=3
