@@ -1,6 +1,6 @@
 <nav class="nav" data-controller="nav">
   <ul>
-    <li><%= link_to "Hotsheet", root_path, class: "title" %></li>
+    <li><%= link_to t("hotsheet.title"), root_path, class: "title" %></li>
   </ul>
   <ul class="sheets">
     <% Hotsheet.sheets.each_with_index do |sheet, index| %>
