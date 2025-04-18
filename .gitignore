@@ -1,7 +1,9 @@
-/gemfiles/.bundle
+/app/assets
+/coverage
+/node_modules
+
 /spec/dummy/log
 /spec/dummy/storage
 /spec/dummy/tmp
 
-/spec/dummy/Gemfile.lock
-*.gem
+/hotsheet-*.gem
