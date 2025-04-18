@@ -35,7 +35,7 @@ export class SheetsController extends Controller {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRF-Token": this.csrf,
+        "X-CSRF-Token": this.csrf ?? "",
       },
     })
       .then((res) => res.json())
