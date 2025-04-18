@@ -1,13 +1,13 @@
 #!/usr/bin/env sh
 set -e
 
-echo ---- Installing dependencies ----
-bundle
-bundle exec appraisal "$@" bundle
+echo '---- Cleaning up old files ----'
+rm -rf app/assets coverage spec/dummy/log spec/dummy/storage spec/dummy/tmp
 
-echo ---- Setting up database ----
-if [ -n "$CI" ]; then
-  bundle exec rails db:create db:schema:load
-else
-  bundle exec rails db:drop db:setup
-fi
+echo '---- Installing dependencies ----'
+bun i
+bundle
+bundle exec appraisal bundle
+
+echo '---- Setting up database ----'
+bundle exec rails "$([ -n "$CI" ] && echo db:schema:load || echo db:reset)"

@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+set -e
+
+rm -rf app/assets
+
+# Watch assets
+pids=''
+for cmd in css js; do
+  bun build:$cmd --no-clear-screen --watch > /dev/null & pids="$pids $!"
+done
+
+# Start server
+bundle exec rails s "$@"
+
+trap 'kill $pids' INT
+# shellcheck disable=SC2086
+wait $pids

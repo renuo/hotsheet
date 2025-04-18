@@ -18,7 +18,7 @@ bin/setup
 
 ### Run
 
-- `spec/dummy/bin/run`: Start the dummy app's Rails server
+- `bin/run_dummy`: Start the dummy app's Rails server
 
 ### Lint
 
