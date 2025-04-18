@@ -5,7 +5,7 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
 
   def index
     @rows = @sheet.rows
-    @cells = @sheet.model.pluck @rows.pluck(:name)
+    @cells = @sheet.model.pluck(*@rows.pluck(:name))
     @cells = @rows.length == 1 ? [@cells] : @cells.transpose
   end
 

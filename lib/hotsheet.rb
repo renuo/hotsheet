@@ -9,15 +9,12 @@ module Hotsheet
   class Error < StandardError; end
 
   class << self
-    attr_accessor :sheets
-
     def configure(&config)
-      Hotsheet.sheets = {}
-      return unless config && defined? Rails::Server
+      @config = config
+    end
 
-      Rails.application.config.to_prepare do
-        Hotsheet.sheets = Config.new.tap { |c| c.instance_eval(&config) }.sheets
-      end
+    def sheets
+      @sheets ||= Config.new.tap { |c| c.instance_eval(&@config) }.sheets
     end
   end
 end

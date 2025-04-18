@@ -6,5 +6,5 @@ Hotsheet::Engine.routes.draw do
   end
 
   root "sheets#root"
-  match "*", to: "sheets#error", via: :all
+  match "*path", to: "sheets#error", via: :all
 end
