@@ -1,0 +1,26 @@
+en:
+  activerecord:
+    models:
+      post:
+        one: Post
+        other: Posts
+      tag:
+        one: Tag
+        other: Tags
+      user:
+        one: User
+        other: Users
+
+  attributes:
+    admin: Admin?
+    birthdate: Birthdate
+    body: Body
+    color: Color
+    created_at: Created at
+    display_name: Display name
+    gender: Gender
+    handle: Handle
+    id: ID
+    name: Name
+    title: Title
+    updated_at: Updated at

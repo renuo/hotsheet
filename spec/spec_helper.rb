@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
-ENV["RAILS_ENV"] = "test"
+unless ENV.key? "NO_COV"
+  require "simplecov"
+
+  SimpleCov.start "rails" do
+    add_filter %w[lib/hotsheet/version.rb]
+    enable_coverage :branch
+    minimum_coverage line: 50, branch: 100
+  end
+end
 
 require_relative "dummy/config/environment"
-require "database_cleaner-active_record"
 require "rspec/rails"
 require "selenium-webdriver"
-
-require "support/capybara_utils"
 
 %i[firefox firefox_headless].each do |driver|
   Capybara.register_driver driver do |app|
@@ -20,13 +25,13 @@ end
 driver = ENV.fetch("SELENIUM_DRIVER", "firefox_headless").to_sym
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = driver
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.include Capybara::DSL, type: :system
-  config.include CapybaraUtils, type: :system
 
   config.disable_monkey_patching!
   config.filter_rails_from_backtrace!
@@ -38,9 +43,5 @@ RSpec.configure do |config|
   config.before :all, type: :system do
     FileUtils.rm_rf Rails.root.join "tmp/capybara"
     driven_by driver, screen_size: [1280, 800]
-  end
-
-  config.before :each, type: :system do
-    DatabaseCleaner.clean_with :truncation
   end
 end

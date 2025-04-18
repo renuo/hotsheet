@@ -16,17 +16,16 @@ class Hotsheet::Sheet
     @config = config
 
     validate_column_name! name
-    validate_config!
+    validate_config! name
 
     @rows << @config.merge(name: name.to_sym)
   end
 
   def rows
     @rows.filter_map do |row|
-      next unless allowed? row[:visible]
+      next unless row[:visible]
 
-      row.merge label: @model.human_attribute_name(row[:name]),
-                editable: allowed?(row[:editable])
+      row.merge label: @model.human_attribute_name(row[:name]), editable: row[:editable]
     end
   end
 
@@ -36,20 +35,16 @@ class Hotsheet::Sheet
 
   private
 
-  def allowed?(config)
-    config.is_a?(Proc) ? config.call : config
-  end
-
   def validate_column_name!(name)
     return if @model.column_names.include? name.to_s
 
-    error "Unknown column '#{@model.table_name}.#{name}'"
+    error "Unknown database column '#{name}' for '#{@model.table_name}'"
   end
 
-  def validate_config!
+  def validate_config!(name)
     @config.each do |key, value|
-      error "Unknown config '#{key}'" unless DEFAULT_CONFIG.key? key
-      error "Invalid config '#{key}'" unless value == false || value.is_a?(Proc)
+      error "Unknown config '#{key}' for row '#{name}'" unless DEFAULT_CONFIG.key? key
+      error "Invalid config '#{key}' for row '#{name}'" unless value == false
     end
     @config = DEFAULT_CONFIG.merge @config
   end
