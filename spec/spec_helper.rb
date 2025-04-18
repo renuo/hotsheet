@@ -15,6 +15,7 @@ rescue LoadError
 end
 
 require_relative "dummy/config/environment"
+require_relative "support/utils"
 require "rspec/rails"
 require "selenium-webdriver"
 

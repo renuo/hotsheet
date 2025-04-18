@@ -9,6 +9,10 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
     @cells = @rows.length == 1 ? [@cells] : @cells.transpose
   end
 
+  def error
+    render "error", status: :not_found
+  end
+
   private
 
   def set_sheet

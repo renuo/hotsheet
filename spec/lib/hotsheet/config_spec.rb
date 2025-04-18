@@ -7,11 +7,7 @@ RSpec.describe Hotsheet::Config do
   let(:sheet) { sheets["posts"] }
   let(:sheets) { Hotsheet.sheets }
 
-  before do
-    stub_const "Rails::Server", true
-    config
-    Rails.application.config.to_prepare_blocks.each(&:call)
-  end
+  before { prepare { config } }
 
   describe "#sheet" do
     context "without config" do
