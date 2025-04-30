@@ -19,23 +19,30 @@ RSpec.describe Hotsheet::SheetsController do
   end
 
   describe "#update" do
+    let(:path) { hotsheet.user_path(user.id) }
+
     it "updates the model" do
-      expect { put hotsheet.user_path(user.id), params: { attr: :name, value: "Admin" } }
-        .to change { user.reload.name }.from("Admin User").to "Admin"
+      expect { put path, params: { row_name: :name, to: "Bob" } }
+        .to change { user.reload.name }.from("Admin User").to "Bob"
     end
 
-    context "when row is hidden" do
-      it "raises an error" do
-        expect { put hotsheet.user_path(user.id), params: { attr: :admin, value: false } }
-          .not_to(change { user.reload.admin })
-        expect(response.parsed_body["error"]).to eq "Forbidden"
+    context "with nonexistent row" do
+      it "does not update the model" do
+        expect { put path, params: { row_name: :age, to: 21 } }.not_to change(user, :reload)
+      end
+    end
+
+    context "with invalid value" do
+      it "does not update the model" do
+        expect { put path, params: { row_name: :name, to: "B" } }.not_to change(user, :reload)
+        expect(response.parsed_body["error"]).to eq "Name is too short (minimum is 2 characters)"
       end
     end
 
     context "with missing params" do
-      it "raises an error" do
-        expect { put hotsheet.user_path(user.id) }.not_to(change { user.reload.admin })
-        expect(response.parsed_body["error"]).to eq "Forbidden"
+      it "does not update the model" do
+        expect { put path }.not_to change(user, :reload)
+        expect { put path, params: { row_name: :name } }.not_to change(user, :reload)
       end
     end
   end

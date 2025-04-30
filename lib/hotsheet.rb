@@ -3,6 +3,7 @@
 require "hotsheet/config"
 require "hotsheet/engine"
 require "hotsheet/sheet"
+require "hotsheet/sheet/row"
 require "hotsheet/version"
 
 module Hotsheet

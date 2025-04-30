@@ -1,64 +1,39 @@
 # frozen_string_literal: true
 
 class Hotsheet::Sheet
-  DEFAULT_CONFIG = { editable: true, visible: true }.freeze
-
   attr_accessor :model
 
-  def initialize(model_name)
-    error "Unknown model '#{model_name}'" unless Object.const_defined? model_name
+  def initialize(name, config = {})
+    ensure_model_exists! name
 
-    @model = model_name.to_s.constantize
-    @rows = []
-  end
-
-  def row(name, **config)
     @config = config
-
-    validate_column_name! name
-    validate_config! name
-
-    @rows << @config.merge(name: name.to_sym)
-  end
-
-  def rows
-    @rows.filter_map do |row|
-      next unless row[:visible]
-
-      row.merge label: @model.human_attribute_name(row[:name]), editable: row[:editable]
-    end
+    @model = name.to_s.constantize
+    @rows = []
   end
 
   def human_name
     @model.model_name.human count: 2
   end
 
-  def update!(id:, attr:, value:)
-    row = @rows.find { |r| r[:name] == attr }
-    error "Forbidden" unless row && row[:visible] && row[:editable]
+  def row(name, config = {})
+    row = Row.new(@model, name, config)
+    row.validate!
+    @rows << row
+  end
 
-    @model.find(id).update! attr => value
-  rescue StandardError => e
-    error e.message
+  def rows
+    @rows.select(&:visible?)
+  end
+
+  def use_default_configuration
+    @model.column_names.each { |name| row name }
   end
 
   private
 
-  def validate_column_name!(name)
-    return if @model.column_names.include? name.to_s
+  def ensure_model_exists!(name)
+    return if Object.const_defined? name
 
-    error "Unknown database column '#{name}' for '#{@model.table_name}'"
-  end
-
-  def validate_config!(name)
-    @config.each do |key, value|
-      error "Unknown config '#{key}' for row '#{name}'" unless DEFAULT_CONFIG.key? key
-      error "Invalid config '#{key}' for row '#{name}'" unless value == false
-    end
-    @config = DEFAULT_CONFIG.merge @config
-  end
-
-  def error(message)
-    raise Hotsheet::Error, message
+    raise Hotsheet::Error, "Unknown model '#{name}'"
   end
 end

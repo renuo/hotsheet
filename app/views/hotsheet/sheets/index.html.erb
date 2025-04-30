@@ -1,12 +1,12 @@
 <div class="table" spellcheck="false" data-controller="sheets">
-  <% @cells.each_with_index do |rows, x_index| %>
+  <% @cells.each_with_index do |values, x_index| %>
     <% row = @rows[x_index] %>
-    <% readonly_class = row[:editable] ? "" : " readonly" %>
+    <% readonly_class = row.editable? ? "" : " readonly" %>
 
     <div class="row">
-      <span class="cell header" data-name="<%= row[:name] %>"><%= row[:label] %></span>
+      <span class="cell header" data-name="<%= row.name %>"><%= row.human_name %></span>
 
-      <% rows.each_with_index do |value, y_index| %>
+      <% values.each_with_index do |value, y_index| %>
         <span class="cell<%= readonly_class %>" tabindex="0"
               data-xy="<%= "#{x_index},#{y_index}" %>"><%= value %></span>
       <% end %>

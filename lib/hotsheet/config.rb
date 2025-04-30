@@ -7,13 +7,9 @@ class Hotsheet::Config
     @sheets = {}
   end
 
-  def sheet(model_name, &config)
-    sheet = Hotsheet::Sheet.new(model_name).tap do |s|
-      if config
-        s.instance_eval(&config)
-      else
-        s.model.column_names.each { |column_name| s.row column_name }
-      end
+  def sheet(name, config = {}, &rows)
+    sheet = Hotsheet::Sheet.new(name, config).tap do |s|
+      rows ? s.instance_eval(&rows) : s.use_default_configuration
     end
 
     @sheets[sheet.model.table_name] = sheet
