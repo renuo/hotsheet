@@ -1,12 +1,20 @@
 .table {
-  border: calc(var(--border-width) / 2) solid var(--border-color);
+  border: var(--border);
   border-radius: var(--border-radius);
-  overflow-x: auto;
+  height: fit-content;
 }
 
 .row {
   flex-direction: column;
   max-width: 20rem;
+
+  &:first-child .cell {
+    border-left: none;
+  }
+
+  &:last-child .cell {
+    border-right: none;
+  }
 }
 
 .cell {
@@ -25,12 +33,17 @@
     z-index: 1;
   }
 
+  &:last-child {
+    border-bottom: none;
+  }
+
   &:has(input) {
     overflow: visible;
   }
 
   &.header {
     background-color: var(--border-color);
+    border-top: none;
   }
 
   &.readonly {

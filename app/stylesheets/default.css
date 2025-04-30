@@ -19,6 +19,7 @@ body {
 
 main {
   min-height: 100vh;
+  overflow-x: auto;
   padding: calc(
       var(--height) * 2 + var(--padding) * 2 + var(--margin) + var(--border-width) + var(--padding)
     )
