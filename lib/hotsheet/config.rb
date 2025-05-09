@@ -7,9 +7,9 @@ class Hotsheet::Config
     @sheets = {}
   end
 
-  def sheet(name, config = {}, &rows)
+  def sheet(name, config = {}, &columns)
     sheet = Hotsheet::Sheet.new(name, config).tap do |s|
-      rows ? s.instance_eval(&rows) : s.use_default_configuration
+      columns ? s.instance_eval(&columns) : s.use_default_configuration
     end
 
     @sheets[sheet.model.table_name] = sheet

@@ -14,7 +14,7 @@ export class SheetsController extends Controller {
 
   private x = 0
   private y = 0
-  private rowNames: string[] = []
+  private columnNames: string[] = []
   private input = document.createElement("input")
   private cell = this.input as HTMLElement
   private cells: HTMLElement[][] = []
@@ -26,7 +26,7 @@ export class SheetsController extends Controller {
     const sheet = window.location.pathname
     const id = this.cells[this.y][0].innerHTML
     const params = new URLSearchParams({
-      row_name: this.rowNames[this.x],
+      column_name: this.columnNames[this.x],
       from: this.value,
       to: this.input.value,
     })
@@ -132,7 +132,7 @@ export class SheetsController extends Controller {
       cell.addEventListener("keydown", this.moveFocus)
     })
 
-    this.rowNames = [...this.element.querySelectorAll<HTMLElement>(".header")].map(
+    this.columnNames = [...this.element.querySelectorAll<HTMLElement>(".header")].map(
       (header) => header.dataset.name!,
     )
   }

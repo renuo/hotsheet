@@ -8,25 +8,25 @@ class Hotsheet::Sheet
 
     @config = config
     @model = name.to_s.constantize
-    @rows = []
+    @columns = []
   end
 
   def human_name
     @model.model_name.human count: 2
   end
 
-  def row(name, config = {})
-    row = Row.new(@model, name, config)
-    row.validate!
-    @rows << row
+  def column(name, config = {})
+    column = Column.new(@model, name, config)
+    column.validate!
+    @columns << column
   end
 
-  def rows
-    @rows.select(&:visible?)
+  def columns
+    @columns.select(&:visible?)
   end
 
   def use_default_configuration
-    @model.column_names.each { |name| row name }
+    @model.column_names.each { |name| column name }
   end
 
   private

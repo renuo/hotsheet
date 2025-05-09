@@ -1,10 +1,10 @@
 <div class="table" spellcheck="false" data-controller="sheets">
   <% @cells.each_with_index do |values, x_index| %>
-    <% row = @rows[x_index] %>
-    <% readonly_class = row.editable? ? "" : " readonly" %>
+    <% columns = @columns[x_index] %>
+    <% readonly_class = columns.editable? ? "" : " readonly" %>
 
-    <div class="row">
-      <span class="cell header" data-name="<%= row.name %>"><%= row.human_name %></span>
+    <div class="column">
+      <span class="cell header" data-name="<%= columns.name %>"><%= columns.human_name %></span>
 
       <% values.each_with_index do |value, y_index| %>
         <span class="cell<%= readonly_class %>" tabindex="0"

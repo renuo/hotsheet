@@ -4,7 +4,7 @@
   height: fit-content;
 }
 
-.row {
+.column {
   flex-direction: column;
   max-width: 20rem;
 

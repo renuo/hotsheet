@@ -2,16 +2,16 @@
 
 class Hotsheet::SheetsController < Hotsheet::ApplicationController
   before_action :set_sheet
-  before_action :set_row, only: :update
+  before_action :set_column, only: :update
 
   def index
-    @rows = @sheet.rows
-    @cells = @sheet.model.pluck(*@rows.map(&:name))
-    @cells = @rows.length == 1 ? [@cells] : @cells.transpose
+    @columns = @sheet.columns
+    @cells = @sheet.model.pluck(*@columns.map(&:name))
+    @cells = @columns.length == 1 ? [@cells] : @cells.transpose
   end
 
   def update
-    @row&.update! params[:id], params[:to]
+    @column&.update! params[:id], params[:to]
     json = {}
   rescue Hotsheet::Error => e
     json = { error: e.message, value: params[:from], x: params[:x], y: params[:y] }
@@ -29,7 +29,7 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
     @sheet = Hotsheet.sheets[params[:sheet_name]]
   end
 
-  def set_row
-    @row = @sheet.rows.find { |row| row.name == params[:row_name] }
+  def set_column
+    @column = @sheet.columns.find { |column| column.name == params[:column_name] }
   end
 end

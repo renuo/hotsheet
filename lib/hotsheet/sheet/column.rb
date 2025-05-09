@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Hotsheet::Sheet::Row
+class Hotsheet::Sheet::Column
   attr_accessor :name
 
   DEFAULT_CONFIG = { editable: true, visible: true }.freeze
@@ -51,12 +51,12 @@ class Hotsheet::Sheet::Row
   def ensure_config_exists!(key)
     return if DEFAULT_CONFIG.key? key
 
-    raise Hotsheet::Error, "Unknown config '#{key}' for row '#{@name}'"
+    raise Hotsheet::Error, "Unknown config '#{key}' for column '#{@name}'"
   end
 
   def validate_config_value!(key, value)
     return if [true, false].include? value
 
-    raise Hotsheet::Error, "Invalid config '#{key}' for row '#{@name}'"
+    raise Hotsheet::Error, "Invalid config '#{key}' for column '#{@name}'"
   end
 end

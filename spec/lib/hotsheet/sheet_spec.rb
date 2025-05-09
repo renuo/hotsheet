@@ -27,20 +27,20 @@ RSpec.describe Hotsheet::Sheet do
     end
   end
 
-  describe "#row" do
-    let(:rows) { sheet.instance_variable_get(:@rows) }
+  describe "#column" do
+    let(:columns) { sheet.instance_variable_get(:@columns) }
 
-    it "creates a row" do
-      expect { sheet.row(:name) }.to change(rows, :length).by(1)
-      expect(rows.last).to be_a Hotsheet::Sheet::Row
+    it "creates a column" do
+      expect { sheet.column(:name) }.to change(columns, :length).by(1)
+      expect(columns.last).to be_a Hotsheet::Sheet::Column
     end
   end
 
-  describe "#rows" do
-    before { sheet.row :name, visible: false }
+  describe "#columns" do
+    before { sheet.column :name, visible: false }
 
-    it "only returns visible rows" do
-      expect(sheet.rows).to eq([])
+    it "only returns visible columns" do
+      expect(sheet.columns).to eq([])
     end
   end
 end

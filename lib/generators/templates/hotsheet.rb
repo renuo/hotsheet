@@ -5,8 +5,8 @@ Hotsheet.configure do
   # See https://github.com/renuo/hotsheet?tab=readme-ov-file#usage.
 
   # sheet :User do
-  #   row :id, editable: false
-  #   row :name
-  #   row :birthdate, visible: false
+  #   column :id, editable: false
+  #   column :name
+  #   column :birthdate, visible: false
   # end
 end

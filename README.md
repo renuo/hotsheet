@@ -21,7 +21,7 @@ After installing, you can directly go to `/hotsheet` within your app by default.
 ### Configuration
 
 You can configure which models ('sheets') this gem should manage, and specify which
-database columns ('rows') should be editable or viewable in the spreadsheet. This can be
+database columns should be editable or viewable in the spreadsheet. This can be
 done by configuring the initializer file created by the install command:
 
 ```rb
@@ -29,9 +29,9 @@ done by configuring the initializer file created by the install command:
 
 Hotsheet.configure do
   sheet :User do
-    row :id, editable: false
-    row :name
-    row :birthdate, visible: false
+    column :id, editable: false
+    column :name
+    column :birthdate, visible: false
   end
 end
 ```

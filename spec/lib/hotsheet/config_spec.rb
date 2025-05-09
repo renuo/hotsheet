@@ -16,27 +16,27 @@ RSpec.describe Hotsheet::Config do
       end
     end
 
-    context "without rows" do
+    context "without columns" do
       let(:config) { Hotsheet.configure { sheet :Post } }
 
       it "uses all database columns" do
         expect(sheet).to be_a Hotsheet::Sheet
-        expect(sheet.rows.map(&:name)).to eq %w[id title body user_id created_at updated_at]
+        expect(sheet.columns.map(&:name)).to eq %w[id title body user_id created_at updated_at]
       end
     end
 
-    context "with rows" do
+    context "with columns" do
       let(:config) do
         Hotsheet.configure do
           sheet :Post do
-            row :title
-            row :body
+            column :title
+            column :body
           end
         end
       end
 
-      it "keeps the rows in the correct order" do
-        expect(sheet.rows.map(&:name)).to eq(%w[title body])
+      it "keeps the columns in the correct order" do
+        expect(sheet.columns.map(&:name)).to eq(%w[title body])
       end
     end
   end
