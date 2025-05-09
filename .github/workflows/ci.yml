@@ -3,7 +3,6 @@ name: ci
 on:
   pull_request:
   push:
-    branches:
 
 env:
   BUNDLE_PATH: vendor/bundle
