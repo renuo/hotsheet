@@ -31,7 +31,7 @@ Hotsheet.configure do
   sheet :User do
     column :id, editable: false
     column :name
-    column :birthdate, visible: false
+    column :birthdate, editable: false
   end
 end
 ```
