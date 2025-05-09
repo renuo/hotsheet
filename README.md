@@ -43,6 +43,12 @@ follow the [Code of Conduct](https://github.com/renuo/hotsheet/blob/main/CODE_OF
 
 ## Roadmap
 
+This is a newly created gem, and we will firstly focus on:
+
+1. Single-user experience (styles and usability)
+1. Configuration and access permissions
+1. Concurrent users (broadcasting, conflict resolution)
+
 Feel free to look at our [planned enhancements](https://github.com/renuo/hotsheet/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement)
 or add your own.
 
