@@ -7,7 +7,7 @@ gem "puma", require: false
 gem "sqlite3", require: false
 gem "rails", "~> 7.1.0"
 
-group :development do
+group :development, :test do
   gem "capybara", require: false
   gem "rspec-rails", require: false
   gem "selenium-webdriver", require: false

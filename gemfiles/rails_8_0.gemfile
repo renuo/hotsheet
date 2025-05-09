@@ -8,7 +8,7 @@ gem "sqlite3", require: false
 gem "rails", "~> 8.0.0"
 gem "simplecov"
 
-group :development do
+group :development, :test do
   gem "capybara", require: false
   gem "rspec-rails", require: false
   gem "selenium-webdriver", require: false

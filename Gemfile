@@ -6,7 +6,7 @@ gem "propshaft", require: false
 gem "puma", require: false
 gem "sqlite3", require: false
 
-group :development do
+group :development, :test do
   gem "appraisal", require: false
   gem "better_errors"
   gem "binding_of_caller"

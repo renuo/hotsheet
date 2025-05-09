@@ -11,7 +11,7 @@ gem "bigdecimal"
 gem "drb"
 gem "mutex_m"
 
-group :development do
+group :development, :test do
   gem "capybara", require: false
   gem "rspec-rails", require: false
   gem "selenium-webdriver", require: false

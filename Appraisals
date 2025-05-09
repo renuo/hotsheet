@@ -13,19 +13,19 @@ appraise "rails_7_0" do
   gem "drb"
   gem "mutex_m"
 
-  group(:development) { IGNORED_GEMS.each { |gem| remove_gem gem } }
+  group(:development, :test) { IGNORED_GEMS.each { |gem| remove_gem gem } }
 end
 
 appraise "rails_7_1" do
   gem "rails", "~> 7.1.0"
 
-  group(:development) { IGNORED_GEMS.each { |gem| remove_gem gem } }
+  group(:development, :test) { IGNORED_GEMS.each { |gem| remove_gem gem } }
 end
 
 appraise "rails_7_2" do
   gem "rails", "~> 7.2.0"
 
-  group(:development) { IGNORED_GEMS.each { |gem| remove_gem gem } }
+  group(:development, :test) { IGNORED_GEMS.each { |gem| remove_gem gem } }
 end
 
 if RUBY_VERSION.to_f >= 3.2
@@ -33,6 +33,6 @@ if RUBY_VERSION.to_f >= 3.2
     gem "rails", "~> 8.0.0"
     gem "simplecov"
 
-    group(:development) { IGNORED_GEMS.each { |gem| remove_gem gem } }
+    group(:development, :test) { IGNORED_GEMS.each { |gem| remove_gem gem } }
   end
 end
