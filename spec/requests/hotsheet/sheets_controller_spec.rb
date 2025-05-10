@@ -22,19 +22,19 @@ RSpec.describe Hotsheet::SheetsController do
     let(:path) { hotsheet.user_path(user.id) }
 
     it "updates the model" do
-      expect { put path, params: { column_name: :name, to: "Bob" } }
+      expect { put path, params: { column_name: :name, value: "Bob" } }
         .to change { user.reload.name }.from("Admin User").to "Bob"
     end
 
     context "with nonexistent column" do
       it "does not update the model" do
-        expect { put path, params: { column_name: :age, to: 21 } }.not_to change(user, :reload)
+        expect { put path, params: { column_name: :age, value: 21 } }.not_to change(user, :reload)
       end
     end
 
     context "with invalid value" do
       it "does not update the model" do
-        expect { put path, params: { column_name: :name, to: "B" } }.not_to change(user, :reload)
+        expect { put path, params: { column_name: :name, value: "B" } }.not_to change(user, :reload)
         expect(response.parsed_body["error"]).to eq "Name is too short (minimum is 2 characters)"
       end
     end

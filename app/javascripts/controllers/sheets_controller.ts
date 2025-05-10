@@ -1,12 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-type UpdateResponse = {
-  error?: string
-  value: string
-  x: number
-  y: number
-}
-
 export class SheetsController extends Controller {
   static readonly arrowKeys = ["ArrowDown", "ArrowLeft", "ArrowRight", "ArrowUp"]
 
@@ -15,6 +8,7 @@ export class SheetsController extends Controller {
   private x = 0
   private y = 0
   private columnNames: string[] = []
+  private flash = document.querySelector(".flash")!
   private input = document.createElement("input")
   private cell = this.input as HTMLElement
   private cells: HTMLElement[][] = []
@@ -25,13 +19,9 @@ export class SheetsController extends Controller {
   private readonly update = () => {
     const sheet = window.location.pathname
     const id = this.cells[this.y][0].innerHTML
-    const params = new URLSearchParams({
-      column_name: this.columnNames[this.x],
-      from: this.value,
-      to: this.input.value,
-    })
+    const { value, x, y } = this
 
-    fetch(`${sheet}/${id}?${params}&x=${this.x}&y=${this.y}`, {
+    fetch(`${sheet}/${id}?column_name=${this.columnNames[this.x]}&value=${this.input.value}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -39,15 +29,16 @@ export class SheetsController extends Controller {
       },
     })
       .then((res) => res.json())
-      .then((res: UpdateResponse) => {
+      .then((res) => {
         if (res.error) {
+          const cell = this.cells[y][x]
           const flash = document.createElement("span")
 
           flash.classList.add("alert")
           flash.innerHTML = res.error
-          this.cells[res.y][res.x].innerHTML = res.value
-
-          document.querySelector(".flash")!.replaceChildren(flash)
+          cell.innerHTML = value
+          cell.click()
+          this.flash.replaceChildren(flash)
           setTimeout(() => flash.remove(), 5000)
         }
       })

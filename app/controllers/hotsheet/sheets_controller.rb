@@ -11,12 +11,12 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
   end
 
   def update
-    @column&.update! params[:id], params[:to]
-    json = {}
+    @column&.update! params[:id], params[:value]
+    error = false
   rescue Hotsheet::Error => e
-    json = { error: e.message, value: params[:from], x: params[:x], y: params[:y] }
+    error = e.message
   ensure
-    respond_to { |format| format.any { render json: } }
+    respond_to { |format| format.any { render json: { error: } } }
   end
 
   def error
