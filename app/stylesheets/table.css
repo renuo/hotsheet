@@ -19,15 +19,22 @@
 
 .cell {
   align-items: center;
-  border: calc(var(--border-width) / 2) solid var(--border-color);
+  border: calc(var(--border-width) / 2) solid var(--color-border);
   height: var(--height);
   overflow: hidden;
   padding: 0 0.5rem;
   user-select: none;
   white-space: nowrap;
 
-  &:focus {
-    border-radius: 0.25rem;
+  &:hover,
+  &.readonly {
+    background-color: var(--color-background-hover);
+  }
+
+  &:focus,
+  &:focus-within {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
     outline: var(--outline);
     user-select: text;
     z-index: 1;
@@ -42,12 +49,8 @@
   }
 
   &.header {
-    background-color: var(--border-color);
+    background-color: var(--color-border);
     border-top: none;
-  }
-
-  &.readonly {
-    color: var(--color-gray);
   }
 
   input {

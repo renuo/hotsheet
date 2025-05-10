@@ -31,7 +31,7 @@
 
     &:hover,
     &.active {
-      background-color: var(--border-color);
+      background-color: var(--color-border);
     }
 
     &.title {
