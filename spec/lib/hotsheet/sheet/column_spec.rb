@@ -22,31 +22,6 @@ RSpec.describe Hotsheet::Sheet::Column do
     end
   end
 
-  describe "#update!" do
-    let(:user) { users(:admin) }
-
-    context "with readonly config" do
-      let(:config) { { editable: false } }
-
-      it "raises an error" do
-        expect { column.update!(user.id, "Bob") }.to raise_error "Forbidden"
-      end
-    end
-
-    context "with invalid value" do
-      it "raises an error" do
-        expect { column.update!(user.id, "B") }
-          .to raise_error "Name is too short (minimum is 2 characters)"
-      end
-    end
-
-    context "with nonexistent id" do
-      it "raises an error" do
-        expect { column.update!(0, "Bob") }.to raise_error "Not found"
-      end
-    end
-  end
-
   describe "#validate!" do
     context "with nonexistent database column" do
       let(:name) { :age }

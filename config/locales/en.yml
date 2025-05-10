@@ -1,4 +1,7 @@
 en:
   hotsheet:
+    errors:
+      forbidden: Forbidden
+      not_found: Not found
     not_found: 404 Not Found
     title: Hotsheet

@@ -23,14 +23,6 @@ class Hotsheet::Sheet::Column
     @config[:editable]
   end
 
-  def update!(id, value)
-    raise Hotsheet::Error, "Forbidden" unless editable?
-
-    model = @model.find_by(id:)
-    raise Hotsheet::Error, "Not found" if model.nil?
-    raise Hotsheet::Error, model.errors.full_messages.first unless model.update @name => value
-  end
-
   def validate!
     ensure_database_column_exists!
 

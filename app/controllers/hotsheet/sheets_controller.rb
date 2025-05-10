@@ -11,12 +11,11 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
   end
 
   def update
-    @column&.update! params[:id], params[:value]
-    error = false
-  rescue Hotsheet::Error => e
-    error = e.message
-  ensure
-    respond_to { |format| format.any { render json: { error: } } }
+    resource = @sheet.model.find_by(id: params[:id])
+    return respond t("hotsheet.errors.not_found") if resource.nil?
+    return respond if resource.update @column.name => params[:value]
+
+    respond resource.errors.full_messages.first
   end
 
   def error
@@ -31,5 +30,12 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
 
   def set_column
     @column = @sheet.columns.find { |column| column.name == params[:column_name] }
+    return respond t("hotsheet.errors.not_found") if @column.nil?
+
+    respond t("hotsheet.errors.forbidden") unless @column.editable?
+  end
+
+  def respond(message = "")
+    respond_to { |format| format.any { render json: message.to_json } }
   end
 end

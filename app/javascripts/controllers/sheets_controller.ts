@@ -29,13 +29,13 @@ export class SheetsController extends Controller {
       },
     })
       .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
+      .then((error?: string) => {
+        if (error) {
           const cell = this.cells[y][x]
           const flash = document.createElement("span")
 
           flash.classList.add("alert")
-          flash.innerHTML = res.error
+          flash.innerHTML = error
           cell.innerHTML = value
           cell.click()
           this.flash.replaceChildren(flash)
