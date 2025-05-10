@@ -8,7 +8,7 @@ export class NavController extends Controller {
 
     if (key === "Tab") {
       ev.preventDefault()
-      document.querySelector<HTMLElement>(`.table .cell[data-xy]`)?.focus()
+      document.querySelector<HTMLElement>(`.table .cell[data-xy]`)?.click()
     } else if (key === "ArrowRight") {
       this.sheets[Number((ev.target as HTMLElement).dataset.x) + 1]?.focus()
     } else if (key === "ArrowLeft") {

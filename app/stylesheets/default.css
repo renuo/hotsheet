@@ -29,5 +29,5 @@ main {
 
 ::selection {
   background-color: var(--color-primary);
-  color: #000;
+  color: var(--color-background);
 }
