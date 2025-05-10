@@ -15,7 +15,7 @@ Hotsheet.configure do
   sheet :User do
     column :id, editable: false
     column :name
-    column :handle
+    column :handle, editable: false
     column :email
     column :birthdate
     column :admin

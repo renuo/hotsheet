@@ -5,29 +5,28 @@ export class SheetsController extends Controller {
 
   private readonly csrf = document.querySelector<HTMLMetaElement>("meta[name=csrf-token]")?.content
 
-  private x = 0
-  private y = 0
-  private columnNames: string[] = []
   private flash = document.querySelector(".flash")!
   private input = document.createElement("input")
   private cell = this.input as HTMLElement
-  private cells: HTMLElement[][] = []
+  private cells: Record<string, HTMLElement> = {}
+  private columnNames: string[] = []
+  private ids: string[] = []
   private editMode = false
-  private value = ""
+  private prevValue = ""
 
   /** Sends the new value to the server. */
   private readonly update = () => {
     const sheet = window.location.pathname
-    const id = this.cells[this.y][0].innerHTML
-    const value = this.input.value
-    const prevValue = this.value
-    const { x, y } = this
+    const [x, y] = this.getPosition()
+    const {
+      cell,
+      prevValue,
+      input: { value },
+    } = this
 
-    if (value === prevValue) {
-      return
-    }
+    if (value === prevValue) return
 
-    fetch(`${sheet}/${id}?column_name=${this.columnNames[this.x]}&value=${value}`, {
+    fetch(`${sheet}/${this.ids[y]}?column_name=${this.columnNames[x]}&value=${value}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -37,25 +36,25 @@ export class SheetsController extends Controller {
       .then((res) => res.json())
       .then((error?: string) => {
         if (error) {
-          const cell = this.cells[y][x]
           const flash = document.createElement("span")
 
           flash.classList.add("alert")
           flash.innerHTML = error
           cell.innerHTML = prevValue
           cell.click()
+
           this.flash.replaceChildren(flash)
           setTimeout(() => flash.remove(), 5000)
         }
       })
   }
 
-  /** Returns the cell at the given position. */
-  private readonly getCell = (offsetX: number, offsetY: number): HTMLElement | undefined =>
-    this.cells[this.y + offsetY]?.[this.x + offsetX]
+  /** Returns the position of the focused cell. */
+  private readonly getPosition = (): number[] => this.cell.dataset.xy!.split(",").map(Number)
 
   /** Sets the cell and focuses it. */
-  private readonly setCell = (cell: HTMLElement): void => {
+  private readonly setCell = (cell?: HTMLElement): void => {
+    if (!cell) return
     if (this.editMode) {
       this.update()
       this.editMode = false
@@ -65,14 +64,13 @@ export class SheetsController extends Controller {
 
     this.cell = cell
     cell.focus()
-    ;[this.x, this.y] = cell.dataset.xy!.split(",").map(Number)
   }
 
   /** Enables edit mode for the focused cell. */
   private readonly enableEditMode = (): void => {
     if (!this.cell.classList.contains("readonly")) {
       this.editMode = true
-      this.value = this.input.value = this.cell.innerHTML
+      this.prevValue = this.input.value = this.cell.innerHTML
       this.cell.replaceChildren(this.input)
       this.input.select()
     }
@@ -95,11 +93,9 @@ export class SheetsController extends Controller {
 
     if (this.editMode) {
       if (key === "Enter") {
-        const cell = this.getCell(0, 1)
+        const [x, y] = this.getPosition()
 
-        if (cell) {
-          this.setCell(cell)
-        }
+        this.setCell(this.cells[`${x},${y + 1}`])
       }
     } else if (key === "Enter") {
       this.enableEditMode()
@@ -107,30 +103,41 @@ export class SheetsController extends Controller {
       ev.preventDefault()
       document.querySelector<HTMLElement>(".sheets .active")!.focus()
     } else if (SheetsController.arrowKeys.includes(key)) {
-      const [offsetX, offsetY] =
+      const offset =
         key === "ArrowDown" ? [0, 1]
         : key === "ArrowRight" ? [1, 0]
         : key === "ArrowUp" ? [0, -1]
         : [-1, 0]
-      const cell = this.getCell(offsetX, offsetY)
+      const [x, y] = this.getPosition().map((v, i) => v + offset[i])
+      let cell = this.cells[`${x},${y}`]
 
-      if (cell) {
-        this.setCell(cell)
+      if (offset[0]) {
+        for (let i = x; !cell && i !== 0 && i !== this.columnNames.length; i += offset[0]) {
+          cell = this.cells[`${i},${y}`]
+        }
       }
+
+      this.setCell(cell)
     }
+  }
+
+  private readonly addCell = (cell: HTMLElement): void => {
+    this.cells[cell.dataset.xy!] = cell
+
+    cell.addEventListener("click", this.focus)
+    cell.addEventListener("keydown", this.moveFocus)
   }
 
   readonly connect = (): void => {
     this.element.querySelectorAll<HTMLElement>(".cell[data-xy]").forEach((cell) => {
-      const [x, y] = cell.dataset.xy!.split(",").map(Number)
-
-      ;(this.cells[y] ??= [])[x] = cell
-      cell.addEventListener("click", this.focus)
-      cell.addEventListener("keydown", this.moveFocus)
+      this.addCell(cell)
     })
 
     this.columnNames = [...this.element.querySelectorAll<HTMLElement>(".header")].map(
       (header) => header.dataset.name!,
+    )
+    this.ids = [...this.element.querySelectorAll<HTMLElement>(".column:first-child .readonly")].map(
+      (cell) => cell.innerHTML,
     )
   }
 }

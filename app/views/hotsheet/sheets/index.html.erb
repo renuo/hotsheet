@@ -1,15 +1,18 @@
 <div class="table" spellcheck="false" data-controller="sheets">
   <% @cells.each_with_index do |values, x_index| %>
     <% column = @columns[x_index] %>
-    <% readonly_class = column.editable? ? "" : " readonly" %>
+    <% editable = column.editable? %>
 
     <div class="column">
       <span class="cell header"
             data-name="<%= column.name %>"><%= @sheet.model.human_attribute_name column.name %></span>
 
       <% values.each_with_index do |value, y_index| %>
-        <span class="cell<%= readonly_class %>" tabindex="0"
-              data-xy="<%= "#{x_index},#{y_index}" %>"><%= value %></span>
+        <% if editable %>
+          <span class="cell" tabindex="0" data-xy="<%= "#{x_index},#{y_index}" %>"><%= value %></span>
+        <% else %>
+          <span class="cell readonly"><%= value %></span>
+        <% end %>
       <% end %>
     </div>
   <% end %>
