@@ -36,7 +36,7 @@ RSpec.describe Hotsheet::Config do
       end
 
       it "keeps the columns in the correct order" do
-        expect(sheet.columns.map(&:name)).to eq(%w[email name])
+        expect(sheet.columns.map(&:name)).to eq(%w[id email name])
       end
     end
   end

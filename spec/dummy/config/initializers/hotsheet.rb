@@ -2,7 +2,6 @@
 
 Hotsheet.configure do
   sheet :Post do
-    column :id, editable: false
     column :title
     column :body
     column :user_id
@@ -13,7 +12,6 @@ Hotsheet.configure do
   sheet :Tag
 
   sheet :User do
-    column :id, editable: false
     column :name
     column :handle, editable: false
     column :email

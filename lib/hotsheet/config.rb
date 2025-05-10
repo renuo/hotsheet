@@ -9,6 +9,7 @@ class Hotsheet::Config
 
   def sheet(name, config = {}, &columns)
     sheet = Hotsheet::Sheet.new(name, config).tap do |s|
+      s.column :id, editable: false
       columns ? s.instance_eval(&columns) : s.use_default_configuration
     end
 

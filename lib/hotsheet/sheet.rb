@@ -11,6 +11,10 @@ class Hotsheet::Sheet
     @columns = []
   end
 
+  def use_default_configuration
+    @model.column_names[1..].each { |name| column name }
+  end
+
   def human_name
     @model.model_name.human count: 2
   end
@@ -23,10 +27,6 @@ class Hotsheet::Sheet
 
   def columns
     @columns.select(&:visible?)
-  end
-
-  def use_default_configuration
-    @model.column_names.each { |name| column name }
   end
 
   private

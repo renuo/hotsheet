@@ -6,8 +6,7 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
 
   def index
     @columns = @sheet.columns
-    @cells = @sheet.model.pluck(*@columns.map(&:name))
-    @cells = @columns.length == 1 ? [@cells] : @cells.transpose
+    @cells = @sheet.model.pluck(*@columns.map(&:name)).transpose
   end
 
   def update
