@@ -6,7 +6,7 @@
 - Give controlled DB access to your admin users without having to create CRUD views for each table.
 - Lightweight and fast. We keep usage simple and configuration to the minimum.
 
-![demo_gif](https://github.com/user-attachments/assets/debf45a1-c6d2-4a1f-a734-37559bb095de)
+<image width=450 alt=demo src=https://github.com/user-attachments/assets/d63544ff-0720-4839-9c14-b5c8cd084cd2>
 
 ## Installation
 
