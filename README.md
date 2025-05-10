@@ -29,7 +29,6 @@ done by configuring the initializer file created by the install command:
 
 Hotsheet.configure do
   sheet :User do
-    column :id, editable: false
     column :name
     column :birthdate, editable: false
   end
