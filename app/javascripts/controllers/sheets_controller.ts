@@ -19,9 +19,15 @@ export class SheetsController extends Controller {
   private readonly update = () => {
     const sheet = window.location.pathname
     const id = this.cells[this.y][0].innerHTML
-    const { value, x, y } = this
+    const value = this.input.value
+    const prevValue = this.value
+    const { x, y } = this
 
-    fetch(`${sheet}/${id}?column_name=${this.columnNames[this.x]}&value=${this.input.value}`, {
+    if (value === prevValue) {
+      return
+    }
+
+    fetch(`${sheet}/${id}?column_name=${this.columnNames[this.x]}&value=${value}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +42,7 @@ export class SheetsController extends Controller {
 
           flash.classList.add("alert")
           flash.innerHTML = error
-          cell.innerHTML = value
+          cell.innerHTML = prevValue
           cell.click()
           this.flash.replaceChildren(flash)
           setTimeout(() => flash.remove(), 5000)
