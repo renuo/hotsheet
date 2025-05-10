@@ -7,7 +7,7 @@
   .alert {
     background-color: var(--color-red);
     border-radius: var(--border-radius);
-    color: var(--color-black);
+    color: #000;
     padding: var(--padding);
   }
 }

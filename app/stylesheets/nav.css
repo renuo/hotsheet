@@ -29,7 +29,10 @@
       z-index: 1;
     }
 
-    &:hover,
+    &:hover {
+      background-color: var(--color-background-hover);
+    }
+
     &.active {
       background-color: var(--color-border);
     }
