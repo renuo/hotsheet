@@ -16,9 +16,9 @@ class Hotsheet::Sheet
   end
 
   def column(name, config = {})
-    column = Column.new(@model, name, config)
-    column.validate!
-    @columns << column
+    ensure_column_exists! name
+
+    @columns << Column.new(name, config)
   end
 
   def columns
@@ -35,5 +35,11 @@ class Hotsheet::Sheet
     return if Object.const_defined? name
 
     raise Hotsheet::Error, "Unknown model '#{name}'"
+  end
+
+  def ensure_column_exists!(name)
+    return if @model.column_names.include? name.to_s
+
+    raise Hotsheet::Error, "Unknown column '#{name}' for '#{@model.table_name}'"
   end
 end

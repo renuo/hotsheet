@@ -5,14 +5,11 @@ class Hotsheet::Sheet::Column
 
   DEFAULT_CONFIG = { editable: true, visible: true }.freeze
 
-  def initialize(model, name, config)
-    @model = model
+  def initialize(name, config)
     @name = name.to_s
     @config = DEFAULT_CONFIG.merge config
-  end
 
-  def human_name
-    @model.human_attribute_name @name
+    validate_config! config
   end
 
   def visible?
@@ -23,21 +20,13 @@ class Hotsheet::Sheet::Column
     @config[:editable]
   end
 
-  def validate!
-    ensure_database_column_exists!
+  private
 
-    @config.each do |key, value|
+  def validate_config!(config)
+    config.each do |key, value|
       ensure_config_exists! key
       validate_config_value! key, value
     end
-  end
-
-  private
-
-  def ensure_database_column_exists!
-    return if @model.column_names.include? @name.to_s
-
-    raise Hotsheet::Error, "Unknown database column '#{@name}' for '#{@model.table_name}'"
   end
 
   def ensure_config_exists!(key)

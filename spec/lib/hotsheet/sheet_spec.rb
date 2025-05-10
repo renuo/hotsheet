@@ -3,8 +3,6 @@
 require "spec_helper"
 
 RSpec.describe Hotsheet::Sheet do
-  fixtures :users
-
   let(:sheet) { described_class.new :User }
 
   describe "#initialize" do
@@ -30,9 +28,15 @@ RSpec.describe Hotsheet::Sheet do
   describe "#column" do
     let(:columns) { sheet.instance_variable_get(:@columns) }
 
-    it "creates a column" do
+    it "adds a column" do
       expect { sheet.column(:name) }.to change(columns, :length).by(1)
       expect(columns.last).to be_a Hotsheet::Sheet::Column
+    end
+
+    context "with nonexistent column" do
+      it "raises an error" do
+        expect { sheet.column(:age) }.to raise_error "Unknown column 'age' for 'users'"
+      end
     end
   end
 
