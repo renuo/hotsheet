@@ -2,12 +2,15 @@
 
 <!-- ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.1.0..HEAD) -->
 
-## [0.2.0](https://github.com/renuo/hotsheet/releases/tag/v0.2.0) - 2025-05-12
+## [0.2.0](https://github.com/renuo/hotsheet/releases/tag/v0.2.0) - 2025-05-26
 
 - Add dark mode and improve CSS ([@hunchr])
-- Improve configuration file DSL (breaking changes) ([@hunchr])
 - Make table cells selectable with arrow keys ([@hunchr])
 - Remove pagination ([@hunchr])
+
+### Breaking Changes
+
+- Improve configuration file DSL ([@hunchr])
 
 ## [0.1.1](https://github.com/renuo/hotsheet/releases/tag/v0.1.1) - 2025-02-03
 
