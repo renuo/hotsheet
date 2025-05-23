@@ -3,7 +3,6 @@ name: ci
 on: push
 
 env:
-  BUNDLE_FROZEN: "true"
   BUNDLE_PATH: ~/.bundle
 
 jobs:
