@@ -1,8 +1,6 @@
 name: ci
 
-on:
-  pull_request:
-  push:
+on: push
 
 env:
   BUNDLE_PATH: vendor/bundle
