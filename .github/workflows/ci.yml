@@ -3,7 +3,8 @@ name: ci
 on: push
 
 env:
-  BUNDLE_PATH: vendor/bundle
+  BUNDLE_FROZEN: "true"
+  BUNDLE_PATH: ~/.bundle
 
 jobs:
   lint:
@@ -15,12 +16,12 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v4
         with:
-          key: cache-${{ hashFiles("bun.lock", "Gemfile") }}
+          key: cache-${{ hashFiles('bun.lock', 'Gemfile') }}
           restore-keys: cache
           path: |
             node_modules
-            vendor/bundle
             ~/.bun/install/cache
+            ~/.bundle
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
@@ -49,12 +50,12 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v4
         with:
-          key: cache-${{ hashFiles("bun.lock", "Gemfile") }}
+          key: cache-${{ hashFiles('bun.lock', 'Gemfile') }}
           restore-keys: cache
           path: |
             node_modules
-            vendor/bundle
             ~/.bun/install/cache
+            ~/.bundle
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
