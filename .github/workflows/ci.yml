@@ -66,8 +66,13 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: false
 
-      - name: Install dependencies
-        run: bin/setup
+      - name: Set up Hotsheet
+        run: |
+          bun i --frozen-lockfile
+          bundle
+          bundle exec appraisal install
+          bun run build
+          bundle exec rails db:schema:load
 
       - name: Run tests
         run: bin/check

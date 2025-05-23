@@ -1,21 +1,23 @@
-#!/usr/bin/env sh
-set -e
+#!/usr/bin/env ruby
+# frozen_string_literal: true
 
-echo '---- Cleaning up old files ----'
-rm -rf app/assets coverage spec/dummy/log spec/dummy/storage spec/dummy/tmp
+def system!(command)
+  system command, exception: true
+end
 
-echo '---- Installing dependencies ----'
-bun i
-bundle
-bundle exec appraisal install
+puts "---- Cleaning up old files ----"
+system! "rm -rf #{File.read(".gitignore").tr("\n", " ").strip.gsub(%r{\A/| /}, " ./")}"
 
-echo '---- Building assets ----'
-bun run build
+puts "---- Installing dependencies ----"
+system! "bun i"
+system! "bundle"
+system! "bundle exec appraisal install"
 
-echo '---- Setting up database ----'
-if [ -n "$CI" ]; then
-  bundle exec rails db:schema:load 
-else
-  bundle exec rails db:reset db:schema:load 
-  RAILS_ENV=development bundle exec rails db:seed
-fi
+puts "---- Bundling assets ----"
+system! "bun run build"
+
+puts "---- Setting up database ----"
+system! "bundle exec rails db:reset db:schema:load"
+system! "RAILS_ENV=development bundle exec rails db:seed"
+
+exec "bin/run_dummy"

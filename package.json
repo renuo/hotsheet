@@ -2,9 +2,7 @@
   "name": "hotsheet",
   "private": true,
   "scripts": {
-    "build": "bun build:css && bun build:js",
-    "build:css": "bun build --minify --outfile app/assets/stylesheets/hotsheet.css app/stylesheets/application.css",
-    "build:js": "bun build --minify --outfile app/assets/javascripts/hotsheet.js app/javascripts/application.ts"
+    "build": "bun build --minify --no-clear-screen --outdir app/assets app/*/hotsheet.*"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
