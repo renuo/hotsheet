@@ -12,6 +12,15 @@ RSpec.describe Hotsheet::Sheet::Column do
       expect(column.editable?).to be true
     end
 
+    context "with valid config" do
+      let(:config) { { editable: false, visible: false } }
+
+      it "does not raise an error" do
+        expect(column.visible?).to be false
+        expect(column.editable?).to be false
+      end
+    end
+
     context "with invalid config" do
       let(:config) { { editable: "no" } }
 
