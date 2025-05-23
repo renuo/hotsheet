@@ -6,4 +6,5 @@
 /spec/dummy/storage
 /spec/dummy/tmp
 
+/Gemfile.lock
 /hotsheet-*.gem
