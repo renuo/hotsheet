@@ -29,6 +29,10 @@ class Hotsheet::Sheet
     @columns.select(&:visible?)
   end
 
+  def cells_for(columns)
+    @model.pluck(*columns.map(&:name)).transpose
+  end
+
   private
 
   def ensure_model_exists!(name)
