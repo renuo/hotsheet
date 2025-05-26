@@ -6,5 +6,6 @@ APP_PATH = File.expand_path "../spec/dummy/config/application", __dir__
 ENGINE_PATH = File.expand_path "../lib/hotsheet/engine", __dir__
 ENGINE_ROOT = File.expand_path "..", __dir__
 
+require "logger"
 require "rails/all"
 require "rails/engine/commands"

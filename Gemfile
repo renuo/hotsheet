@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "propshaft", require: false
+gem "propshaft"
 gem "puma", require: false
 gem "sqlite3", require: false
 

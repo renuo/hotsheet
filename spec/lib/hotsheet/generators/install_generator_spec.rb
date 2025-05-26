@@ -8,7 +8,7 @@ RSpec.describe Hotsheet::Generators::InstallGenerator do
 
   before do
     FileUtils.rm_rf Rails.root.join("tmp/config")
-    Rails.root.join("tmp/config").mkdir
+    FileUtils.mkdir_p Rails.root.join("tmp/config")
     Rails.root.join("tmp/config/routes.rb").write ""
   end
 

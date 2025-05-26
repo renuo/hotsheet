@@ -5,7 +5,6 @@ require "logger"
 require "action_controller/railtie"
 require "active_record/railtie"
 require "active_support/railtie"
-require "propshaft"
 require "rails"
 
 Bundler.require(*Rails.groups)
