@@ -13,7 +13,7 @@ class Dummy < Rails::Application
   config.load_defaults Rails::VERSION::STRING.to_f
 
   config.action_controller.perform_caching = false
-  config.action_dispatch.show_exceptions = :all
+  config.action_dispatch.show_exceptions = :rescuable
   config.action_view.preload_links_header = false
   config.active_record.dump_schema_after_migration = true
   config.active_record.migration_error = :page_load
