@@ -7,7 +7,10 @@ RSpec.describe Hotsheet::Config do
   let(:sheet) { sheets["users"] }
   let(:sheets) { Hotsheet.sheets }
 
-  before { prepare { config } }
+  before do
+    Hotsheet.instance_variable_set :@sheets, nil
+    config
+  end
 
   describe "#sheet" do
     context "without config" do
