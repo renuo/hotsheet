@@ -6,40 +6,7 @@ env:
   BUNDLE_PATH: ~/.bundle
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Restore cache
-        uses: actions/cache@v4
-        id: cache
-        with:
-          key: lint-${{ hashFiles('bun.lock', 'gemfiles/*.lock') }}
-          restore-keys: lint
-          path: |
-            node_modules
-            ~/.bun/install/cache
-            ~/.bundle
-
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.4
-          bundler-cache: false
-
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: bun i && bundle
-
-      - name: Run linters
-        run: bin/lint
-
-  test:
+  check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -52,8 +19,8 @@ jobs:
         uses: actions/cache@v4
         id: cache
         with:
-          key: test-${{ matrix.ruby }}-${{ hashFiles('bun.lock', 'gemfiles/*.lock') }}
-          restore-keys: test-${{ matrix.ruby }}
+          key: cache-${{ matrix.ruby }}-${{ hashFiles('bun.lock', 'gemfiles/*.lock') }}
+          restore-keys: cache-${{ matrix.ruby }}
           path: |
             node_modules
             ~/.bun/install/cache
@@ -74,6 +41,10 @@ jobs:
 
       - name: Bundle assets and prepare database
         run: bun run build && bundle exec rails db:schema:load
+
+      - name: Run linters
+        if: ${{ matrix.ruby == 3.4 }}
+        run: bin/lint
 
       - name: Run tests
         run: bin/check
