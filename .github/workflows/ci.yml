@@ -14,9 +14,10 @@ jobs:
 
       - name: Restore cache
         uses: actions/cache@v4
+        id: cache
         with:
-          key: cache-${{ hashFiles('bun.lock', 'Gemfile') }}
-          restore-keys: cache
+          key: lint-${{ hashFiles('bun.lock', 'gemfiles/*.lock') }}
+          restore-keys: lint
           path: |
             node_modules
             ~/.bun/install/cache
@@ -32,6 +33,7 @@ jobs:
           bundler-cache: false
 
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: bun i && bundle
 
       - name: Run linters
@@ -48,9 +50,10 @@ jobs:
 
       - name: Restore cache
         uses: actions/cache@v4
+        id: cache
         with:
-          key: cache-${{ hashFiles('bun.lock', 'Gemfile') }}
-          restore-keys: cache
+          key: test-${{ matrix.ruby }}-${{ hashFiles('bun.lock', 'gemfiles/*.lock') }}
+          restore-keys: test-${{ matrix.ruby }}
           path: |
             node_modules
             ~/.bun/install/cache
@@ -65,13 +68,12 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: false
 
-      - name: Set up Hotsheet
-        run: |
-          bun i --frozen-lockfile
-          bundle
-          bundle exec appraisal install
-          bun run build
-          bundle exec rails db:schema:load
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bun i && bundle && bundle exec appraisal install
+
+      - name: Bundle assets and prepare database
+        run: bun run build && bundle exec rails db:schema:load
 
       - name: Run tests
         run: bin/check
