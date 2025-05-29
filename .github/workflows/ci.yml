@@ -17,7 +17,6 @@ jobs:
 
       - name: Restore cache
         uses: actions/cache@v4
-        id: cache
         with:
           key: cache-${{ matrix.ruby }}-${{ hashFiles('bun.lock', 'gemfiles/*.lock') }}
           restore-keys: cache-${{ matrix.ruby }}
@@ -36,7 +35,6 @@ jobs:
           bundler-cache: false
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: bun i && bundle && bundle exec appraisal install
 
       - name: Bundle assets and prepare database
