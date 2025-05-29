@@ -43,7 +43,7 @@ jobs:
         run: bun run build && bundle exec rails db:schema:load
 
       - name: Run linters
-        if: ${{ matrix.ruby == 3.4 }}
+        if: matrix.ruby == 3.4
         run: bin/lint
 
       - name: Run tests
