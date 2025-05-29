@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-require "hotsheet/config"
-require "hotsheet/engine"
-require "hotsheet/sheet"
-require "hotsheet/sheet/column"
-require "hotsheet/version"
-
 module Hotsheet
   class Error < StandardError; end
 
@@ -19,3 +13,9 @@ module Hotsheet
     end
   end
 end
+
+require "hotsheet/config"
+require "hotsheet/engine"
+require "hotsheet/sheet"
+require "hotsheet/sheet/column"
+require "hotsheet/version"
