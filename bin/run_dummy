@@ -2,9 +2,11 @@
 set -e
 
 echo '---- Starting dummy server and watching assets ----'
-bun run build --watch & pid=$!
+bun build:css --watch & pids=$!
+bun build:js --watch & pids="$pids $!"
 bundle exec rails s
 
-trap 'kill $pid' INT
-wait $pid
+trap 'kill $pids' INT
+# shellcheck disable=SC2086
+wait $pids
 true
