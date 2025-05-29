@@ -6,7 +6,7 @@ begin
   require "simplecov"
 
   SimpleCov.start "rails" do
-    add_filter %w[lib/generators/templates lib/hotsheet/version.rb]
+    add_filter %w[lib/generators/templates lib/hotsheet/engine.rb lib/hotsheet/version.rb]
     enable_coverage :branch
     minimum_coverage line: 100, branch: 100
   end

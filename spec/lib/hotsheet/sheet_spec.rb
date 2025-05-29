@@ -3,48 +3,38 @@
 require "spec_helper"
 
 RSpec.describe Hotsheet::Sheet do
-  let(:sheet) { described_class.new :User }
+  let(:sheet) { described_class.new :User, config, &columns }
+  let(:config) { {} }
+  let(:columns) { ->(_) {} }
 
-  describe "#initialize" do
-    it "constantizes the model name" do
-      expect(sheet.model).to eq User
-    end
+  it "includes the id by default" do
+    expect(sheet.model).to eq User
+    expect(sheet.columns.keys).to eq %w[id]
+  end
 
-    context "with nonexistent model" do
-      let(:sheet) { described_class.new :Author }
+  context "without config" do
+    let(:sheet) { described_class.new :User, config }
 
-      it "raises an error" do
-        expect { sheet }.to raise_error "Unknown model 'Author'"
-      end
+    it "includes all columns" do
+      expect(sheet.columns.keys).to eq %w[id name handle email birthdate
+                                          admin status created_at updated_at]
     end
   end
 
-  describe "#human_name" do
-    it "reads the human name from the locales" do
-      expect(sheet.human_name).to eq "Users"
-    end
-  end
+  context "with nonexistent column" do
+    let(:columns) { ->(_) { column :age } }
 
-  describe "#column" do
-    let(:columns) { sheet.instance_variable_get(:@columns) }
-
-    it "adds a column" do
-      expect { sheet.column(:name) }.to change(columns, :length).by(1)
-      expect(columns.last).to be_a Hotsheet::Sheet::Column
-    end
-
-    context "with nonexistent column" do
-      it "raises an error" do
-        expect { sheet.column(:age) }.to raise_error "Unknown column 'age' for 'users'"
-      end
+    it "raises an error" do
+      expect { sheet.column :age }.to raise_error(/Column must be one of/)
     end
   end
 
   describe "#columns" do
-    before { sheet.column :name, visible: false }
+    let(:columns) { ->(_) { column :name, visible: false } }
 
     it "only returns visible columns" do
-      expect(sheet.columns).to eq([])
+      expect(sheet.columns.keys).to eq %w[id]
+      expect(sheet.instance_variable_get(:@columns).keys).to eq %w[id name]
     end
   end
 end

@@ -4,11 +4,11 @@ require "spec_helper"
 require_relative "../../../../lib/generators/hotsheet/install_generator"
 
 RSpec.describe Hotsheet::Generators::InstallGenerator do
-  let(:generator) { described_class.new([], [], destination_root: Rails.root.join("tmp")) }
+  let(:generator) { described_class.new [], [], destination_root: Rails.root.join("tmp") }
 
   before do
-    FileUtils.rm_rf Rails.root.join("tmp/config")
-    FileUtils.mkdir_p Rails.root.join("tmp/config")
+    FileUtils.rm_rf Rails.root.join "tmp/config"
+    FileUtils.mkdir_p Rails.root.join "tmp/config"
     Rails.root.join("tmp/config/routes.rb").write ""
   end
 

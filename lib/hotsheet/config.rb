@@ -1,18 +1,29 @@
 # frozen_string_literal: true
 
-class Hotsheet::Config
-  attr_reader :sheets
+module Hotsheet::Config
+  def merge_config!(default, custom)
+    config = default.transform_values { |value| value[:default] }
 
-  def initialize
-    @sheets = {}
-  end
+    custom.each do |key, value|
+      unless default.key? key
+        raise Hotsheet::Error, "Config must be one of #{default.keys}, got '#{key}'"
+      end
 
-  def sheet(name, config = {}, &columns)
-    sheet = Hotsheet::Sheet.new(name, config).tap do |s|
-      s.column :id, editable: false
-      columns ? s.instance_eval(&columns) : s.use_default_configuration
+      ensure_allowed_value! key, value, default[key]
+      config[key] = value
     end
 
-    @sheets[sheet.model.table_name] = sheet
+    config
+  end
+
+  private
+
+  def ensure_allowed_value!(key, value, config)
+    allowed = config[:allowed_classes]
+    value = value.class
+
+    return if allowed.include? value
+
+    raise Hotsheet::Error, "Config '#{key}' must be one of #{allowed}, got '#{value}'"
   end
 end

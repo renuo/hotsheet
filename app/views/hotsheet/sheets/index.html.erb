@@ -1,13 +1,14 @@
 <div class="table" spellcheck="false" data-controller="sheets">
-  <% @cells.each_with_index do |values, x_index| %>
-    <% column = @columns[x_index] %>
+  <% @columns.each_with_index do |entry, x_index| %>
+    <% column_name, column = entry %>
     <% editable = column.editable? %>
 
     <div class="column">
-      <span class="cell header"
-            data-name="<%= column.name %>"><%= @sheet.model.human_attribute_name column.name %></span>
+      <span class="cell header" data-name="<%= column_name %>">
+        <%= @sheet.model.human_attribute_name column_name %>
+      </span>
 
-      <% values.each_with_index do |value, y_index| %>
+      <% @cells[x_index].each_with_index do |value, y_index| %>
         <% if editable %>
           <span class="cell" tabindex="0" data-xy="<%= "#{x_index},#{y_index}" %>"><%= value %></span>
         <% else %>

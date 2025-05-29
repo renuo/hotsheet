@@ -1,12 +1,12 @@
 <nav class="nav" data-controller="nav">
   <ul>
-    <li><%= link_to t("hotsheet.title"), root_path, class: "title" %></li>
+    <li><%= link_to Hotsheet.t("title", "Hotsheet"), root_path, class: "title" %></li>
   </ul>
   <ul class="sheets">
-    <% Hotsheet.sheets.each_with_index do |sheet, index| %>
-      <% sheet_name, model = sheet %>
+    <% Hotsheet.sheets.each_with_index do |entry, index| %>
       <li>
-        <%= link_to model.human_name, sheet_path_for(sheet_name),
+        <% sheet_name, sheet = entry %>
+        <%= link_to sheet.model.model_name.human(count: 2), sheet_path_for(sheet_name),
                     class: ("active" if params[:sheet_name] == sheet_name), data: { x: index } %>
       </li>
     <% end %>

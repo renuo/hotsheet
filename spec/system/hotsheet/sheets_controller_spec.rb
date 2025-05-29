@@ -6,9 +6,8 @@ RSpec.describe Hotsheet::SheetsController do
   fixtures :users
 
   let(:user) { users(:admin) }
-  let(:config) { Hotsheet.configure { sheet :User } }
 
-  before { prepare { config } }
+  before { prepare { Hotsheet.configure { sheet :User } } }
 
   it "updates the cell value" do
     visit hotsheet.users_path

@@ -13,9 +13,6 @@ system! "bun i"
 system! "bundle"
 system! "bundle exec appraisal install"
 
-puts "---- Bundling assets ----"
-system! "bun run build"
-
 puts "---- Setting up database ----"
 system! "bundle exec rails db:reset db:schema:load"
 system! "RAILS_ENV=development bundle exec rails db:seed"

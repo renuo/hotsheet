@@ -7,6 +7,7 @@ AllCops:
   Exclude:
     - gemfiles/**/*
     - spec/dummy/db/schema.rb
+    - spec/dummy/tmp/**/*
 
 Style/ClassAndModuleChildren:
   Enabled: false

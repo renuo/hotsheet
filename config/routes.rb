@@ -4,7 +4,7 @@ Hotsheet::Engine.routes.draw do
   next if Rails::VERSION::MAJOR < 8 && !defined? Rails::Server
 
   Hotsheet.sheets.each_key do |sheet_name|
-    resources sheet_name, only: %i[index update], controller: :sheets, sheet_name: sheet_name
+    resources sheet_name, sheet_name:, controller: :sheets, only: %i[index update]
   end
 
   root "sheets#root"

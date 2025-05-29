@@ -3,18 +3,19 @@
 class Hotsheet::SheetsController < Hotsheet::ApplicationController
   before_action :set_sheet
   before_action :set_column, only: :update
+  before_action :set_resource, only: :update
 
   def index
     @columns = @sheet.columns
-    @cells = @sheet.cells_for(@columns)
+    @cells = @sheet.cells_for @columns
   end
 
   def update
-    resource = @sheet.model.find_by(id: params[:id])
-    return respond t("hotsheet.errors.not_found") if resource.nil?
-    return respond if resource.update @column.name => params[:value]
-
-    respond resource.errors.full_messages.first
+    if @resource.update params[:column_name] => params[:value]
+      respond
+    else
+      respond @resource.errors.full_messages.first
+    end
   end
 
   def error
@@ -28,10 +29,16 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
   end
 
   def set_column
-    @column = @sheet.columns.find { |column| column.name == params[:column_name] }
-    return respond t("hotsheet.errors.not_found") if @column.nil?
+    @column = @sheet.columns[params[:column_name]]
+    return respond Hotsheet.t "errors.not_found", "Not found" if @column.nil?
 
-    respond t("hotsheet.errors.forbidden") unless @column.editable?
+    respond Hotsheet.t "errors.forbidden", "Forbidden" unless @column.editable?
+  end
+
+  def set_resource
+    @resource = @sheet.model.find_by id: params[:id]
+
+    respond Hotsheet.t "errors.not_found", "Not found" if @resource.nil?
   end
 
   def respond(message = "")

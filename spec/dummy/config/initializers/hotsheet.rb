@@ -6,14 +6,14 @@ Hotsheet.configure do
     column :body
     column :user_id
     column :created_at
-    column :updated_at
+    column :updated_at, editable: false
   end
 
   sheet :Tag
 
   sheet :User do
     column :name
-    column :handle, editable: false
+    column :handle, editable: -> { false }
     column :email
     column :birthdate
     column :admin

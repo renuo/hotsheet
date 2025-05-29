@@ -13,7 +13,7 @@ RSpec.describe Hotsheet::SheetsController do
   describe "#index" do
     it "shows a table with all values" do
       get hotsheet.users_path
-      expect(response).to have_http_status :ok
+      expect(response).to be_successful
       expect(response.body).to include user.name
     end
   end
@@ -26,7 +26,7 @@ RSpec.describe Hotsheet::SheetsController do
         .to change { user.reload.name }.from("Admin User").to "Bob"
     end
 
-    context "when column is not editable" do
+    context "when the column is not editable" do
       let(:config) { Hotsheet.configure { sheet(:User) { column :name, editable: false } } }
 
       it "does not update the resource" do
@@ -69,8 +69,8 @@ RSpec.describe Hotsheet::SheetsController do
   describe "#error" do
     it "shows an error page" do
       get "/hotsheet/authors"
-      expect(response).to have_http_status :not_found
-      expect(response.body).to include I18n.t("hotsheet.not_found")
+      expect(response).to be_not_found
+      expect(response.body).to include I18n.t("hotsheet.errors.not_found")
     end
   end
 end
