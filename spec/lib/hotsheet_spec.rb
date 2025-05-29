@@ -21,4 +21,10 @@ RSpec.describe Hotsheet do
       expect { config.sheets }.to raise_error "Unknown model 'Author'"
     end
   end
+
+  describe "#t" do
+    it "falls back to english" do
+      expect { I18n.with_locale(:de) { described_class.t "errors.not_found" } }.not_to raise_error
+    end
+  end
 end

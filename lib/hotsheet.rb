@@ -29,8 +29,10 @@ module Hotsheet
       end
     end
 
-    def t(key, default)
-      I18n.t key, scope: "hotsheet", default:
+    def t(key)
+      I18n.t key, scope: "hotsheet"
+    rescue I18n::MissingTranslationData
+      I18n.with_locale(:en) { I18n.t key, scope: "hotsheet" }
     end
 
     private

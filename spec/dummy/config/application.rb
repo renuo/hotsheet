@@ -27,7 +27,7 @@ class Dummy < Rails::Application
   config.eager_load = false
   config.enable_reloading = true
   config.filter_parameters = %i[passw]
-  config.i18n.available_locales = %i[en]
+  config.i18n.available_locales = %i[en de]
   config.i18n.default_locale = :en
   config.i18n.fallbacks = false
   config.i18n.raise_on_missing_translations = true
