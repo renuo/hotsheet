@@ -25,5 +25,5 @@ Gem::Specification.new do |s|
                 "{config,lib}/**/*.rb", "LICENSE", "README.md"]
 
   s.required_ruby_version = ">= 3.1.0"
-  s.add_dependency "rails", ">= 7.0.0"
+  s.add_dependency "rails", ">= 6.1.0"
 end

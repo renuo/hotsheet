@@ -3,7 +3,13 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
 
-  enum :status, { invisible: 0, do_not_disturb: 1, idle: 2, online: 3 }, default: :invisible
+  STATUS = { invisible: 0, do_not_disturb: 1, idle: 2, online: 3 }.freeze
+
+  if Rails::VERSION::MAJOR >= 7
+    enum :status, STATUS, default: :invisible
+  else
+    enum status: STATUS, _default: :invisible # rubocop:disable Rails/EnumSyntax
+  end
 
   validates :name, presence: true, length: { in: 2..40 }
   validates :handle, presence: true, length: { in: 1..20 }, uniqueness: true

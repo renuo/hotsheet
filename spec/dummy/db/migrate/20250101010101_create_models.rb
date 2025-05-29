@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateModels < ActiveRecord::Migration[8.0]
+class CreateModels < ActiveRecord::Migration[6.1]
   def change
     create_users
     create_posts
@@ -18,7 +18,7 @@ class CreateModels < ActiveRecord::Migration[8.0]
       t.date :birthdate
       t.boolean :admin, null: false, default: false
       t.integer :status, null: false
-      t.timestamps
+      t.timestamps precision: 0
     end
   end
 
@@ -26,8 +26,8 @@ class CreateModels < ActiveRecord::Migration[8.0]
     create_table :posts do |t|
       t.string :title, null: false
       t.text :body, null: false
-      t.belongs_to :user, null: false, foreign_key: true
-      t.timestamps
+      t.references :user, null: false, foreign_key: true
+      t.timestamps precision: 0
     end
   end
 
@@ -35,14 +35,14 @@ class CreateModels < ActiveRecord::Migration[8.0]
     create_table :tags do |t|
       t.string :name, null: false
       t.string :color, null: false
-      t.timestamps
+      t.timestamps precision: 0
     end
   end
 
   def create_post_tags
     create_table :post_tags do |t|
-      t.belongs_to :post, null: false, foreign_key: true
-      t.belongs_to :tag, null: false, foreign_key: true
+      t.references :post, null: false, foreign_key: true
+      t.references :tag, null: false, foreign_key: true
     end
   end
 end
