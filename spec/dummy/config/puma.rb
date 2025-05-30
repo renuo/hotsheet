@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-threads_count = ENV.fetch "RAILS_MAX_THREADS", 3
+cores = ENV.fetch "RAILS_MAX_THREADS", Concurrent.physical_processor_count
+env = ENV.fetch "RAILS_ENV", "development"
 
-threads threads_count, threads_count
+environment env
+pidfile ENV.fetch "PIDFILE" if ENV.key? "PIDFILE"
 port ENV.fetch "PORT", 3000
-pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+threads cores, cores
+workers cores if env == "production"
 
 plugin :tmp_restart

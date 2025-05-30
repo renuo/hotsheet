@@ -1,0 +1,7 @@
+admin:
+  name: Admin User
+  handle: admin
+  email: admin@example.com
+  birthdate: 2000-01-01
+  admin: true
+  status: online

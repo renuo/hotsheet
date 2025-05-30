@@ -1,19 +1,24 @@
 # frozen_string_literal: true
 
-Hotsheet.configure do |config|
-  config.model :Author do |model|
-    model.included_attributes = %i[name birthdate gender created_at]
+Hotsheet.configure do
+  sheet :Post do
+    column :title
+    column :body
+    column :user_id
+    column :created_at
+    column :updated_at, editable: false
   end
 
-  config.model :Post do |model|
-    model.excluded_attributes = %i[id author_id created_at updated_at]
-  end
+  sheet :Tag
 
-  config.model :TableNameTest do |model|
-    model.included_attributes = %i[]
-  end
-
-  config.model :VeryLongModelNameForOverflowTest do
-    nil
+  sheet :User do
+    column :name
+    column :handle, editable: -> { false }
+    column :email
+    column :birthdate
+    column :admin
+    column :status
+    column :created_at, visible: false
+    column :updated_at
   end
 end

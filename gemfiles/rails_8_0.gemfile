@@ -2,21 +2,16 @@
 
 source "https://rubygems.org"
 
-gem "rails", "8.0.0.rc2"
+gem "propshaft"
+gem "puma", require: false
+gem "sqlite3", require: false
+gem "rails", "~> 8.0.0"
+gem "simplecov", require: false
 
-group :test do
-  gem "appraisal"
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem "capybara"
-  gem "database_cleaner-active_record", require: false
-  gem "debug"
-  gem "faker", require: false
-  gem "puma"
-  gem "renuocop", require: false
-  gem "rspec-rails"
+group :development, :test do
+  gem "capybara", require: false
+  gem "rspec-rails", require: false
   gem "selenium-webdriver", require: false
-  gem "sqlite3"
 end
 
 gemspec path: "../"

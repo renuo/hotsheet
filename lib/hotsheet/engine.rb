@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module Hotsheet
-  class Engine < ::Rails::Engine
-    isolate_namespace Hotsheet
+class Hotsheet::Engine < Rails::Engine
+  isolate_namespace Hotsheet
 
-    config.assets.precompile += %w[hotsheet/application.css hotsheet/application.js]
+  if config.respond_to? :assets
+    config.assets.paths << Hotsheet::Engine.root.join("app/assets")
   end
 end

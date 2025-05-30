@@ -2,22 +2,19 @@
 
 source "https://rubygems.org"
 
+gem "propshaft"
+gem "puma", require: false
+gem "sqlite3", "~> 1.7", require: false
 gem "rails", "~> 7.0.0"
-gem "concurrent-ruby", "1.3.4"
+gem "benchmark"
+gem "bigdecimal"
+gem "drb"
+gem "mutex_m"
 
-group :test do
-  gem "appraisal"
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem "capybara"
-  gem "database_cleaner-active_record", require: false
-  gem "debug"
-  gem "faker", require: false
-  gem "puma"
-  gem "renuocop", require: false
-  gem "rspec-rails"
+group :development, :test do
+  gem "capybara", require: false
+  gem "rspec-rails", require: false
   gem "selenium-webdriver", require: false
-  gem "sqlite3", "~> 1.4"
 end
 
 gemspec path: "../"
