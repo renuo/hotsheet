@@ -4,6 +4,8 @@ module Hotsheet
   class Engine < ::Rails::Engine
     isolate_namespace Hotsheet
 
-    config.assets.precompile += %w[hotsheet/application.css hotsheet/application.js]
+    initializer "hotsheet.assets" do |app|
+      app.config.assets.precompile += %w[hotsheet/application.css hotsheet/application.js]
+    end
   end
 end

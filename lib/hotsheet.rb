@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "sprockets/railtie"
 require "turbo-rails"
 
 require "hotsheet/engine"
