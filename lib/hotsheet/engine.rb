@@ -5,5 +5,6 @@ class Hotsheet::Engine < Rails::Engine
 
   if config.respond_to? :assets
     config.assets.paths << Hotsheet::Engine.root.join("app/assets")
+    config.assets.precompile << %w[hotsheet.css hotsheet.js]
   end
 end
