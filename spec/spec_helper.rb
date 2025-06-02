@@ -2,12 +2,22 @@
 
 ENV["RAILS_ENV"] = "test"
 
+begin
+  require "simplecov"
+
+  SimpleCov.start "rails" do
+    add_filter %w[lib/generators/templates lib/hotsheet/engine.rb lib/hotsheet/version.rb]
+    enable_coverage :branch
+    minimum_coverage line: 100, branch: 100
+  end
+rescue LoadError
+  nil
+end
+
 require_relative "dummy/config/environment"
-require "database_cleaner-active_record"
+require_relative "support/utils"
 require "rspec/rails"
 require "selenium-webdriver"
-
-require "support/capybara_utils"
 
 %i[firefox firefox_headless].each do |driver|
   Capybara.register_driver driver do |app|
@@ -20,13 +30,14 @@ end
 driver = ENV.fetch("SELENIUM_DRIVER", "firefox_headless").to_sym
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = driver
+
+ActionController::Base.allow_forgery_protection = false
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.include Capybara::DSL, type: :system
-  config.include CapybaraUtils, type: :system
 
   config.disable_monkey_patching!
   config.filter_rails_from_backtrace!
@@ -34,13 +45,15 @@ RSpec.configure do |config|
   config.mock_with(:rspec) { |mocks| mocks.verify_partial_doubles = true }
   config.order = :random
   config.run_all_when_everything_filtered = true
+  config.use_transactional_fixtures = true
 
-  config.before :all, type: :system do
-    FileUtils.rm_rf Rails.root.join "tmp/capybara"
-    driven_by driver, screen_size: [1280, 800]
+  if config.respond_to? :fixture_paths
+    config.fixture_paths = ["spec/fixtures"]
+  else
+    config.fixture_path = "spec/fixtures"
   end
 
-  config.before :each, type: :system do
-    DatabaseCleaner.clean_with :truncation
+  config.before :all, type: :system do
+    driven_by driver, screen_size: [1280, 800]
   end
 end

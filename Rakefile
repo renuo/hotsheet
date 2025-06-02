@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require "bundler/setup"
-require "bundler/gem_tasks"
+require_relative "spec/dummy/config/application"
 
-APP_RAKEFILE = File.expand_path("spec/dummy/Rakefile", __dir__)
+Rails.application.load_tasks
 
-load "rails/tasks/engine.rake"
-load "rails/tasks/statistics.rake"
-task default: :stats
+task build: :environment do
+  sh "bun run build"
+  sh "gem build"
+end

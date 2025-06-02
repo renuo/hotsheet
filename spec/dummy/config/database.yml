@@ -1,11 +1,9 @@
-development:
+development: &default
   adapter: sqlite3
   database: storage/development.sqlite3
-  pool: <%= ENV.fetch "RAILS_MAX_THREADS", 5 %>
+  pool: <%= ENV.fetch "RAILS_MAX_THREADS", Concurrent.physical_processor_count %>
   timeout: 5000
 
 test:
-  adapter: sqlite3
+  <<: *default
   database: storage/test.sqlite3
-  pool: <%= ENV.fetch "RAILS_MAX_THREADS", 5 %>
-  timeout: 5000

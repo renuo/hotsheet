@@ -1,0 +1,33 @@
+body,
+body * {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font:
+    400 1rem -apple-system,
+    BlinkMacSystemFont,
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+main {
+  min-height: 100vh;
+  overflow-x: auto;
+  padding: calc(
+      var(--height) * 2 + var(--padding) * 2 + var(--margin) + var(--border-width) + var(--padding)
+    )
+    var(--padding) var(--padding) var(--padding);
+  width: 100%;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
