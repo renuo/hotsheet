@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 Hotsheet::Engine.routes.draw do
-  root to: "pages#index"
+  next unless defined? Rails::Server
 
-  post :broadcast_edit_intent, to: "pages#broadcast_edit_intent"
-
-  Hotsheet.models.each do |model|
-    resources model.table_name, controller: :pages, only: %i[index update], model: model.name
+  Hotsheet.sheets.each_key do |sheet_name|
+    resources sheet_name, sheet_name:, controller: :sheets, only: %i[index update]
   end
+
+  root "sheets#root"
+  match "*path", to: "sheets#error", via: :all
 end

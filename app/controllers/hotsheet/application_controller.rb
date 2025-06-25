@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-module Hotsheet
-  class ApplicationController < ActionController::Base
-    include Pagy::Backend
-  end
+class Hotsheet::ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
 end

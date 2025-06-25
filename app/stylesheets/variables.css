@@ -1,0 +1,27 @@
+:root {
+  --color-background: #000;
+  --color-background-hover: #202020;
+  --color-border: #404040;
+  --color-foreground: #fff;
+  --color-primary: #60ffff;
+  --color-red: #ff6060;
+
+  --border: var(--border-width) solid var(--color-border);
+  --border-width: 0.0625rem;
+  --border-radius: 0.25rem;
+  --outline: var(--border-width) solid var(--color-primary);
+
+  --margin: 0.25rem;
+  --padding: 0.5rem;
+  --height: 1.75rem;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-background: #fff;
+    --color-background-hover: #e3e3e3;
+    --color-border: #b6b6b6;
+    --color-foreground: #000;
+    --color-primary: #0070e4;
+  }
+}

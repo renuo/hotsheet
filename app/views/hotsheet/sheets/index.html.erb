@@ -1,0 +1,20 @@
+<div class="table" spellcheck="false" data-controller="sheets">
+  <% @columns.each_with_index do |entry, x_index| %>
+    <% column_name, column = entry %>
+    <% editable = column.editable? %>
+
+    <div class="column">
+      <span class="cell header" data-name="<%= column_name %>">
+        <%= @sheet.model.human_attribute_name column_name %>
+      </span>
+
+      <% @cells[x_index]&.each_with_index do |value, y_index| %>
+        <% if editable %>
+          <span class="cell" tabindex="0" data-xy="<%= "#{x_index},#{y_index}" %>"><%= value %></span>
+        <% else %>
+          <span class="cell readonly"><%= value %></span>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

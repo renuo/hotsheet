@@ -1,22 +1,31 @@
+# Changelog
+
 <!-- ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.1.0..HEAD) -->
 
-## [0.1.1](https://github.com/renuo/hotsheet/releases/tag/v0.1.1) (2025-02-03)
+## [0.2.0](https://github.com/renuo/hotsheet/releases/tag/v0.2.0) - 2025-05-26
 
-- Improve configuration file usage and logic ([@simon-isler])
-- Configure compatible Ruby/Rails versions for testing ([@ignaciosy])
-- Improve flash messages layout ([@ignaciosy])
+- Add dark mode and improve CSS ([@hunchr])
+- Make table cells selectable with arrow keys ([@hunchr])
+- Remove pagination ([@hunchr])
+
+### Breaking Changes
+
+- Improve configuration file DSL ([@hunchr])
+
+## [0.1.1](https://github.com/renuo/hotsheet/releases/tag/v0.1.1) - 2025-02-03
+
 - Form inputs are now always visible for usage simplicity ([@ignaciosy])
+- Improve configuration file usage and logic ([@simon-isler])
+- Improve flash messages layout ([@ignaciosy])
 
-## [0.1.0](https://github.com/renuo/hotsheet/releases/tag/v0.1.0) (2024-11-05)
+## [0.1.0](https://github.com/renuo/hotsheet/releases/tag/v0.1.0) - 2024-11-05
 
 - Gem structure and initial configuration ([@ignaciosy])
-- Inline editing table (([@simon-isler]) and ([@edmunteanu]))
-- Dummy app for development and test ([@hunchr])
-- Configuration for initializer, CI, lint, tests ([@hunchr])
-- Generator `bin/rails g hotsheet:install` for copying initializer and mounting engine in routes ([@hunchr])
+- Generator for initializer and mounting engine in routes ([@hunchr])
+- Inline editing table ([@simon-isler], [@edmunteanu])
 - Pagination for data tables ([@hunchr])
 
-[@ignaciosy]: https://github.com/ignaciosy
-[@hunchr]: https://github.com/hunchr
-[@simon-isler]: https://github.com/simon-isler
 [@edmunteanu]: https://github.com/edmunteanu
+[@hunchr]: https://github.com/hunchr
+[@ignaciosy]: https://github.com/ignaciosy
+[@simon-isler]: https://github.com/simon-isler

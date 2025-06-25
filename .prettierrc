@@ -1,13 +1,5 @@
 {
-  "arrowParens": "always",
-  "bracketSameLine": true,
-  "bracketSpacing": true,
-  "endOfLine": "lf",
-  "printWidth": 80,
-  "quoteProps": "consistent",
-  "semi": false,
-  "singleQuote": false,
-  "tabWidth": 2,
-  "trailingComma": "all",
-  "useTabs": false
+  "experimentalTernaries": true,
+  "printWidth": 100,
+  "semi": false
 }

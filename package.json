@@ -1,0 +1,16 @@
+{
+  "name": "hotsheet",
+  "private": true,
+  "scripts": {
+    "build": "bun build:css && bun build:js",
+    "build:css": "bun build --minify --no-clear-screen --outdir app/assets app/stylesheets/hotsheet.css",
+    "build:js": "bun build --minify --no-clear-screen --outdir app/assets app/javascripts/hotsheet.ts"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo": "^8.0.13"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
+}

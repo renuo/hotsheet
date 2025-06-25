@@ -1,5 +1,6 @@
 en:
-  home: Home
   hotsheet:
-    success: '%{record} updated successfully'
-    error: '%{record} update failed: %{errors}'
+    errors:
+      forbidden: Forbidden
+      not_found: Not found
+    title: Hotsheet

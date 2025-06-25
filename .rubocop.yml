@@ -3,16 +3,11 @@ inherit_gem:
 
 AllCops:
   SuggestExtensions: false
-  TargetRubyVersion: 3.0.0
+  TargetRubyVersion: 3.1
   Exclude:
     - gemfiles/**/*
     - spec/dummy/db/schema.rb
+    - spec/dummy/tmp/**/*
 
-RSpec/ExampleLength:
-  CountAsOne:
-    - array
-    - hash
-    - method_call
-
-Rails/StrongParametersExpect:
+Style/ClassAndModuleChildren:
   Enabled: false
