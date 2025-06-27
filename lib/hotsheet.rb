@@ -12,9 +12,9 @@ module Hotsheet
   class << self
     include Config
 
-    CONFIG = {}.freeze
-
     attr_reader :config
+
+    CONFIG = {}.freeze
 
     def configure(config = {}, &sheets)
       @config = [merge_config!(CONFIG, config), sheets]
@@ -29,10 +29,10 @@ module Hotsheet
       end
     end
 
+    I18N = Psych.load_file(Hotsheet::Engine.root.join("config/locales/en.yml"))["en"]["hotsheet"].freeze
+
     def t(key)
-      I18n.t key, scope: "hotsheet"
-    rescue I18n::MissingTranslationData
-      I18n.with_locale(:en) { I18n.t key, scope: "hotsheet" }
+      I18n.t "hotsheet.#{key}", default: I18N[key]
     end
 
     private

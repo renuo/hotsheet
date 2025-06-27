@@ -2,6 +2,10 @@
 
 <!-- ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.1.0..HEAD) -->
 
+## [0.2.1](https://github.com/renuo/hotsheet/releases/tag/v0.2.1) - 2025-06-27
+
+- Fix I18n fallback ([@hunchr])
+
 ## [0.2.0](https://github.com/renuo/hotsheet/releases/tag/v0.2.0) - 2025-06-25
 
 - Add dark mode and improve CSS ([@hunchr])
