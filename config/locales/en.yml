@@ -1,6 +1,5 @@
 en:
   hotsheet:
-    errors:
-      forbidden: Forbidden
-      not_found: Not found
+    error_forbidden: Forbidden
+    error_not_found: Not found
     title: Hotsheet

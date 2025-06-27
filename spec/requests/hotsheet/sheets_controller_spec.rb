@@ -39,7 +39,7 @@ RSpec.describe Hotsheet::SheetsController do
 
       it "does not update the resource" do
         expect { put path, params: { column_name: :name, value: "Bob" } }.not_to change(user, :reload)
-        expect(response.parsed_body).to eq I18n.t("hotsheet.errors.forbidden")
+        expect(response.parsed_body).to eq Hotsheet.t("error_forbidden")
       end
     end
 
@@ -55,21 +55,21 @@ RSpec.describe Hotsheet::SheetsController do
 
       it "does not update the resource" do
         expect { put path, params: { column_name: :name, value: "Bob" } }.not_to change(user, :reload)
-        expect(response.parsed_body).to eq I18n.t("hotsheet.errors.not_found")
+        expect(response.parsed_body).to eq Hotsheet.t("error_not_found")
       end
     end
 
     context "with nonexistent column" do
       it "does not update the resource" do
         expect { put path, params: { column_name: :age, value: 21 } }.not_to change(user, :reload)
-        expect(response.parsed_body).to eq I18n.t("hotsheet.errors.not_found")
+        expect(response.parsed_body).to eq Hotsheet.t("error_not_found")
       end
     end
 
     context "with missing params" do
       it "does not update the resource" do
         expect { put path }.not_to change(user, :reload)
-        expect(response.parsed_body).to eq I18n.t("hotsheet.errors.not_found")
+        expect(response.parsed_body).to eq Hotsheet.t("error_not_found")
       end
     end
   end

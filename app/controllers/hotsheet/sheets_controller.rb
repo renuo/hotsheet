@@ -28,15 +28,15 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
 
   def set_column
     @column = @sheet.columns[params[:column_name]]
-    return respond Hotsheet.t "errors.not_found" if @column.nil?
+    return respond Hotsheet.t "error_not_found" if @column.nil?
 
-    respond Hotsheet.t "errors.forbidden" unless @column.editable?
+    respond Hotsheet.t "error_forbidden" unless @column.editable?
   end
 
   def set_resource
     @resource = @sheet.model.find_by id: params[:id]
 
-    respond Hotsheet.t "errors.not_found" if @resource.nil?
+    respond Hotsheet.t "error_not_found" if @resource.nil?
   end
 
   def respond(message = "")
