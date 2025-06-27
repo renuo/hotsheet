@@ -16,24 +16,35 @@
 
 ## Usage
 
-After installing, you can directly go to `/hotsheet` within your app by default.
+After the installation, you can start the Rails server and visit
+[/hotsheet](http://localhost:3000/hotsheet) to view the spreadsheet.
 
 ### Configuration
 
 You can configure which models ('sheets') this gem should manage, and specify which
 database columns should be editable or viewable in the spreadsheet. This can be
-done by configuring the initializer file created by the install command:
+done by editing the [config/initializers/hotsheet.rb](https://github.com/renuo/hotsheet/blob/main/lib/generators/templates/hotsheet.rb)
+file created by the install command.
 
 ```rb
-# config/initializers/hotsheet.rb
-
 Hotsheet.configure do
+  # Configure the visible and editable columns for each model.
+  # The ID is included as the first column by default.
   sheet :User do
     column :name
-    column :birthdate, editable: false
+    column :email, editable: false
+    column :birthdate, editable: -> { rand > 0.5 }
   end
+
+  # Leave the block out to include all database columns.
+  sheet :Post
 end
 ```
+
+### Internationalization
+
+You can create custom translations by overwriting the default locales defined in
+[config/locales/en.yml](https://github.com/renuo/hotsheet/blob/main/config/locales/en.yml).
 
 ## Contributing
 
