@@ -4,6 +4,7 @@
 
 ## [0.2.1](https://github.com/renuo/hotsheet/releases/tag/v0.2.1) - 2025-06-27
 
+- Add optional basic auth ([@hunchr])
 - Fix I18n fallback ([@hunchr])
 
 ## [0.2.0](https://github.com/renuo/hotsheet/releases/tag/v0.2.0) - 2025-06-25
