@@ -18,10 +18,6 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
     end
   end
 
-  def error
-    render "error", status: :not_found
-  end
-
   private
 
   def set_sheet
