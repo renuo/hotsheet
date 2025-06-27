@@ -23,7 +23,7 @@
 - Improve configuration file usage and logic ([@simon-isler])
 - Improve flash messages layout ([@ignaciosy])
 
-## [0.1.0](https://github.com/renuo/hotsheet/releases/tag/v0.1.0) - 2024-11-05
+## [0.1.0](https://github.com/renuo/hotsheet/releases/tag/v0.1.0) - 2024-11-08
 
 - Gem structure and initial configuration ([@ignaciosy])
 - Generator for initializer and mounting engine in routes ([@hunchr])
