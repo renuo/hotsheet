@@ -11,10 +11,18 @@ RSpec.describe Hotsheet::SheetsController do
   before { prepare { config } }
 
   describe "#index" do
-    it "shows a table with all values" do
+    it "shows a spreadsheet with all values" do
       get hotsheet.sheets_path :users
       expect(response).to be_successful
       expect(response.body).to include user.name
+    end
+
+    context "when the sheet does not exist" do
+      it "shows an error page" do
+        get "/hotsheet/authors"
+        expect(response).to be_not_found
+        expect(response.body).to include I18n.t("hotsheet.errors.not_found")
+      end
     end
   end
 
@@ -63,14 +71,6 @@ RSpec.describe Hotsheet::SheetsController do
         expect { put path }.not_to change(user, :reload)
         expect(response.parsed_body).to eq I18n.t("hotsheet.errors.not_found")
       end
-    end
-  end
-
-  describe "#error" do
-    it "shows an error page" do
-      get "/hotsheet/authors"
-      expect(response).to be_not_found
-      expect(response.body).to include I18n.t("hotsheet.errors.not_found")
     end
   end
 end
