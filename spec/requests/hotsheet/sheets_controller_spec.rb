@@ -11,15 +11,23 @@ RSpec.describe Hotsheet::SheetsController do
   before { prepare { config } }
 
   describe "#index" do
-    it "shows a table with all values" do
-      get hotsheet.users_path
+    it "shows a spreadsheet with all values" do
+      get hotsheet.sheets_path :users
       expect(response).to be_successful
       expect(response.body).to include user.name
+    end
+
+    context "when the sheet does not exist" do
+      it "shows an error page" do
+        get "/hotsheet/authors"
+        expect(response).to be_not_found
+        expect(response.body).to include I18n.t("hotsheet.errors.not_found")
+      end
     end
   end
 
   describe "#update" do
-    let(:path) { hotsheet.user_path(user.id) }
+    let(:path) { hotsheet.sheet_path :users, user }
 
     it "updates the resource" do
       expect { put path, params: { column_name: :name, value: "Bob" } }
@@ -43,7 +51,7 @@ RSpec.describe Hotsheet::SheetsController do
     end
 
     context "with nonexistent id" do
-      let(:path) { hotsheet.user_path(0) }
+      let(:path) { hotsheet.sheet_path :users, 0 }
 
       it "does not update the resource" do
         expect { put path, params: { column_name: :name, value: "Bob" } }.not_to change(user, :reload)
@@ -63,14 +71,6 @@ RSpec.describe Hotsheet::SheetsController do
         expect { put path }.not_to change(user, :reload)
         expect(response.parsed_body).to eq I18n.t("hotsheet.errors.not_found")
       end
-    end
-  end
-
-  describe "#error" do
-    it "shows an error page" do
-      get "/hotsheet/authors"
-      expect(response).to be_not_found
-      expect(response.body).to include I18n.t("hotsheet.errors.not_found")
     end
   end
 end

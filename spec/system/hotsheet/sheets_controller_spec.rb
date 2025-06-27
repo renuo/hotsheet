@@ -10,7 +10,7 @@ RSpec.describe Hotsheet::SheetsController do
   before { prepare { Hotsheet.configure { sheet :User } } }
 
   it "updates the cell value" do
-    visit hotsheet.users_path
+    visit hotsheet.sheets_path :users
     find(".cell", text: user.name).click.send_keys(:enter).fill_in(with: "Admin").send_keys :enter
 
     expect { find(".cell", text: user.email).click }

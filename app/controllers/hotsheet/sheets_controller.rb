@@ -18,14 +18,12 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
     end
   end
 
-  def error
-    render "error", status: :not_found
-  end
-
   private
 
   def set_sheet
     @sheet = Hotsheet.sheets[params[:sheet_name]]
+
+    render "hotsheet/home/error", status: :not_found if @sheet.nil?
   end
 
   def set_column
