@@ -24,7 +24,7 @@ After the installation, you can start the Rails server and visit
 You can configure which models ('sheets') this gem should manage, and specify which
 database columns should be editable or viewable in the spreadsheet. This can be
 done by editing the [config/initializers/hotsheet.rb](https://github.com/renuo/hotsheet/blob/main/lib/generators/templates/hotsheet.rb)
-file created by the install command.
+file created by the install command:
 
 ```rb
 Hotsheet.configure do
@@ -39,6 +39,15 @@ Hotsheet.configure do
   # Leave the block out to include all database columns.
   sheet :Post
 end
+```
+
+### Basic Authentication
+
+If you don't want everyone to have access to Hotsheet, you can set a
+basic auth environment variable:
+
+```sh
+HOTSHEET_BASIC_AUTH="admin:password"
 ```
 
 ### Internationalization
@@ -59,7 +68,7 @@ This is a newly created gem, and we will firstly focus on:
 1. Configuration and access permissions
 1. Concurrent users (broadcasting, conflict resolution)
 
-Feel free to look at our [planned enhancements](https://github.com/renuo/hotsheet/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement)
+Feel free to look at our [planned enhancements](https://github.com/renuo/hotsheet/issues?q=is:open+is:issue+label:feature)
 or add your own.
 
 ## License
