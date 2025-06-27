@@ -12,14 +12,14 @@ RSpec.describe Hotsheet::SheetsController do
 
   describe "#index" do
     it "shows a table with all values" do
-      get hotsheet.users_path
+      get hotsheet.sheets_path :users
       expect(response).to be_successful
       expect(response.body).to include user.name
     end
   end
 
   describe "#update" do
-    let(:path) { hotsheet.user_path(user.id) }
+    let(:path) { hotsheet.sheet_path :users, user }
 
     it "updates the resource" do
       expect { put path, params: { column_name: :name, value: "Bob" } }
@@ -43,7 +43,7 @@ RSpec.describe Hotsheet::SheetsController do
     end
 
     context "with nonexistent id" do
-      let(:path) { hotsheet.user_path(0) }
+      let(:path) { hotsheet.sheet_path :users, 0 }
 
       it "does not update the resource" do
         expect { put path, params: { column_name: :name, value: "Bob" } }.not_to change(user, :reload)

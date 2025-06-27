@@ -6,7 +6,7 @@
     <% Hotsheet.sheets.each_with_index do |entry, index| %>
       <li>
         <% sheet_name, sheet = entry %>
-        <%= link_to sheet.model.model_name.human(count: 2), sheet_path_for(sheet_name),
+        <%= link_to sheet.model.model_name.human(count: 2), sheets_path(sheet_name),
                     class: ("active" if params[:sheet_name] == sheet_name), data: { x: index } %>
       </li>
     <% end %>

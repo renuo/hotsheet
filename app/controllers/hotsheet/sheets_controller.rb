@@ -22,6 +22,8 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
 
   def set_sheet
     @sheet = Hotsheet.sheets[params[:sheet_name]]
+
+    render "hotsheet/home/error", status: :not_found if @sheet.nil?
   end
 
   def set_column
