@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     "rubygems_mfa_required" => "true"
   }
   s.files = Dir["app/{assets,controllers,helpers,views}/**/*.*",
-                "{config,lib}/**/*.rb", "LICENSE", "README.md"]
+                "{config,lib}/**/*.*", "LICENSE", "README.md"]
 
   s.required_ruby_version = ">= 3.1.0"
   s.add_dependency "rails", ">= 6.1.0"
