@@ -38,6 +38,7 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.include Capybara::DSL, type: :system
+  config.include Capybara::RSpecMatchers, type: :request
 
   config.disable_monkey_patching!
   config.filter_rails_from_backtrace!
