@@ -3,9 +3,11 @@
 class Hotsheet::Sheet
   include Hotsheet::Config
 
-  CONFIG = {}.freeze
-
   attr_reader :config, :model
+
+  CONFIG = {
+    per: { allowed_classes: [Integer], default: 100 }
+  }.freeze
 
   def initialize(name, config, &columns)
     @config = merge_config! CONFIG, config
@@ -20,11 +22,22 @@ class Hotsheet::Sheet
     @columns.select { |_name, column| column.visible? }
   end
 
-  def cells_for(columns)
-    @model.pluck(*columns.keys).transpose
+  def cells_for(columns, params)
+    page = page_info params[:page]
+
+    [@model.order(:id).limit(page[:limit]).offset(page[:offset]).pluck(*columns.keys).transpose, page]
   end
 
   private
+
+  def page_info(page)
+    total = @model.count
+    page = (page || 1).to_i
+    limit = @config[:per]
+    offset = (1..total.fdiv(limit).ceil).cover?(page) ? page.pred * limit : 0
+
+    { count: page * limit, total:, next: page.next, limit:, offset: }
+  end
 
   def use_default_configuration
     @model.column_names[1..].each { |name| column name }

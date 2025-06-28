@@ -7,6 +7,7 @@ export class SheetsController extends Controller {
 
   private flash = document.querySelector(".flash")!
   private input = document.createElement("input")
+  private columns = this.element.querySelectorAll(".column")
   private cell = this.input as HTMLElement
   private cells: Record<string, HTMLElement> = {}
   private columnNames: string[] = []
@@ -16,7 +17,6 @@ export class SheetsController extends Controller {
 
   /** Sends the new value to the server. */
   private readonly update = () => {
-    const sheet = window.location.pathname
     const [x, y] = this.getPosition()
     const {
       cell,
@@ -26,7 +26,7 @@ export class SheetsController extends Controller {
 
     if (value === prevValue) return
 
-    fetch(`${sheet}/${this.ids[y]}?column_name=${this.columnNames[x]}&value=${value}`, {
+    fetch(`${location.pathname}/${this.ids[y]}?column_name=${this.columnNames[x]}&value=${value}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -77,19 +77,19 @@ export class SheetsController extends Controller {
   }
 
   /** Focuses the clicked cell or makes it editable if it's already focused. */
-  private readonly focus = (ev: MouseEvent): void => {
-    const cell = ev.target as HTMLElement
+  private readonly focus = (event: MouseEvent): void => {
+    const cell = event.target as HTMLElement
 
     if (cell !== this.cell && cell.classList.contains("cell")) {
-      this.setCell(ev.target as HTMLElement)
+      this.setCell(event.target as HTMLElement)
     } else if (!this.editMode) {
       this.enableEditMode()
     }
   }
 
   /** Moves the focus to the next cell or makes it editable. */
-  private readonly moveFocus = (ev: KeyboardEvent): void => {
-    const { key } = ev
+  private readonly moveFocus = (event: KeyboardEvent): void => {
+    const { key } = event
 
     if (this.editMode) {
       if (key === "Enter") {
@@ -100,7 +100,7 @@ export class SheetsController extends Controller {
     } else if (key === "Enter") {
       this.enableEditMode()
     } else if (key === "Tab") {
-      ev.preventDefault()
+      event.preventDefault()
       document.querySelector<HTMLElement>(".sheets .active")!.focus()
     } else if (SheetsController.arrowKeys.includes(key)) {
       const offset =
@@ -139,5 +139,28 @@ export class SheetsController extends Controller {
     this.ids = [...this.element.querySelectorAll<HTMLElement>(".column:first-child .readonly")].map(
       (cell) => cell.innerHTML,
     )
+  }
+
+  readonly loadMore = (event: MouseEvent): void => {
+    const target = event.target as HTMLElement
+
+    fetch(`${location.pathname}?page=${target.dataset.page}`)
+      .then((res) => res.text())
+      .then((html) => {
+        const table = document.createElement("div")
+
+        table.innerHTML = html
+        table.querySelectorAll(".column").forEach((column, index) => {
+          this.columns[index].append(...[...column.children].slice(1))
+        })
+
+        const moreButton = table.querySelector(".load-more")
+
+        if (moreButton) {
+          this.element.querySelector(".load-more")!.replaceWith(moreButton)
+        } else {
+          this.element.querySelector(".load-more")!.remove()
+        }
+      })
   }
 }

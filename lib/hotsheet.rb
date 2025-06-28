@@ -31,8 +31,8 @@ module Hotsheet
 
     I18N = Psych.load_file(Hotsheet::Engine.root.join("config/locales/en.yml"))["en"]["hotsheet"].freeze
 
-    def t(key)
-      I18n.t "hotsheet.#{key}", default: I18N[key]
+    def t(key, **kwargs)
+      I18n.t "hotsheet.#{key}", default: I18N[key], **kwargs
     end
 
     private
