@@ -1,6 +1,8 @@
 # Changelog
 
-<!-- ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.1.0..HEAD) -->
+## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.2.1..HEAD)
+
+- Support import maps ([@hunchr])
 
 ## [0.2.1](https://github.com/renuo/hotsheet/releases/tag/v0.2.1) - 2025-06-27
 
@@ -11,7 +13,8 @@
 
 - Add dark mode and improve CSS ([@hunchr])
 - Make table cells selectable with arrow keys ([@hunchr])
-- Remove pagination ([@hunchr])
+- Remove pagination/pagy ([@hunchr])
+- Remove sprockets-rails, stimulus-rails, and turbo-rails runtime dependencies ([@hunchr])
 
 ### Breaking Changes
 
