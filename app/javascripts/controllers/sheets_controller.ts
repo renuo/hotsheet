@@ -121,24 +121,25 @@ export class SheetsController extends Controller {
     }
   }
 
-  private readonly addCell = (cell: HTMLElement): void => {
-    this.cells[cell.dataset.xy!] = cell
-
-    cell.addEventListener("click", this.focus)
-    cell.addEventListener("keydown", this.moveFocus)
-  }
-
-  readonly connect = (): void => {
-    this.element.querySelectorAll<HTMLElement>(".cell[data-xy]").forEach((cell) => {
-      this.addCell(cell)
-    })
-
-    this.columnNames = [...this.element.querySelectorAll<HTMLElement>(".header")].map(
-      (header) => header.dataset.name!,
-    )
+  private readonly addCells = (): void => {
+    this.cells = {}
     this.ids = [...this.element.querySelectorAll<HTMLElement>(".column:first-child .readonly")].map(
       (cell) => cell.innerHTML,
     )
+
+    this.element.querySelectorAll<HTMLElement>(".cell[data-xy]").forEach((cell) => {
+      this.cells[cell.dataset.xy!] = cell
+
+      cell.addEventListener("click", this.focus)
+      cell.addEventListener("keydown", this.moveFocus)
+    })
+  }
+
+  readonly connect = (): void => {
+    this.columnNames = [...this.element.querySelectorAll<HTMLElement>(".header")].map(
+      (header) => header.dataset.name!,
+    )
+    this.addCells()
   }
 
   readonly loadMore = (event: MouseEvent): void => {
@@ -153,6 +154,7 @@ export class SheetsController extends Controller {
         table.querySelectorAll(".column").forEach((column, index) => {
           this.columns[index].append(...[...column.children].slice(1))
         })
+        this.addCells()
 
         const moreButton = table.querySelector(".load-more")
 
