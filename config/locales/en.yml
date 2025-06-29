@@ -1,5 +1,6 @@
 en:
   hotsheet:
+    button_load_more: Load more (showing %{count} of %{total})
     error_forbidden: Forbidden
     error_not_found: Not found
     title: Hotsheet

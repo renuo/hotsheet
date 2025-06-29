@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Hotsheet.configure do
-  sheet :Post do
+  sheet :Post, per: 10 do
     column :title
     column :body
     column :user_id

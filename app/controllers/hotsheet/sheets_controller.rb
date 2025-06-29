@@ -7,7 +7,7 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
 
   def index
     @columns = @sheet.columns
-    @cells = @sheet.cells_for @columns
+    @cells, @config = @sheet.cells_for @columns, params
   end
 
   def update

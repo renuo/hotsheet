@@ -15,6 +15,32 @@ RSpec.describe Hotsheet::SheetsController do
       get hotsheet.sheets_path :users
       expect(response).to be_successful
       expect(response.body).to include user.name
+      expect(response.body).to have_no_css ".load-more"
+    end
+
+    context "with :per configured" do
+      let(:config) { Hotsheet.configure { sheet(:User, per: 1) { column :name } } }
+      let!(:other_user) { User.create!(name: "2nd Page", handle: "2", email: "2nd@local") }
+
+      it "has a button to load more" do
+        get hotsheet.sheets_path :users
+        expect(response.body).to include user.name
+        expect(response.body).not_to include other_user.name
+        expect(response.body).to include Hotsheet.t("button_load_more", count: 1, total: User.count)
+      end
+
+      it "can show the second page directly" do
+        get hotsheet.sheets_path :users, page: 2
+        expect(response.body).to include other_user.name
+        expect(response.body).not_to include user.name
+      end
+
+      it "shows the first page if the page count is invalid" do
+        get hotsheet.sheets_path :users, page: 100
+        expect(response.body).to include user.name
+        expect(response.body).not_to include other_user.name
+        expect(response.body).to have_no_css ".load-more"
+      end
     end
 
     context "when the sheet does not exist" do

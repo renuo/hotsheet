@@ -2,6 +2,8 @@
 
 <!-- ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.1.0..HEAD) -->
 
+- Add pagination ([@hunchr])
+
 ## [0.2.1](https://github.com/renuo/hotsheet/releases/tag/v0.2.1) - 2025-06-27
 
 - Add optional basic auth ([@hunchr])
