@@ -11,7 +11,8 @@
 
         <% @cells[x_index]&.each_with_index do |value, y_index| %>
           <% if editable %>
-            <span class="cell" tabindex="0" data-xy="<%= "#{x_index},#{y_index}" %>"><%= value %></span>
+            <span class="cell" tabindex="0"
+                  data-xy="<%= "#{x_index},#{y_index + @config[:offset]}" %>"><%= value %></span>
           <% else %>
             <span class="cell readonly"><%= value %></span>
           <% end %>
