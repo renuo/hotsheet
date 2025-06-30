@@ -2,9 +2,8 @@
 
 ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.2.1..HEAD)
 
-- Support import maps ([@hunchr])
-
 - Add pagination ([@hunchr])
+- Support import maps ([@hunchr])
 
 ## [0.2.1](https://github.com/renuo/hotsheet/releases/tag/v0.2.1) - 2025-06-27
 
