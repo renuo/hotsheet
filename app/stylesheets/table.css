@@ -1,6 +1,7 @@
 .table {
   border: var(--border);
   border-radius: var(--border-radius);
+  flex-direction: column;
   height: fit-content;
 }
 
@@ -58,4 +59,13 @@
     overflow: hidden;
     width: 100%;
   }
+}
+
+.load-more {
+  align-items: center;
+  background-color: var(--color-border);
+  cursor: pointer;
+  height: var(--height);
+  padding: 0 0.5rem;
+  user-select: none;
 }

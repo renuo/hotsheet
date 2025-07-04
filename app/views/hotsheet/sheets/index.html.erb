@@ -1,20 +1,28 @@
 <div class="table" spellcheck="false" data-controller="sheets">
-  <% @columns.each_with_index do |entry, x_index| %>
-    <% column_name, column = entry %>
-    <% editable = column.editable? %>
+  <div>
+    <% @columns.each_with_index do |entry, x_index| %>
+      <% column_name, column = entry %>
+      <% editable = column.editable? %>
 
-    <div class="column">
-      <span class="cell header" data-name="<%= column_name %>">
-        <%= @sheet.model.human_attribute_name column_name %>
-      </span>
+      <div class="column">
+        <span class="cell header" data-name="<%= column_name %>">
+          <%= @sheet.model.human_attribute_name column_name %>
+        </span>
 
-      <% @cells[x_index]&.each_with_index do |value, y_index| %>
-        <% if editable %>
-          <span class="cell" tabindex="0" data-xy="<%= "#{x_index},#{y_index}" %>"><%= value %></span>
-        <% else %>
-          <span class="cell readonly"><%= value %></span>
+        <% @cells[x_index]&.each_with_index do |value, y_index| %>
+          <% if editable %>
+            <span class="cell" tabindex="0"
+                  data-xy="<%= "#{x_index},#{y_index + @config[:offset]}" %>"><%= value %></span>
+          <% else %>
+            <span class="cell readonly"><%= value %></span>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+  </div>
+  <% if @config[:count] < @config[:total] %>
+    <button class="load-more" data-action="sheets#loadMore" data-page="<%= @config[:next] %>">
+      <%= Hotsheet.t "button_load_more", count: @config[:count], total: @config[:total] %>
+    </button>
   <% end %>
 </div>
