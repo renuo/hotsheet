@@ -3,10 +3,11 @@
 require "hotsheet/version"
 require "hotsheet/engine"
 require "hotsheet/config"
-require "hotsheet/sheet"
-require "hotsheet/column"
 
 module Hotsheet
+  autoload :Column, "#{__dir__}/hotsheet/column"
+  autoload :Sheet, "#{__dir__}/hotsheet/sheet"
+
   class Error < StandardError; end
 
   class << self
