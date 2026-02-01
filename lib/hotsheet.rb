@@ -15,10 +15,10 @@ module Hotsheet
 
     attr_reader :config
 
-    CONFIG = {}.freeze
+    DEFAULT_CONFIG = {}.freeze
 
     def configure(config = {}, &sheets)
-      @config = [merge_config!(CONFIG, config), sheets]
+      @config = [merge_config!(DEFAULT_CONFIG, config), sheets]
       self
     end
 
