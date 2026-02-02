@@ -19,7 +19,6 @@ class Dummy < Rails::Application
   config.active_record.migration_error = :page_load
   config.active_support.deprecation = :raise
   config.active_support.report_deprecations = true
-  config.active_support.to_time_preserves_timezone = :zone
   config.assets.compile = true
   config.assets.quiet = true
   config.cache_store = :null_store

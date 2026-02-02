@@ -42,4 +42,11 @@ if RUBY_VERSION.to_f >= 3.2
 
     group(:development, :test) { IGNORED_GEMS.each { |name| remove_gem name } }
   end
+
+  appraise "rails_8_1" do
+    gem "rails", "~> 8.1.0"
+    gem "simplecov", require: false
+
+    group(:development, :test) { IGNORED_GEMS.each { |name| remove_gem name } }
+  end
 end

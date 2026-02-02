@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: [3.1, 3.4]
+        ruby: [3.1, 4.0]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
         run: bun run build && bundle exec rails db:schema:load
 
       - name: Run linters
-        if: matrix.ruby == 3.4
+        if: matrix.ruby == 4.0
         run: bin/lint
 
       - name: Run tests
