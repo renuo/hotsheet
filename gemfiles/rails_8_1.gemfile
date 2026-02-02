@@ -4,13 +4,9 @@ source "https://rubygems.org"
 
 gem "propshaft"
 gem "puma", require: false
-gem "sqlite3", "~> 1.7", require: false
-gem "rails", "~> 7.0.0"
-gem "tsort", require: false
-gem "benchmark"
-gem "bigdecimal"
-gem "drb"
-gem "mutex_m"
+gem "sqlite3", require: false
+gem "rails", "~> 8.1.0"
+gem "simplecov", require: false
 
 group :development, :test do
   gem "capybara", require: false

@@ -20,7 +20,7 @@ RSpec.describe Hotsheet::SheetsController do
 
     context "with :per configured" do
       let(:config) { Hotsheet.configure { sheet(:User, per: 1) { column :name } } }
-      let!(:other_user) { User.create!(name: "2nd Page", handle: "2", email: "2nd@local") }
+      let!(:other_user) { User.create!(name: "2nd Page", handle: "2", email: "2nd@local", admin: false) }
 
       it "has a button to load more" do
         get hotsheet.sheets_path :users

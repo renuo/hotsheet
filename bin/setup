@@ -10,7 +10,7 @@ system! "rm -rf #{File.read(".gitignore").tr("\n", " ").strip.gsub(%r{\A/| /}, "
 
 puts "---- Installing dependencies ----"
 system! "bun i"
-system! "bundle"
+system! "bundle install"
 system! "bundle exec appraisal install"
 
 puts "---- Setting up database ----"

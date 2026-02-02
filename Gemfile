@@ -9,7 +9,6 @@ gem "sqlite3", require: false
 group :development, :test do
   gem "appraisal", require: false
   gem "better_errors"
-  gem "binding_of_caller"
   gem "brakeman", require: false
   gem "capybara", require: false
   gem "erb_lint", require: false

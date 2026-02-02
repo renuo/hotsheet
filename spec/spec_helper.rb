@@ -54,7 +54,7 @@ RSpec.configure do |config|
     config.fixture_path = "spec/fixtures"
   end
 
-  config.before :all, type: :system do
+  config.before :each, type: :system do
     driven_by driver, screen_size: [1280, 800]
   end
 end
