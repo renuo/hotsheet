@@ -6,6 +6,7 @@ gem "puma", require: false
 gem "sqlite3", "~> 1.7", require: false
 gem "rails", "~> 6.1.0"
 gem "sprockets-rails"
+gem "tsort", require: false
 gem "benchmark"
 gem "bigdecimal"
 gem "drb"

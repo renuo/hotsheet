@@ -9,6 +9,7 @@ appraise "rails_6_1" do
   gem "rails", "~> 6.1.0"
   gem "sprockets-rails"
   gem "sqlite3", "~> 1.7", require: false
+  gem "tsort", require: false
 
   remove_gem "propshaft"
   NOT_DEFAULT_GEMS_IN_RUBY_3_4.each { |name| gem name }
@@ -18,6 +19,7 @@ end
 appraise "rails_7_0" do
   gem "rails", "~> 7.0.0"
   gem "sqlite3", "~> 1.7", require: false
+  gem "tsort", require: false
 
   NOT_DEFAULT_GEMS_IN_RUBY_3_4.each { |name| gem name }
   group(:development, :test) { IGNORED_GEMS.each { |name| remove_gem name } }

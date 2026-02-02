@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2025_01_01_010101) do
-
   create_table "post_tags", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "tag_id", null: false
@@ -20,29 +19,29 @@ ActiveRecord::Schema.define(version: 2025_01_01_010101) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "title", null: false
     t.text "body", null: false
-    t.integer "user_id", null: false
     t.datetime "created_at", precision: 0, null: false
+    t.string "title", null: false
     t.datetime "updated_at", precision: 0, null: false
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name", null: false
     t.string "color", null: false
     t.datetime "created_at", precision: 0, null: false
+    t.string "name", null: false
     t.datetime "updated_at", precision: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "handle", null: false
-    t.string "email", null: false
-    t.date "birthdate"
     t.boolean "admin", default: false, null: false
-    t.integer "status", null: false
+    t.date "birthdate"
     t.datetime "created_at", precision: 0, null: false
+    t.string "email", null: false
+    t.string "handle", null: false
+    t.string "name", null: false
+    t.integer "status", null: false
     t.datetime "updated_at", precision: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
