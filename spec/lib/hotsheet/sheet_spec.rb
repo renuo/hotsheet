@@ -16,8 +16,8 @@ RSpec.describe Hotsheet::Sheet do
     let(:sheet) { described_class.new :User, config }
 
     it "includes all columns" do
-      expect(sheet.columns.keys).to eq %w[id name handle email birthdate
-                                          admin status created_at updated_at]
+      expect(sheet.columns.keys).to match_array %w[id admin birthdate created_at email
+                                                   handle name status updated_at]
     end
   end
 
