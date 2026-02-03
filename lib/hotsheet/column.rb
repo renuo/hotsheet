@@ -5,13 +5,13 @@ class Hotsheet::Column
 
   attr_reader :config
 
-  CONFIG = {
+  DEFAULT_CONFIG = {
     editable: { allowed_classes: [FalseClass, Proc], default: true },
     visible: { allowed_classes: [FalseClass, Proc], default: true }
   }.freeze
 
   def initialize(config)
-    @config = merge_config! CONFIG, config
+    @config = merge_config! DEFAULT_CONFIG, config
   end
 
   def editable?

@@ -5,12 +5,12 @@ class Hotsheet::Sheet
 
   attr_reader :config, :model
 
-  CONFIG = {
+  DEFAULT_CONFIG = {
     per: { allowed_classes: [Integer], default: 100 }
   }.freeze
 
   def initialize(name, config, &columns)
-    @config = merge_config! CONFIG, config
+    @config = merge_config! DEFAULT_CONFIG, config
     @model = name.to_s.constantize
     @columns = {}
 
