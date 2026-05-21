@@ -6,9 +6,18 @@ RSpec.describe Hotsheet::Column do
   let(:column) { described_class.new config }
   let(:config) { {} }
 
-  it "is editable and visible by default" do
+  it "is editable and visible by default, with no type" do
     expect(column.editable?).to be true
     expect(column.visible?).to be true
+    expect(column.type).to be_nil
+  end
+
+  context "with type: :text" do
+    let(:config) { { type: :text } }
+
+    it "exposes the type" do
+      expect(column.type).to eq :text
+    end
   end
 
   context "with config" do

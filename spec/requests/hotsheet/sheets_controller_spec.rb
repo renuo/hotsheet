@@ -18,6 +18,15 @@ RSpec.describe Hotsheet::SheetsController do
       expect(response.body).to have_no_css ".load-more"
     end
 
+    context "with a text column" do
+      let(:config) { Hotsheet.configure { sheet(:User) { column :name, type: :text } } }
+
+      it "renders the column with data-type attribute" do
+        get hotsheet.sheets_path :users
+        expect(response.body).to have_css ".column[data-type='text']"
+      end
+    end
+
     context "with :per configured" do
       let(:config) { Hotsheet.configure { sheet(:User, per: 1) { column :name } } }
       let!(:other_user) { User.create!(name: "2nd Page", handle: "2", email: "2nd@local", admin: false) }
