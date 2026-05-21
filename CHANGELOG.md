@@ -1,6 +1,8 @@
 # Changelog
 
-<!-- ## [Unreleased](https://github.com/renuo/hotsheet/compare/v0.2.1..HEAD) -->
+## [0.2.3](https://github.com/renuo/hotsheet/releases/tag/v0.2.3) - 2026-05-21
+
+- Add text column type with auto-resizing textarea ([@oliver-thoma])
 
 ## [0.2.2](https://github.com/renuo/hotsheet/releases/tag/v0.2.2) - 2025-07-04
 
@@ -37,6 +39,7 @@
 - Pagination for data tables ([@hunchr])
 
 [@edmunteanu]: https://github.com/edmunteanu
+[@oliver-thoma]: https://github.com/oliver-thoma
 [@hunchr]: https://github.com/hunchr
 [@ignaciosy]: https://github.com/ignaciosy
 [@simon-isler]: https://github.com/simon-isler
