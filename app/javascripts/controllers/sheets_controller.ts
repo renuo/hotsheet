@@ -80,6 +80,7 @@ export class SheetsController extends Controller {
       const [x] = this.getPosition()
       const isText = this.isText(x)
       const editor = isText ? this.textarea : this.input
+      if (isText) this.textarea.style.height = ""
       this.editMode = true
       this.prevValue = editor.value = isText ? (this.cell.textContent ?? "") : this.cell.innerHTML
       this.cell.replaceChildren(editor)

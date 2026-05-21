@@ -78,7 +78,7 @@
   }
 
   textarea {
-    min-height: calc(var(--height) * 4);
+    field-sizing: content;
     resize: vertical;
     white-space: pre-wrap;
     width: 100%;
