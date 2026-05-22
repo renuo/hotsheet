@@ -2,7 +2,7 @@
 
 ## [0.2.3](https://github.com/renuo/hotsheet/releases/tag/v0.2.3) - 2026-05-21
 
-- Add text column type with auto-resizing textarea ([@oliver-thoma])
+- Add text column type with auto-resizing textarea ([@odthoma])
 
 ## [0.2.2](https://github.com/renuo/hotsheet/releases/tag/v0.2.2) - 2025-07-04
 
@@ -28,18 +28,18 @@
 ## [0.1.1](https://github.com/renuo/hotsheet/releases/tag/v0.1.1) - 2025-02-03
 
 - Form inputs are now always visible for usage simplicity ([@ignaciosy])
-- Improve configuration file usage and logic ([@simon-isler])
+- Improve configuration file usage and logic ([@sislr])
 - Improve flash messages layout ([@ignaciosy])
 
 ## [0.1.0](https://github.com/renuo/hotsheet/releases/tag/v0.1.0) - 2024-11-08
 
 - Gem structure and initial configuration ([@ignaciosy])
 - Generator for initializer and mounting engine in routes ([@hunchr])
-- Inline editing table ([@simon-isler], [@edmunteanu])
+- Inline editing table ([@sislr], [@edmunteanu])
 - Pagination for data tables ([@hunchr])
 
 [@edmunteanu]: https://github.com/edmunteanu
-[@oliver-thoma]: https://github.com/oliver-thoma
+[@odthoma]: https://github.com/odthoma
 [@hunchr]: https://github.com/hunchr
 [@ignaciosy]: https://github.com/ignaciosy
-[@simon-isler]: https://github.com/simon-isler
+[@sislr]: https://github.com/sislr
