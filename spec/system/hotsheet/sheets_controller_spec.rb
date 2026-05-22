@@ -11,9 +11,39 @@ RSpec.describe Hotsheet::SheetsController do
 
   it "updates the cell value" do
     visit hotsheet.sheets_path :users
-    find(".cell", text: user.name).click.send_keys(:enter).fill_in(with: "Admin").send_keys :enter
 
-    expect { find(".cell", text: user.email).click }
-      .to change { user.reload.name }.from("Admin User").to "Admin"
+    find(".cell", text: user.name)
+      .click
+      .send_keys(:enter)
+      .fill_in(with: "Admin")
+      .send_keys(:enter)
+
+    expect(page).to have_css(".cell", text: "Admin")
+    expect(user.reload.name).to eq("Admin")
+  end
+
+  context "with a text column" do
+    before do
+      prepare do
+        Hotsheet.configure do
+          sheet(:User) do
+            column :name, type: :text
+            column :email
+          end
+        end
+      end
+    end
+
+    it "updates the cell value with a newline" do
+      visit hotsheet.sheets_path :users
+
+      find(".cell", text: user.name)
+        .click
+        .send_keys(:enter)
+        .fill_in(with: "Line 1\nLine 2")
+
+      find(".cell", text: user.email).click
+      expect(user.reload.name).to eq("Line 1\nLine 2")
+    end
   end
 end

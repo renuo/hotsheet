@@ -7,6 +7,7 @@ export class SheetsController extends Controller {
 
   private flash = document.querySelector(".flash")!
   private input = document.createElement("input")
+  private textarea = document.createElement("textarea")
   private columns = this.element.querySelectorAll(".column")
   private cell = this.input as HTMLElement
   private cells: Record<string, HTMLElement> = {}
@@ -18,15 +19,13 @@ export class SheetsController extends Controller {
   /** Sends the new value to the server. */
   private readonly update = () => {
     const [x, y] = this.getPosition()
-    const {
-      cell,
-      prevValue,
-      input: { value },
-    } = this
+    const { cell, prevValue } = this
+    const value = this.isText(x) ? this.textarea.value : this.input.value
 
     if (value === prevValue) return
 
-    fetch(`${location.pathname}/${this.ids[y]}?column_name=${this.columnNames[x]}&value=${value}`, {
+    const params = new URLSearchParams({ column_name: this.columnNames[x], value })
+    fetch(`${location.pathname}/${this.ids[y]}?${params}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -52,16 +51,25 @@ export class SheetsController extends Controller {
   /** Returns the position of the focused cell. */
   private readonly getPosition = (): number[] => this.cell.dataset.xy!.split(",").map(Number)
 
+  private readonly isText = (x: number): boolean =>
+    this.columns[x]?.getAttribute("data-type") === "text"
+
   /** Sets the cell and focuses it. */
   private readonly setCell = (cell?: HTMLElement): void => {
-    if (!cell) return
     if (this.editMode) {
+      const [x] = this.getPosition()
+      const isText = this.isText(x)
       this.update()
       this.editMode = false
-      this.cell.innerHTML = this.input.value
-      this.cell.scrollLeft = 0
+      if (isText) {
+        this.cell.textContent = this.textarea.value
+      } else {
+        this.cell.innerHTML = this.input.value
+        this.cell.scrollLeft = 0
+      }
     }
 
+    if (!cell) return
     this.cell = cell
     cell.focus()
   }
@@ -69,10 +77,14 @@ export class SheetsController extends Controller {
   /** Enables edit mode for the focused cell. */
   private readonly enableEditMode = (): void => {
     if (!this.cell.classList.contains("readonly")) {
+      const [x] = this.getPosition()
+      const isText = this.isText(x)
+      const editor = isText ? this.textarea : this.input
+      if (isText) this.textarea.style.height = ""
       this.editMode = true
-      this.prevValue = this.input.value = this.cell.innerHTML
-      this.cell.replaceChildren(this.input)
-      this.input.select()
+      this.prevValue = editor.value = isText ? (this.cell.textContent ?? "") : this.cell.innerHTML
+      this.cell.replaceChildren(editor)
+      editor.select()
     }
   }
 
@@ -95,7 +107,9 @@ export class SheetsController extends Controller {
       if (key === "Enter") {
         const [x, y] = this.getPosition()
 
-        this.setCell(this.cells[`${x},${y + 1}`])
+        if (!this.isText(x)) {
+          this.setCell(this.cells[`${x},${y + 1}`])
+        }
       }
     } else if (key === "Enter") {
       this.enableEditMode()
@@ -139,6 +153,9 @@ export class SheetsController extends Controller {
     this.columnNames = [...this.element.querySelectorAll<HTMLElement>(".header")].map(
       (header) => header.dataset.name!,
     )
+    this.element.addEventListener("focusout", (event: FocusEvent) => {
+      if (!this.element.contains(event.relatedTarget as Node)) this.setCell()
+    })
     this.addCells()
   }
 

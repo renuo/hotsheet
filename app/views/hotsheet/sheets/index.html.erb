@@ -4,7 +4,7 @@
       <% column_name, column = entry %>
       <% editable = column.editable? %>
 
-      <div class="column">
+      <div class="column"<% if column.type %> data-type="<%= column.type %>"<% end %>>
         <span class="cell header" data-name="<%= column_name %>">
           <%= @sheet.model.human_attribute_name column_name %>
         </span>

@@ -61,6 +61,30 @@
   }
 }
 
+.column[data-type="text"] {
+  max-width: 40rem;
+
+  .cell:not(.header):not(:has(textarea)) {
+    display: block;
+    line-height: var(--height);
+    text-overflow: ellipsis;
+  }
+
+  .cell:not(.header):has(textarea) {
+    align-items: flex-start;
+    height: auto;
+    min-height: var(--height);
+    padding: 0.25rem 0.5rem;
+  }
+
+  textarea {
+    field-sizing: content;
+    resize: vertical;
+    white-space: pre-wrap;
+    width: 100%;
+  }
+}
+
 .load-more {
   align-items: center;
   background-color: var(--color-border);

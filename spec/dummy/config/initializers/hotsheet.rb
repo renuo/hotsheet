@@ -3,7 +3,7 @@
 Hotsheet.configure do
   sheet :Post, per: 10 do
     column :title
-    column :body
+    column :body, type: :text
     column :user_id
     column :created_at
     column :updated_at, editable: false

@@ -7,6 +7,7 @@ class Hotsheet::Column
 
   CONFIG = {
     editable: { allowed_classes: [FalseClass, Proc], default: true },
+    type: { allowed_classes: [Symbol], default: nil },
     visible: { allowed_classes: [FalseClass, Proc], default: true }
   }.freeze
 
@@ -16,6 +17,10 @@ class Hotsheet::Column
 
   def editable?
     is? :editable
+  end
+
+  def type
+    @config[:type]
   end
 
   def visible?
