@@ -42,7 +42,14 @@ module Hotsheet
       ensure_sheet_exists! name
 
       sheet = Sheet.new(name, config, &)
-      @sheets[sheet.model.table_name] = sheet
+      ensure_unique_name! sheet.name
+      @sheets[sheet.name] = sheet
+    end
+
+    def ensure_unique_name!(name)
+      return unless @sheets.key? name
+
+      raise Hotsheet::Error, "Sheet '#{name}' is already defined; pass a unique `as:` option"
     end
 
     def ensure_sheet_exists!(name)

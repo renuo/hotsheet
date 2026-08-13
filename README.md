@@ -41,6 +41,14 @@ Hotsheet.configure do
 
   # Leave the block out to include all database columns.
   sheet :Post
+
+  # Pass a `scope` (a lambda evaluated on the model) to restrict the rows.
+  # When the same model is used more than once, give each sheet a unique
+  # name with `as:`; it is used in the URL and the navigation.
+  sheet :User, scope: -> { where(admin: true) }, as: :admins do
+    column :name
+    column :email
+  end
 end
 ```
 
