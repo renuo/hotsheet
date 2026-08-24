@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.4](https://github.com/renuo/hotsheet/releases/tag/v0.2.4) - 2026-08-24
+
+- Add optional scope and `as:` name to sheet definitions ([@sislr])
+
 ## [0.2.3](https://github.com/renuo/hotsheet/releases/tag/v0.2.3) - 2026-05-21
 
 - Add text column type with auto-resizing textarea ([@odthoma])

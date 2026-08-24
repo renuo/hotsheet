@@ -21,4 +21,10 @@ Hotsheet.configure do
     column :created_at, visible: false
     column :updated_at
   end
+
+  sheet :User, scope: -> { where(admin: true) }, as: :admins do
+    column :name
+    column :handle, editable: false
+    column :email
+  end
 end

@@ -34,7 +34,7 @@ class Hotsheet::SheetsController < Hotsheet::ApplicationController
   end
 
   def set_resource
-    @resource = @sheet.model.find_by id: params[:id]
+    @resource = @sheet.scoped.find_by id: params[:id]
 
     respond Hotsheet.t "error_not_found" if @resource.nil?
   end

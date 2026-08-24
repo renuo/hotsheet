@@ -22,6 +22,32 @@ RSpec.describe Hotsheet do
     end
   end
 
+  context "with a scoped sheet" do
+    let(:config) do
+      described_class.configure do
+        sheet :User
+        sheet :User, scope: -> { where(admin: true) }, as: :admins
+      end
+    end
+
+    it "keys sheets by their name" do
+      expect(config.sheets.keys).to eq %w[users admins]
+    end
+  end
+
+  context "with duplicate sheet names" do
+    let(:config) do
+      described_class.configure do
+        sheet :User
+        sheet :User, scope: -> { where(admin: true) }
+      end
+    end
+
+    it "raises an error" do
+      expect { config.sheets }.to raise_error(/already defined/)
+    end
+  end
+
   describe "#t" do
     it "falls back to english" do
       expect { I18n.with_locale(:de) { described_class.t "error_not_found" } }.not_to raise_error
