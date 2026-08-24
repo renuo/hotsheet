@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.3.0](https://github.com/renuo/hotsheet/releases/tag/v0.3.0) - 2026-08-13
+## [0.2.4](https://github.com/renuo/hotsheet/releases/tag/v0.2.4) - 2026-08-24
 
 - Add optional scope and `as:` name to sheet definitions ([@sislr])
 
