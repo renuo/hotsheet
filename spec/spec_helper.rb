@@ -19,15 +19,16 @@ require_relative "support/utils"
 require "rspec/rails"
 require "selenium-webdriver"
 
-%i[firefox firefox_headless].each do |driver|
+%i[chrome chrome_headless].each do |driver|
   Capybara.register_driver driver do |app|
-    args = ["--headless"] if driver == :firefox_headless
-    options = Selenium::WebDriver::Firefox::Options.new args: args
-    Capybara::Selenium::Driver.new app, browser: :firefox, options: options
+    args = ["--force-prefers-reduced-motion"]
+    args << "--headless=new" if driver == :chrome_headless
+    options = Selenium::WebDriver::Chrome::Options.new args: args
+    Capybara::Selenium::Driver.new app, browser: :chrome, options: options
   end
 end
 
-driver = ENV.fetch("SELENIUM_DRIVER", "firefox_headless").to_sym
+driver = ENV.fetch("SELENIUM_DRIVER", "chrome_headless").to_sym
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = driver
 
